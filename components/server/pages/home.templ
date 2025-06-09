@@ -1,7 +1,9 @@
 package serverPages
 
+import "PersonalPortfolio/components/server/layouts"
+
 templ home() {
-	@server.Base("Timothy M | Home") {
+	@serverLayout.Base("Timothy M | Home") {
 		<p>Hello from the home page</p>
 	}
 }
