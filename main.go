@@ -1,6 +1,8 @@
 package main
 
-import "github.com/labstack/echo/v4"
+import (
+	"github.com/labstack/echo/v4"
+)
 
 func main()  {
 	e := echo.New();
@@ -11,3 +13,5 @@ func main()  {
 
 	e.Logger.Fatal(e.Start(":8080"))
 }
+
+

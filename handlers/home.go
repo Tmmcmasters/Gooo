@@ -4,6 +4,6 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-func home(context echo.Context)  {
-	
+func HomeHandler(context echo.Context)  {
+	return 
 }
