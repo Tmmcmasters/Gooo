@@ -1,7 +1,12 @@
 <script setup lang="ts">
-import { ref, onMounted, watch, onBeforeMount } from 'vue'
+import { ref, watch } from 'vue'
 
-const inputs = ref({
+type Inputs = {
+  input1: string
+  input2: string
+  input3: string
+}
+const inputs = ref<Inputs>({
   input1: '',
   input2: '',
   input3: '',
@@ -16,6 +21,7 @@ const stop = watch(
       console.log(initialData)
       const data = JSON.parse(initialData.textContent || '{}')
       inputs.value = data.inputs || inputs.value // Update ref with server data
+      initialData.remove()
     }
   },
   {
@@ -23,11 +29,6 @@ const stop = watch(
     once: true,
   },
 )
-
-onBeforeMount(() => {
-  console.log('onBeforeMount')
-  stop()
-})
 </script>
 
 <template>
