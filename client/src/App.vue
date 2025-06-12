@@ -1,3 +1,13 @@
+<script setup lang="ts">
+import { ref } from 'vue'
+
+const inputs = ref({
+  input1: '',
+  input2: '',
+  input3: '',
+})
+</script>
+
 <template>
   <div id="app">
     <form>
@@ -15,17 +25,6 @@
     <p>Input 3: {{ inputs.input3 }}</p>
   </div>
 </template>
-
-<script setup lang="ts">
-import { ref } from 'vue'
-
-const inputs = ref({
-  input1: '',
-  input2: '',
-  input3: '',
-})
-</script>
-
 <style scoped>
 label {
   margin-right: 10px;
