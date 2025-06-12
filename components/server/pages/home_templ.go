@@ -43,7 +43,7 @@ func Home() templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div id=\"app\"><form><label for=\"input1\">Input 1:</label> <input id=\"input1\" type=\"text\" value=\"\"><br><label for=\"input2\">Input 2:</label> <input id=\"input2\" type=\"text\" value=\"\"><br><label for=\"input3\">Input 3:</label> <input id=\"input3\" type=\"text\" value=\"\"></form></div><script src=\"/assets/js/main.js\"></script> ")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div id=\"app\"><form><label for=\"input1\">Input 1:</label> <input id=\"input1\" type=\"text\" value=\"Server\"><br><label for=\"input2\">Input 2:</label> <input id=\"input2\" type=\"text\" value=\"\"><br><label for=\"input3\">Input 3:</label> <input id=\"input3\" type=\"text\" value=\"\"></form></div><script src=\"/assets/js/main.js\"></script> ")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
