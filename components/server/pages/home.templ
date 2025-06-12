@@ -16,6 +16,16 @@ templ Home() {
         <input id="input3" type="text" value="" />
       </form>
     </div>
-    <script src="/assets/js/main.js"></script> // Serve built Vue JS file
+    // Embed initial data as JSON
+    <script type="application/json" id="initial-data">
+      {
+        "inputs": {
+          "input1": "Server",
+          "input2": "",
+          "input3": ""
+        }
+      }
+    </script>
+    <script src="/assets/js/main.js"></script>
   }
 }

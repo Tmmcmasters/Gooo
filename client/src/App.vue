@@ -1,11 +1,26 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 
 const inputs = ref({
   input1: '',
   input2: '',
   input3: '',
 })
+
+const initialData = document.getElementById('initial-data')
+if (initialData) {
+  const data = JSON.parse(initialData.textContent || '{}')
+  inputs.value = data.inputs || inputs.value // Update ref with server data
+}
+
+// Fetch initial data from the server-rendered HTML
+// onMounted(() => {
+//   const initialData = document.getElementById('initial-data')
+//   if (initialData) {
+//     const data = JSON.parse(initialData.textContent || '{}')
+//     inputs.value = data.inputs || inputs.value // Update ref with server data
+//   }
+// })
 </script>
 
 <template>
@@ -25,6 +40,7 @@ const inputs = ref({
     <p>Input 3: {{ inputs.input3 }}</p>
   </div>
 </template>
+
 <style scoped>
 label {
   margin-right: 10px;
