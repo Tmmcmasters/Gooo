@@ -3,7 +3,19 @@ package serverPages
 import "PersonalPortfolio/components/server/layouts"
 
 templ Home() {
-	@serverLayout.Base("Timothy M | Home") {
-		<p>Hello from the home page</p>
-	}
+  @serverLayout.Base("Timothy M | Home") {
+    <div id="app">
+      <form>
+        <label for="input1">Input 1:</label>
+        <input id="input1" type="text" value="" />
+        <br />
+        <label for="input2">Input 2:</label>
+        <input id="input2" type="text" value="" />
+        <br />
+        <label for="input3">Input 3:</label>
+        <input id="input3" type="text" value="" />
+      </form>
+    </div>
+    <script src="/assets/js/main.js"></script> // Serve built Vue JS file
+  }
 }
