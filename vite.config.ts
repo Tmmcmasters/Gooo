@@ -11,7 +11,7 @@ export default defineConfig({
     vueDevTools(),
   ],
   build: {
-    outDir: '../static/assets',
+    outDir: './static/assets',
     emptyOutDir: true,
     assetsDir: 'js',
     rollupOptions: {
