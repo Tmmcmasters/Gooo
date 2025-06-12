@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, watch, onBeforeMount } from 'vue'
 
 const inputs = ref({
   input1: '',
@@ -7,20 +7,27 @@ const inputs = ref({
   input3: '',
 })
 
-const initialData = document.getElementById('initial-data')
-if (initialData) {
-  const data = JSON.parse(initialData.textContent || '{}')
-  inputs.value = data.inputs || inputs.value // Update ref with server data
-}
+const stop = watch(
+  inputs,
+  (newValue, oldValue) => {
+    const initialData = document.getElementById('initial-data')
+    if (initialData) {
+      console.log(`Setting the initial data`)
+      console.log(initialData)
+      const data = JSON.parse(initialData.textContent || '{}')
+      inputs.value = data.inputs || inputs.value // Update ref with server data
+    }
+  },
+  {
+    immediate: true,
+    once: true,
+  },
+)
 
-// Fetch initial data from the server-rendered HTML
-// onMounted(() => {
-//   const initialData = document.getElementById('initial-data')
-//   if (initialData) {
-//     const data = JSON.parse(initialData.textContent || '{}')
-//     inputs.value = data.inputs || inputs.value // Update ref with server data
-//   }
-// })
+onBeforeMount(() => {
+  console.log('onBeforeMount')
+  stop()
+})
 </script>
 
 <template>
