@@ -16,7 +16,7 @@ export default defineConfig({
     assetsDir: 'js',
     rollupOptions: {
       input: {
-        main: fileURLToPath(new URL('./src/main.ts', import.meta.url)),
+        main: fileURLToPath(new URL('./client/main.ts', import.meta.url)),
       },
       output: {
         entryFileNames: 'js/[name].js',
@@ -30,7 +30,7 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url))
+      '@': fileURLToPath(new URL('./client', import.meta.url))
     },
   },
 })
