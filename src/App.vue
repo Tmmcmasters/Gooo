@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 
 type Inputs = {
   input1: string
@@ -14,7 +14,7 @@ const inputs = ref<Inputs>({
 
 const stop = watch(
   inputs,
-  (newValue, oldValue) => {
+  () => {
     const initialData = document.getElementById('initial-data')
     if (initialData) {
       console.log(`Setting the initial data`)
@@ -29,6 +29,10 @@ const stop = watch(
     once: true,
   },
 )
+
+onMounted(() => {
+  stop()
+})
 </script>
 
 <template>
@@ -43,7 +47,7 @@ const stop = watch(
       <label for="input3">Input 3:</label>
       <input v-model="inputs.input3" id="input3" type="text" />
     </form>
-    <p>Input 1: {{ inputs.input1 }}</p>
+    <p>Input 1: {{ inputs.input1 }} {{ inputs.input2 }}</p>
     <p>Input 2: {{ inputs.input2 }}</p>
     <p>Input 3: {{ inputs.input3 }}</p>
   </div>
