@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { onMounted, ref, watch } from 'vue'
+import TestComponent from './components/TestComponent.vue'
 
 type Inputs = {
   input1: string
@@ -50,6 +51,8 @@ onMounted(() => {
     <p>Input 1: {{ inputs.input1 }} {{ inputs.input2 }}</p>
     <p>Input 2: {{ inputs.input2 }}</p>
     <p>Input 3: {{ inputs.input3 }}</p>
+
+    <TestComponent />
   </div>
 </template>
 
