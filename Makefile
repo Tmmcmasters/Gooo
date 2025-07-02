@@ -14,3 +14,4 @@ notify-templ-proxy:
 
 run:
 	@make templ & sleep 1
+	@air
