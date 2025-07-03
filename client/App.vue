@@ -48,7 +48,7 @@ onMounted(() => {
       <label for="input3">Input 3:</label>
       <input v-model="inputs.input3" id="input3" type="text" />
     </form>
-    <p>Input 1: {{ inputs.input1 }} {{ inputs.input2 }}</p>
+    <p>Input 1: {{ inputs.input1 }} {{ inputs.input3 }} {{ inputs.input2 }}</p>
     <p>Input 2: {{ inputs.input2 }}</p>
     <p>Input 3: {{ inputs.input3 }}</p>
 
