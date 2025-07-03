@@ -1,4 +1,4 @@
-.PHONY: build run templ notify-templ-proxy
+.PHONY: build run templ notify-templ-proxy watch-tailwind
 
 -include .env
 
@@ -12,9 +12,10 @@ templ:
 notify-templ-proxy:
 	@templ generate --notify-proxy --proxyport=$(TEMPL_PROXY_PORT)
 
-dev: 
-	@npm run dev
+watch-tailwind:
+	@npx @tailwindcss/cli -i ./main-tw.css -o ./output-tw.css --watch
 
 run:
 	@make templ & sleep 1
+	@make watch-tailwind & sleep 2
 	@air
