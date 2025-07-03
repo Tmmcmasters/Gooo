@@ -2,7 +2,7 @@
 
 <template>
   <div>
-    <p>Hello from TestComponent.vue</p>
+    <p>Hello from TestComponent.vue hahaha</p>
   </div>
 </template>
 

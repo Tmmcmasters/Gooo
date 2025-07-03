@@ -12,6 +12,9 @@ templ:
 notify-templ-proxy:
 	@templ generate --notify-proxy --proxyport=$(TEMPL_PROXY_PORT)
 
+dev: 
+	@npm run dev
+
 run:
 	@make templ & sleep 1
 	@air
