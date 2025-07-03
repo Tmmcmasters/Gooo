@@ -25,13 +25,6 @@ export default defineConfig({
       },
     }
   },
-  // server: {
-  //   origin: 'http://localhost:5173',
-  //   hmr: {
-  //     host: 'localhost',
-  //     port: 5173
-  //   }
-  // },
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./client', import.meta.url))
