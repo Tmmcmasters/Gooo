@@ -13,7 +13,7 @@ notify-templ-proxy:
 	@templ generate --notify-proxy --proxyport=$(TEMPL_PROXY_PORT)
 
 watch-tailwind:
-	@npx @tailwindcss/cli -i ./main-tw.css -o ./output-tw.css --watch
+	@npx @tailwindcss/cli -i ./main-tw.css -o ./static/assets/css/output-tw.css --watch
 
 run:
 	@make templ & sleep 1

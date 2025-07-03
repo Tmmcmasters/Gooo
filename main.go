@@ -19,7 +19,8 @@ func main()  {
 
 	// Serve Static Assets for Production
 	e.GET("/", handlers.HomeHandler)
-	e.Static("/assets", "static/assets")
+	e.Static("/static", "static/assets")
+	e.Static("/gen", "gen")
 
 	e.Logger.Fatal(e.Start(":" + appPort));
 }
