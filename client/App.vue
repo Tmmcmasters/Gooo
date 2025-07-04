@@ -50,7 +50,7 @@ onMounted(() => {
     </form>
     <p>Input 1: {{ inputs.input1 }} {{ inputs.input3 }} {{ inputs.input2 }}</p>
     <p>Input 2: {{ inputs.input2 }}</p>
-    <p>Input 3: {{ inputs.input3 }}</p>
+    <p class="text-3xl">Input 3: {{ inputs.input3 }}</p>
 
     <TestComponent />
   </div>

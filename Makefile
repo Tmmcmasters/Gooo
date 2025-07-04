@@ -17,5 +17,5 @@ watch-tailwind:
 
 run:
 	@make templ & sleep 1
-	@make watch-tailwind & sleep 2
+	@make watch-tailwind & sleep 1
 	@air
