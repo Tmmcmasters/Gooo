@@ -1,12 +1,15 @@
 package serverLayout
 
-templ Base(title string) {
+templ Base(title string, cssContent string) {
 	<html lang="en">
 		<head>
 			<meta charset="UTF-8"/>
 			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 			// <link href="/static/assets/css/output-tw.css" rel="stylesheet"/>
-			<link rel="preload" href="/static/assets/css/output-tw.css" as="style" onload="this.onload=null;this.rel='stylesheet'"/>
+			<style>
+				{ cssContent }
+			</style>
+			// <link rel="preload" href="/static/assets/css/output-tw.css" as="style" onload="this.onload=null;this.rel='stylesheet'"/>
 			<link href="/gen/css/main.css" rel="stylesheet"/>
 			@Head(title)
 		</head>

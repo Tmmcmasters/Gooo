@@ -2,8 +2,8 @@ package serverPages
 
 import "PersonalPortfolio/components/server/layouts"
 
-templ Home() {
-	@serverLayout.Base("Timothy M | Home") {
+templ Home(cssContent string) {
+	@serverLayout.Base("Timothy M | Home", cssContent) {
 		<div id="app" class="bg-blue-500">
 			<form>
 				<label for="input1">Input 1:</label>
