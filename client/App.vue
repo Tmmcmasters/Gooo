@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref, watch } from 'vue'
+import { onBeforeMount, onMounted, ref, watch } from 'vue'
 import TestComponent from './components/TestComponent.vue'
 
 type Inputs = {
@@ -31,7 +31,11 @@ const stop = watch(
   },
 )
 
+onBeforeMount(() => {
+  console.log('On before mount')
+})
 onMounted(() => {
+  console.log('On mounted')
   stop()
 })
 </script>
