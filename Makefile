@@ -1,4 +1,4 @@
-.PHONY: build run templ notify-templ-proxy tailwind minify-tailwind build-inject-tw build-echo
+.PHONY: build run templ notify-templ-proxy tailwind minify-tailwind build-inject-tw build-echo run-build
 
 -include .env
 
@@ -12,6 +12,10 @@ build:
 	@npm run build
 	@templ generate
 	@make build-echo
+
+run-build:
+	@make build
+	@tmp/main
 
 build-inject-tw: 
 	@go build -o inject-tailwind/inject-tailwind inject-tailwind/inject-tailwind.go
