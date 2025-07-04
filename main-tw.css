@@ -1,1 +1,4 @@
 @import 'tailwindcss';
+
+@source "./**/*.templ";
+@source "./**/*.vue";
