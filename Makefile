@@ -40,4 +40,5 @@ minify-tailwind:
 
 run:
 	@make templ & sleep 1
+	@make build-inject-tw
 	@air

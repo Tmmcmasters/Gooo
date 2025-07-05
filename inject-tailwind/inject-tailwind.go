@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	log.Println("Injecting Tailwind CSS into base.templ")
+	log.Println("Injecting Tailwind CSS into tailwind.templ")
 
 	// Read the Tailwind CSS file
 	cssPath := "./static/assets/css/output-tw.css"
@@ -18,8 +18,8 @@ func main() {
 	}
 	cssContent := strings.TrimSpace(string(css))
 
-	// Read the base.templ file
-	templPath := "./components/server/layouts/base.templ"
+	// Read the tailwind.templ file
+	templPath := "./components/server/generated/tailwind.templ"
 	templContent, err := os.ReadFile(templPath)
 	if err != nil {
 		log.Fatalf("Error reading templ file at path: %s, error: %v", templPath, err)
@@ -41,11 +41,11 @@ func main() {
 		1,
 	)
 
-	// Write the updated base.templ file
+	// Write the updated tailwind.templ file
 	err = os.WriteFile(templPath, []byte(newTemplContent), 0644)
 	if err != nil {
 		log.Fatalf("Error writing %s: %v", templPath, err)
 	}
 
-	log.Println("Successfully injected Tailwind CSS into base.templ")
+	log.Println("Successfully injected Tailwind CSS into tailwind.templ")
 }
