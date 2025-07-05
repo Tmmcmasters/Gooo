@@ -2,3 +2,5 @@
 
 @source "./**/*.templ";
 @source "./**/*.vue";
+
+@plugin "daisyui";

@@ -4,28 +4,9 @@ import "PersonalPortfolio/components/server/layouts"
 
 templ Home() {
 	@serverLayout.Base("Timothy M | Home") {
-		<div id="app" class="bg-blue-500">
-			<form>
-				<label for="input1">Input 1:</label>
-				<input id="input1" type="text" value="Server"/>
-				<br/>
-				<label for="input2">Input 2:</label>
-				<input id="input2" type="text" value=""/>
-				<br/>
-				<label for="input3" class="text-5xl">Input 3:</label>
-				<input id="input3" type="text" value=""/>
-			</form>
+		<div class="w-full h-full bg-base-100">
+			<button class="btn-accent btn ">Here Here</button>
 		</div>
-		// Embed initial data as JSON
-		<script type="application/json" id="initial-data">
-      {
-        "inputs": {
-          "input1": "Server",
-          "input2": "",
-          "input3": ""
-        }
-      }
-    </script>
 		<script src="/gen/js/main.js"></script>
 	}
 }
