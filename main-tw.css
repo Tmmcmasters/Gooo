@@ -3,4 +3,9 @@
 @source "./**/*.templ";
 @source "./**/*.vue";
 
-@plugin "daisyui";
+@plugin "daisyui" {
+  themes:
+    light --default,
+    dark --prefersdark,
+    synthwave;
+}
