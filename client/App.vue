@@ -41,7 +41,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div id="app">
+  <div>
     <form>
       <label for="input1">Input 1:</label>
       <input v-model="inputs.input1" id="input1" type="text" />
@@ -49,12 +49,12 @@ onMounted(() => {
       <label for="input2">Input 2:</label>
       <input v-model="inputs.input2" id="input2" type="text" />
       <br />
-      <label for="input3">Input 3:</label>
+      <label for="input3" class="text-5xl">Input 3:</label>
       <input v-model="inputs.input3" id="input3" type="text" />
     </form>
     <p>Input 1: {{ inputs.input1 }} {{ inputs.input3 }} {{ inputs.input2 }}</p>
     <p>Input 2: {{ inputs.input2 }}</p>
-    <p class="text-6xl">Input 3: {{ inputs.input3 }}</p>
+    <p>Input 3: {{ inputs.input3 }}</p>
 
     <TestComponent />
   </div>
