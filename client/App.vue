@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { onBeforeMount, onMounted, ref, watch } from 'vue'
-import TestComponent from './components/TestComponent.vue'
 import Button from './components/ui/button/Button.vue'
 
 type Inputs = {
