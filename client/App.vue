@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { onBeforeMount, onMounted, ref, watch } from 'vue'
 import TestComponent from './components/TestComponent.vue'
+import Button from './components/ui/button/Button.vue'
+import { AlertCircle, WindArrowDown } from 'lucide-vue-next'
 
 type Inputs = {
   input1: string
@@ -38,6 +40,10 @@ onMounted(() => {
   console.log('On mounted')
   stop()
 })
+
+const alert = (message: string) => {
+  alert(message)
+}
 </script>
 
 <template>
@@ -59,6 +65,8 @@ onMounted(() => {
     <p>Input 1: {{ inputs.input1 }} {{ inputs.input3 }} {{ inputs.input2 }}</p>
     <p>Input 2: {{ inputs.input2 }}</p>
     <p>Input 3: {{ inputs.input3 }}</p>
+
+    <Button @click="alert('clicked')">Shadcn Button</Button>
 
     <TestComponent />
   </div>
