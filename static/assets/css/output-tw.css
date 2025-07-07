@@ -806,6 +806,9 @@
       isolation: isolate;
     }
   }
+  .pointer-events-auto {
+    pointer-events: auto;
+  }
   .collapse {
     &:not(td, tr, colgroup) {
       visibility: visible;
@@ -2506,6 +2509,9 @@
       outline: 2px solid currentColor;
       outline-offset: 2px;
     }
+  }
+  .cursor-pointer {
+    cursor: pointer;
   }
   .touch-pinch-zoom {
     --tw-pinch-zoom: pinch-zoom;

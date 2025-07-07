@@ -39,10 +39,6 @@ onMounted(() => {
   console.log('On mounted')
   stop()
 })
-
-const alert = (message: string) => {
-  alert(message)
-}
 </script>
 
 <template>
@@ -65,7 +61,7 @@ const alert = (message: string) => {
     <p>Input 2: {{ inputs.input2 }}</p>
     <p>Input 3: {{ inputs.input3 }}</p>
 
-    <Button @click="alert('clicked')">Shadcn Button</Button>
+    <Button variant="ghost" @click="console.log('Here is a click')">Shadcn Button</Button>
 
     <TestComponent />
   </div>
