@@ -42,6 +42,10 @@ onMounted(() => {
 
 <template>
   <div>
+    <div class="w-full h-full bg-base-100">
+      <button class="btn-accent btn">Here Here</button>
+      <input type="checkbox" value="synthwave" class="toggle theme-controller" />
+    </div>
     <form>
       <label for="input1">Input 1:</label>
       <input v-model="inputs.input1" id="input1" type="text" />
