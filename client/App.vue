@@ -2,7 +2,6 @@
 import { onBeforeMount, onMounted, ref, watch } from 'vue'
 import TestComponent from './components/TestComponent.vue'
 import Button from './components/ui/button/Button.vue'
-import { AlertCircle, WindArrowDown } from 'lucide-vue-next'
 
 type Inputs = {
   input1: string
