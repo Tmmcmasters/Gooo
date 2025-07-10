@@ -43,7 +43,7 @@ func Home() templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"w-full h-full bg-base-100\"><button class=\"btn-accent btn \">Here Here</button> <input type=\"checkbox\" value=\"synthwave\" class=\"toggle theme-controller\"><div id=\"app\"><script type=\"application/json\" id=\"initial-data\">\n      {\n        \"inputs\": {\n          \"input1\": \"Server\",\n          \"input2\": \"\",\n          \"input3\": \"\"\n        }\n      }\n    </script></div></div><script src=\"/gen/js/main.js\"></script>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"w-full h-full bg-base-100\"><button class=\"btn-accent btn \">Here Here</button> <input type=\"checkbox\" value=\"synthwave\" class=\"toggle theme-controller\"><div id=\"app\"><script type=\"application/json\" id=\"initial-data\">\n      {\n        \"inputs\": {\n          \"input1\": \"Server\",\n          \"input2\": \"\",\n          \"input3\": \"\"\n        }\n      }\n    </script></div></div><script type=\"module\" src=\"/gen/js/main.js\"></script>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

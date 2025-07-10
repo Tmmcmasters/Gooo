@@ -4,7 +4,7 @@ tmp_dir = "tmp"
 [build]
   args_bin = []
   bin = "./tmp/main"
-  cmd = "make tailwind && make inject-tw && make notify-templ-proxy && npm run build && go build -o ./tmp/main ."
+  cmd = "make tailwind && make inject-tw && make notify-templ-proxy && go build -o ./tmp/main ."
   delay = 1000
   exclude_dir = ["assets", "tmp", "gen", "static", "node_modules"]
   exclude_file = ["components/server/generated/tailwind.templ", "components/server/generated/tailwind_templ.go"]

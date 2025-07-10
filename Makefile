@@ -1,4 +1,4 @@
-.PHONY: build run templ notify-templ-proxy tailwind minify-tailwind build-inject-tw build-echo run-build
+.PHONY: build run templ notify-templ-proxy tailwind minify-tailwind build-inject-tw build-echo run-build run-vite
 
 -include .env
 
@@ -38,7 +38,11 @@ tailwind:
 minify-tailwind: 
 	@npx @tailwindcss/cli -i ./main-tw.css -o ./static/assets/css/output-tw.css --minify
 
+run-vite: 
+	@npm run dev
+
 run:
 	@make templ & sleep 1
 	@make build-inject-tw
+	@make run-vite & sleep 1
 	@air
