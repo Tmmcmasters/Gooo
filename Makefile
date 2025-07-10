@@ -44,5 +44,5 @@ run-vite:
 run:
 	@make templ & sleep 1
 	@make build-inject-tw
-	@make run-vite & sleep 1
+	@make run-vite & sleep 2
 	@air
