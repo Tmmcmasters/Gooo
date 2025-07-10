@@ -43,7 +43,7 @@ onMounted(() => {
 <template>
   <div>
     <div class="w-full h-full bg-base-100">
-      <button class="btn-accent btn">Here Here HERE</button>
+      <button class="btn-accent btn">Here Here</button>
       <input type="checkbox" value="synthwave" class="toggle theme-controller" />
     </div>
     <form>

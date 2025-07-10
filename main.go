@@ -43,7 +43,7 @@ func main()  {
 	// Serve Static Assets for Production
 	isLocal := os.Getenv("ENV") == "LOCAL";
 
-	if isLocal {
+	if !isLocal {
 		e.Static("/static", "static")
 		e.Static("/gen", "gen")
 	} else {
@@ -80,7 +80,7 @@ func main()  {
             return nil
         })
 
-
+		// Handle 404s that might be attempting to go to vue
 		e.HTTPErrorHandler = func(err error, c echo.Context) {
         if he, ok := err.(*echo.HTTPError); ok && he.Code == http.StatusNotFound && isLocal {
             // Try proxying to Vite dev server
