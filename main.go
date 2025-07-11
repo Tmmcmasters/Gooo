@@ -10,13 +10,27 @@ import (
 	"os"
 	"strings"
 
-	_ "github.com/joho/godotenv/autoload"
+	"github.com/joho/godotenv"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 )
 
 func main()  {
+	envFile := os.Getenv("ENV_FILE");
+
+	if envFile == "" {
+		envFile = ".env"
+	}
+
+	if err := godotenv.Load(envFile); err != nil {
+		log.Printf("WARNING: Couldn't load %s file: %v", envFile, err);
+	}
+
+	log.Printf("Using environment: %s", os.Getenv("ENV"))
+
+
 	e := echo.New();
+
 
 	appPort := os.Getenv("APP_PORT");
 	if appPort == "" {

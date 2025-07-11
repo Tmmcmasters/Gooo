@@ -15,7 +15,7 @@ build:
 
 run-build:
 	@make build
-	@tmp/main
+	@ENV_FILE=.env.prod tmp/main
 
 build-inject-tw: 
 	@go build -o inject-tailwind/inject-tailwind inject-tailwind/inject-tailwind.go
@@ -45,4 +45,4 @@ run:
 	@make templ & sleep 1
 	@make build-inject-tw
 	@make run-vite & sleep 1
-	@air
+	@ENV_FILE=.env air
