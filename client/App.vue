@@ -3,6 +3,7 @@ import { onBeforeMount, onMounted, ref, watch } from 'vue'
 import Button from './components/ui/button/Button.vue'
 import Switch from './components/ui/switch/Switch.vue'
 import { useColorMode } from '@vueuse/core'
+import { useCookies } from '@vueuse/integrations/useCookies.mjs'
 
 type Inputs = {
   input1: string
@@ -42,6 +43,7 @@ onMounted(() => {
 })
 
 const color = useColorMode({})
+const cookies = useCookies()
 
 const isDark = ref(color.value === 'dark')
 
@@ -49,6 +51,16 @@ const changeColor = (value: boolean) => {
   color.value = value ? 'dark' : 'light'
   isDark.value = value
 }
+
+watch(
+  color,
+  (newValue) => {
+    cookies.set('color-scheme', newValue)
+  },
+  {
+    immediate: true,
+  },
+)
 </script>
 
 <template>
