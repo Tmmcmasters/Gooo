@@ -117,7 +117,7 @@ func main()  {
             // Try proxying to Vite dev server
             req := c.Request()
             originalPath := req.URL.Path
-            log.Printf("404 for %s, attempting to proxy to Vite", originalPath)
+            // log.Printf("404 for %s, attempting to proxy to Vite", originalPath)
 
             // Create a new response writer to capture proxy response
             proxyResp := httptest.NewRecorder()
