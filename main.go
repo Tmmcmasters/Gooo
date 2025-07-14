@@ -31,6 +31,30 @@ const (
 	Reset    = "\033[0m"
 )
 
+type ThemeContextKey string
+const ThemeKey ThemeContextKey = "theme"
+
+func themeMiddleware( next echo.HandlerFunc ) echo.HandlerFunc {
+	return func(c echo.Context) error {
+		theme := "light";
+		cookies, err := c.Cookie("color-scheme")
+		if err == nil && cookies != nil {
+			theme = cookies.Value
+		}
+
+		// Possibility to add more themes later
+		switch theme {
+		case "dark":
+		default: 
+			theme = "light"
+		}
+
+		c.Set(string(ThemeKey), theme)
+		return next(c)
+	}
+	
+}
+
 func main()  {
 	envFile := os.Getenv("ENV_FILE");
 
@@ -53,6 +77,9 @@ func main()  {
 	if appPort == "" {
 		log.Fatal("APP_PORT env variable not set correctly");
 	}
+
+
+	e.Use(themeMiddleware);
 
 	e.Use(middleware.GzipWithConfig(middleware.GzipConfig{
 		Level: 6,

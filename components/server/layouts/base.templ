@@ -1,10 +1,11 @@
 package serverLayout
 
 import "PersonalPortfolio/components/server/generated"
+import "github.com/labstack/echo/v4"
 
 templ Base(title string) {
 	<!DOCTYPE html>
-	<html lang="en">
+	<html lang="en" class={ theme := ctx.(echo.Context).Get(string(ThemeKey)).(string); theme }>
 		<head>
 			<meta charset="UTF-8"/>
 			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
