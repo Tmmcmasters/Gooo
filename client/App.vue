@@ -69,8 +69,6 @@ const changeColor = (value: boolean) => {
     <p>Input 3: {{ inputs.input3 }}</p>
 
     <Button variant="outline" @click="console.log('Here is a click')">Shadcn Button</Button>
-
-    <TestComponent />
   </div>
 </template>
 
