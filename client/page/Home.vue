@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { onBeforeMount, onMounted, ref, watch } from 'vue'
 import { useColorMode } from '@vueuse/core'
-import { useCookies } from '@vueuse/integrations/useCookies.mjs'
 import Switch from '@/components/ui/switch/Switch.vue'
 import Button from '@/components/ui/button/Button.vue'
+import { useCookies } from '@vueuse/integrations/useCookies.mjs'
 
 type Inputs = {
   input1: string
