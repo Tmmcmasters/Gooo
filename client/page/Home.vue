@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import { onBeforeMount, onMounted, ref, watch } from 'vue'
-import { useColorMode } from '@vueuse/core'
 import Switch from '@/components/ui/switch/Switch.vue'
 import Button from '@/components/ui/button/Button.vue'
-import { useCookies } from '@vueuse/integrations/useCookies.mjs'
+import useThemeCookie from '@/composables/useThemeCookie'
 
 type Inputs = {
   input1: string
@@ -42,30 +41,13 @@ onMounted(() => {
   stop()
 })
 
-const color = useColorMode({})
-const cookies = useCookies()
-
-const isDark = ref(color.value === 'dark')
-
-const changeColor = (value: boolean) => {
-  color.value = value ? 'dark' : 'light'
-  isDark.value = value
-}
-
-watch(
-  color,
-  (newValue) => {
-    cookies.set('color-scheme', newValue)
-  },
-  {
-    immediate: true,
-  },
-)
+const { isDark } = useThemeCookie()
 </script>
 
 <template>
   <div>
-    <Switch :model-value="isDark" @update:model-value="changeColor($event)" />
+    <Switch v-model:model-value="isDark" />
+    <p>Is dark: {{ isDark }}</p>
     <form>
       <label for="input1">Input 1:</label>
       <input v-model="inputs.input1" id="input1" type="text" />
@@ -80,7 +62,9 @@ watch(
     <p>Input 2: {{ inputs.input2 }}</p>
     <p>Input 3: {{ inputs.input3 }}</p>
 
-    <Button variant="outline" @click="console.log('Here is a click')">Shadcn Button</Button>
+    <Button variant="outline" @click="console.log('Here is a click')"
+      ><span class="loading loading-dots loading-sm"></span>Shadcn Button</Button
+    >
   </div>
 </template>
 
