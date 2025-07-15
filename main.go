@@ -1,7 +1,9 @@
 package main
 
 import (
+	"PersonalPortfolio/constants"
 	"PersonalPortfolio/handlers"
+	"context"
 	"log"
 	"net/http"
 	"net/http/httptest"
@@ -31,29 +33,36 @@ const (
 	Reset    = "\033[0m"
 )
 
-type ThemeContextKey string
-const ThemeKey ThemeContextKey = "theme"
 
-func themeMiddleware( next echo.HandlerFunc ) echo.HandlerFunc {
+
+func themeMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
 	return func(c echo.Context) error {
-		theme := "light";
-		cookies, err := c.Cookie("color-scheme")
-		if err == nil && cookies != nil {
-			theme = cookies.Value
+		theme := "light"
+		cookie, err := c.Cookie("color-scheme")
+		if err == nil && cookie != nil {
+			theme = cookie.Value
 		}
 
-		// Possibility to add more themes later
+		// Sanitize/validate theme
 		switch theme {
 		case "dark":
-		default: 
+			// leave as-is
+		default:
 			theme = "light"
 		}
 
-		c.Set(string(ThemeKey), theme)
+		// Store in echo.Context (for direct access)
+		c.Set(string(constants.ThemeKey), theme)
+
+		// Also inject into request.Context for templ
+		req := c.Request()
+		ctxWithTheme := context.WithValue(req.Context(), constants.ThemeKey, theme)
+		c.SetRequest(req.WithContext(ctxWithTheme))
+
 		return next(c)
 	}
-	
 }
+
 
 func main()  {
 	envFile := os.Getenv("ENV_FILE");
