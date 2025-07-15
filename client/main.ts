@@ -1,8 +1,8 @@
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
-import App from './App.vue'
+import Home from './page/Home.vue'
 
-const app = createApp(App)
+const app = createApp(Home)
 
 app.use(createPinia())
 
