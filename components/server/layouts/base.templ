@@ -14,6 +14,18 @@ templ Base(title string) {
 			// <link rel="preload" href="/static/assets/css/output-tw.css" as="style" onload="this.onload=null;this.rel='stylesheet'"/>
 			// <link href="/gen/css/main.css" rel="stylesheet"/>
 			@Head(title)
+			if helpers.IsLocal(ctx) {
+				<script>
+if (location.hostname === "localhost") {
+  const ws = new WebSocket("ws://" + location.host + "/ws/reload");
+  ws.onmessage = function(event) {
+    if (event.data === "reload") {
+      location.reload();
+    }
+  };
+}
+</script>
+			}
 		</head>
 		<body>
 			{ children... }
