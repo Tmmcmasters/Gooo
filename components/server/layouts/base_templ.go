@@ -10,6 +10,7 @@ import templruntime "github.com/a-h/templ/runtime"
 
 import "PersonalPortfolio/components/server/generated"
 import "PersonalPortfolio/helpers"
+import "PersonalPortfolio/components/server/utility"
 
 func Base(title string) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
@@ -66,13 +67,11 @@ func Base(title string) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		if helpers.IsLocal(ctx) {
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "<script>\n\n\t\t\t\tfunction setupReloadSocket() {\n\t\t\t\t\tlet ws;\n\t\t\t\t\tfunction connect() {\n\t\t\t\t\t\tws = new WebSocket(\"ws://\" + location.host + \"/ws/reload\");\n\n\t\t\t\t\t\tws.onopen = () => {\n\t\t\t\t\t\t\tconsole.log(\"[dev] Connected to reload socket\");\n\t\t\t\t\t\t};\t\n\n\t\t\t\t\t\tws.onclose = () => {\n\t\t\t\t\t\t\tconsole.log(\"[dev] WebSocket closed, reconnecting in 1s...\");\n\t\t\t\t\t\t\tsetTimeout(connect, 1000);\n\t\t\t\t\t\t};\n\n\t\t\t\t\t\tws.onmessage = (event) => {\n\t\t\t\t\t\t\tif (event.data === \"reload\") {\n\t\t\t\t\t\t\t\tlocation.reload();\n\t\t\t\t\t\t}\n\t\t\t\t\t\t}\n\n\t\t\t\t\t\tws.onerror = (err) => {\n\t\t\t\t\t\t\tconsole.error(`[dev] Error with reload socket ${err}`);\n\t\t\t\t\t\t\tws.close();\n\t\t\t\t\t\t};\n\t\t\t\t\t}\n\n\t\t\t\t\tconnect();\n\t\t\t\t}\n\n\t\t\t\tif (window.location.hostname === \"localhost\") {\n\t\t\t\t\tsetupReloadSocket();\n\t\t\t\t}\n</script>")
-			if templ_7745c5c3_Err != nil {
-				return templ_7745c5c3_Err
-			}
+		templ_7745c5c3_Err = serverUtility.SocketScript().Render(ctx, templ_7745c5c3_Buffer)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, "</head><body>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "</head><body>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -80,7 +79,7 @@ func Base(title string) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 6, "</body></html>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, "</body></html>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

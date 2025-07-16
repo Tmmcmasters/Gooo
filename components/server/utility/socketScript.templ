@@ -1,0 +1,43 @@
+package serverUtility
+
+import "PersonalPortfolio/helpers"
+
+templ SocketScript() {
+	if helpers.IsLocal(ctx) {
+		<script>
+
+				function setupReloadSocket() {
+					let ws;
+					function connect() {
+						ws = new WebSocket("ws://" + location.host + "/ws/reload");
+
+						ws.onopen = () => {
+							console.log("[dev] Connected to reload socket");
+						};	
+
+						ws.onclose = () => {
+							console.log("[dev] WebSocket closed, reconnecting in 1s...");
+							setTimeout(connect, 1000);
+						};
+
+						ws.onmessage = (event) => {
+							if (event.data === "reload") {
+								location.reload();
+						}
+						}
+
+						ws.onerror = (err) => {
+							console.error(`[dev] Error with reload socket ${err}`);
+							ws.close();
+						};
+					}
+
+					connect();
+				}
+
+				if (window.location.hostname === "localhost") {
+					setupReloadSocket();
+				}
+</script>
+	}
+}
