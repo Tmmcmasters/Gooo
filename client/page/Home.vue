@@ -3,6 +3,8 @@ import { onBeforeMount, onMounted, ref, watch } from 'vue'
 import Switch from '@/components/ui/switch/Switch.vue'
 import Button from '@/components/ui/button/Button.vue'
 import useThemeCookie from '@/composables/useThemeCookie'
+import { useCounterStore } from '@/stores/counter'
+import { storeToRefs } from 'pinia'
 
 type Inputs = {
   input1: string
@@ -42,11 +44,16 @@ onMounted(() => {
 })
 
 const { isDark } = useThemeCookie()
+
+const { count } = storeToRefs(useCounterStore())
+const { increment } = useCounterStore()
 </script>
 
 <template>
   <div>
     <Switch v-model:model-value="isDark" />
+    <p class="text-5xl">{{ count }}</p>
+    <Button @click="increment">Increment</Button>
     <p>Is dark: {{ isDark }}</p>
     <form>
       <label for="input1">Input 1:</label>
