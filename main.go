@@ -126,6 +126,10 @@ func reloadWebSocket(c echo.Context) error {
 	return nil
 }
 
+// broadcastReload sends a websocket message to all connected clients to reload
+// the page. It iterates over the map of connected clients and sends a
+// websocket.TextMessage with the payload "reload". If the send fails, the
+// connection is closed and the client is removed from the map.
 func broadcastReload() {
 	reloadCLientsMu.Lock()
 	defer reloadCLientsMu.Unlock()
@@ -169,6 +173,13 @@ func themeMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
 	}
 }
 
+// handleViteDevServer sets up the reverse proxy to Vite for development. It
+// forwards requests from /gen/js/* to /client/*.ts to allow Vite to handle
+// the typescript files. It also forwards requests for Vite's HMR client and
+// other client assets. If a request for a static asset fails, it attempts to
+// proxy the request to Vite dev server. If the proxy succeeds, it copies the
+// response to the client. If the proxy fails, it falls back to the default
+// Echo error handling or custom 404 response.
 func handleViteDevServer(e *echo.Echo, isLocal bool) {
 	// Establish the Reverse Proxy to Vite
 	viteUrl, _ := url.Parse("http://localhost:5173")
@@ -244,6 +255,11 @@ func handleViteDevServer(e *echo.Echo, isLocal bool) {
 	}
 }
 
+// envMiddleware injects the environment variable into the echo.Context and
+// the request.Context for use by the application. It sets the environment
+// in the context using a predefined key and ensures the value is accessible
+// throughout the request lifecycle. This middleware is useful for passing
+// environment-specific configuration to handlers and other middleware functions.
 func envMiddleware(next echo.HandlerFunc, env string) echo.HandlerFunc {
 	return func(c echo.Context) error {
 		c.Set(string(constants.EnvKey), env)
