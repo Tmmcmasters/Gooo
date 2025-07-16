@@ -9,7 +9,9 @@ import (
 )
 
 func main() {
-	log.Println("\u2022" + constants.Blue + " Injecting Tailwind CSS into tailwind.templ" + constants.Reset)
+	log.SetFlags(0)
+	log.Println("")
+	log.Println("\u2022" + constants.Blue + constants.Bold + " Build: " + constants.Reset + "Injecting Tailwind CSS into tailwind.templ")
 
 	// Read the Tailwind CSS file
 	cssPath := "./static/assets/css/output-tw.css"
@@ -48,5 +50,6 @@ func main() {
 		log.Fatalf("Error writing %s: %v", templPath, err)
 	}
 
-	log.Println("\u2022" + constants.Green + " Successfully injected Tailwind CSS into tailwind.templ" + constants.Reset)
+	log.Println("\u2022" + constants.Green + constants.Bold + " Build: " + constants.Reset + "Successfully injected Tailwind CSS into tailwind.templ")
+	log.Println("")
 }
