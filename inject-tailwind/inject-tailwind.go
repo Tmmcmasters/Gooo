@@ -22,7 +22,7 @@ func main() {
 	cssContent := strings.TrimSpace(string(css))
 
 	// Read the tailwind.templ file
-	templPath := "./components/server/generated/tailwind.templ"
+	templPath := "./server/generated/tailwind.templ"
 	templContent, err := os.ReadFile(templPath)
 	if err != nil {
 		log.Fatalf("Error reading templ file at path: %s, error: %v", templPath, err)

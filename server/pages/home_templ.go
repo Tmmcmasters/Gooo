@@ -8,7 +8,7 @@ package serverPages
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
-import "PersonalPortfolio/components/server/layouts"
+import "PersonalPortfolio/server/layout"
 
 func Home() templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
