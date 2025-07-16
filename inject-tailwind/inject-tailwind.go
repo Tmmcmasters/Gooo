@@ -1,6 +1,7 @@
 package main
 
 import (
+	"PersonalPortfolio/constants"
 	"log"
 	"os"
 	"regexp"
@@ -8,7 +9,7 @@ import (
 )
 
 func main() {
-	log.Println("Injecting Tailwind CSS into tailwind.templ")
+	log.Println("\u2022" + constants.Blue + " Injecting Tailwind CSS into tailwind.templ" + constants.Reset)
 
 	// Read the Tailwind CSS file
 	cssPath := "./static/assets/css/output-tw.css"
@@ -47,5 +48,5 @@ func main() {
 		log.Fatalf("Error writing %s: %v", templPath, err)
 	}
 
-	log.Println("Successfully injected Tailwind CSS into tailwind.templ")
+	log.Println("\u2022" + constants.Green + " Successfully injected Tailwind CSS into tailwind.templ" + constants.Reset)
 }
