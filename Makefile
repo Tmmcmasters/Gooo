@@ -2,6 +2,9 @@
 
 -include .env
 
+# Suppress the "Entering/Leaving directory" messages
+MAKEFLAGS += --no-print-directory	
+
 build-echo: 
 	@go build -o ./tmp/main .
 
