@@ -12,6 +12,7 @@ import (
 	"os"
 	"strings"
 	"sync"
+	"time"
 
 	"github.com/gorilla/websocket"
 	"github.com/joho/godotenv"
@@ -166,6 +167,7 @@ func main() {
 	if isLocal {
 		e.GET("/ws/reload", reloadWebSocket)
 		go func() {
+			time.Sleep(1 * time.Second)
 			log.Println(Green + "[dev] Broadcasting client reload..." + Reset)
 			broadcastReload()
 		}()
