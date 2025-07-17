@@ -17,7 +17,7 @@ templ SocketScript() {
 
 						ws.onclose = () => {
 							console.log("[dev] WebSocket closed, reconnecting in 1s...");
-							setTimeout(connect, 1000);
+							setTimeout(connect, 500);
 						};
 
 						ws.onmessage = (event) => {

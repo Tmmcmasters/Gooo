@@ -4,10 +4,11 @@ import "PersonalPortfolio/server/layout"
 
 templ Home() {
 	@serverLayout.Base("Gooo") {
-		<div class="w-full h-full bg-base-100">
-			<img class="w-32" src="/static/assets/img/goo.png" alt="A melting vue.js logo"/>
-			<div id="home">
-				<script type="application/json" id="home-initial-data">
+		<div class="w-full h-full bg-base-100 flex items-start justify-center">
+			<div class="flex flex-col items-center justify-center max-w-4xl w-full">
+				<img class="w-32" src="/static/assets/img/goo.png" alt="A melting vue.js logo"/>
+				<div id="home">
+					<script type="application/json" id="home-initial-data">
       {
         "inputs": {
           "input1": "Server",
@@ -16,8 +17,8 @@ templ Home() {
         }
       }
     </script>
+				</div>
 			</div>
-		</div>
-		<script type="module" src="/gen/js/main.js"></script>
+		</div> <script type="module" src="/gen/js/main.js"></script>
 	}
 }
