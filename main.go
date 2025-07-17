@@ -45,17 +45,17 @@ func main() {
 	e.Use(themeMiddleware)
 
 	e.Use(middleware.GzipWithConfig(middleware.GzipConfig{
-		Level: 6,
-		Skipper: func(c echo.Context) bool {
-			path := c.Request().URL.Path
+		Level: 5,
+		// Skipper: func(c echo.Context) bool {
+		// 	path := c.Request().URL.Path
 
-			// Skip gzip if path is not a js statically generated vue file
-			if strings.HasPrefix(path, "/gen/js") && strings.HasSuffix(path, ".js") {
-				return false
-			}
+		// 	// Skip gzip if path is not a js statically generated vue file
+		// 	if strings.HasPrefix(path, "/gen/js") && strings.HasSuffix(path, ".js") {
+		// 		return false
+		// 	}
 
-			return true
-		},
+		// 	return true
+		// },
 	}))
 
 	e.GET("/", handlers.HomeHandler)
@@ -80,8 +80,8 @@ func main() {
 	if isLocal {
 		e.GET("/ws/reload", reloadWebSocket)
 		go func() {
-			time.Sleep(1 * time.Second)
-			log.Println(constants.Green + "[dev] Broadcasting client reload..." + constants.Reset)
+			// time.Sleep(1 * time.Second) // Initial delay to let server stabilize
+			log.Println(constants.Green + "[dev] Initiating client reload broadcast..." + constants.Reset)
 			broadcastReload()
 		}()
 	}
@@ -96,7 +96,6 @@ var (
 
 // reloadWebSocket sets up a websocket to listen for reload events and
 // automatically reload connected clients when the server restarts.
-//
 // It's used by the vite dev server to communicate with the client to reload
 // the page when the server restarts.
 func reloadWebSocket(c echo.Context) error {
@@ -126,18 +125,33 @@ func reloadWebSocket(c echo.Context) error {
 	return nil
 }
 
-// broadcastReload sends a websocket message to all connected clients to reload
-// the page. It iterates over the map of connected clients and sends a
-// websocket.TextMessage with the payload "reload". If the send fails, the
-// connection is closed and the client is removed from the map.
+// broadcastReload sends a WebSocket message to all connected clients to reload
+// the page, but only after at least one client is connected or a timeout is reached.
 func broadcastReload() {
-	reloadCLientsMu.Lock()
-	defer reloadCLientsMu.Unlock()
+	// Wait for at least one client or timeout after 5 seconds
+	timeout := time.After(5 * time.Second)
+	ticker := time.NewTicker(500 * time.Millisecond)
+	defer ticker.Stop()
 
-	for conn := range reloadClients {
-		if err := conn.WriteMessage(websocket.TextMessage, []byte("reload")); err != nil {
-			conn.Close()
-			delete(reloadClients, conn)
+	for {
+		select {
+		case <-timeout:
+			log.Println(constants.Yellow + "[dev] No clients connected after timeout, skipping reload broadcast" + constants.Reset)
+			return
+		case <-ticker.C:
+			reloadCLientsMu.Lock()
+			if len(reloadClients) > 0 {
+				log.Println(constants.Green+"[dev] Broadcasting client reload to", len(reloadClients), "clients..."+constants.Reset)
+				for conn := range reloadClients {
+					if err := conn.WriteMessage(websocket.TextMessage, []byte("reload")); err != nil {
+						conn.Close()
+						delete(reloadClients, conn)
+					}
+				}
+				reloadCLientsMu.Unlock()
+				return
+			}
+			reloadCLientsMu.Unlock()
 		}
 	}
 }
