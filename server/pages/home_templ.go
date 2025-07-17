@@ -43,7 +43,7 @@ func Home() templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"w-full h-full bg-base-100 flex items-start justify-center\"><div class=\"flex flex-col items-center justify-center max-w-4xl w-full py-5\"><img class=\"w-48 drop-shadow-2xl drop-shadow-green-300/40 \" src=\"/static/assets/img/goo.png\" alt=\"A melting vue.js logo\"><p>Welcome to Gooo (pronounced like \"goo\")</p><div id=\"home\"><script type=\"application/json\" id=\"home-initial-data\">\n      {\n        \"inputs\": {\n          \"input1\": \"Server\",\n          \"input2\": \"\",\n          \"input3\": \"\"\n        }\n      }\n    </script></div></div></div><script type=\"module\" src=\"/gen/js/main.js\"></script>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"w-full h-full bg-base-100 flex items-start justify-center\"><div class=\"flex flex-col items-center justify-center max-w-4xl w-full py-5\"><img class=\"w-48 drop-shadow-2xl drop-shadow-green-300/40 \" src=\"/static/assets/img/goo.png\" alt=\"A melting vue.js logo\"><p class=\"text-5xl font-bold\">Welcome to <span class=\"italic text-go\">Gooo</span>(\"goo\")</p><div id=\"home\"><script type=\"application/json\" id=\"home-initial-data\">\n      {\n        \"inputs\": {\n          \"input1\": \"Server\",\n          \"input2\": \"\",\n          \"input3\": \"\"\n        }\n      }\n    </script></div></div></div><script type=\"module\" src=\"/gen/js/main.js\"></script>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

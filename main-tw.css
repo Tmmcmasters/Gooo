@@ -1,6 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 @import 'tailwindcss';
 @import 'tw-animate-css';
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
 @custom-variant dark (&:is(.dark *));
 
@@ -15,7 +15,7 @@
 :root {
   --background: oklch(0.9885 0.0057 84.5659);
   --foreground: oklch(0.366 0.0251 49.6085);
-  --card: oklch(0.9686 0.0091 78.2818);
+  --card: oklch(56.847% 0.01538 78.153);
   --card-foreground: oklch(0.366 0.0251 49.6085);
   --popover: oklch(0.9686 0.0091 78.2818);
   --popover-foreground: oklch(0.366 0.0251 49.6085);
@@ -59,6 +59,7 @@
   --shadow-2xl: 3px 3px 0px 0px hsl(28 18% 25% / 0.45);
   --tracking-normal: 0em;
   --spacing: 0.25rem;
+  --go-color: oklch(78.773% 0.1101 217.353);
 }
 
 .dark {
@@ -106,9 +107,11 @@
   --shadow-lg: 3px 3px 0px 0px hsl(0 0% 5% / 0.18), 3px 4px 6px -1px hsl(0 0% 5% / 0.18);
   --shadow-xl: 3px 3px 0px 0px hsl(0 0% 5% / 0.18), 3px 8px 10px -1px hsl(0 0% 5% / 0.18);
   --shadow-2xl: 3px 3px 0px 0px hsl(0 0% 5% / 0.45);
+  --go-color: oklch(78.773% 0.1101 217.353);
 }
 
 @theme inline {
+  --color-go: var(--go-color);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -166,7 +169,7 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply font-sans bg-background text-foreground;
   }
   button {
     @apply cursor-pointer;
