@@ -28,7 +28,7 @@ templ SocketScript() {
 
 						ws.onerror = (err) => {
 							console.error(`[dev] Error with reload socket ${err}`);
-							ws.close();
+							setTimeout(connect, 500);
 						};
 					}
 
