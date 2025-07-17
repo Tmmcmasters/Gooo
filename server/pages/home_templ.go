@@ -43,13 +43,13 @@ func Home() templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"w-full h-full bg-base-100\"><img class=\"w-32\" src=\"/static/assets/img/goo.png\" alt=\"A melting vue.js logo\"><div id=\"app\"><script type=\"application/json\" id=\"initial-data\">\n      {\n        \"inputs\": {\n          \"input1\": \"Server\",\n          \"input2\": \"\",\n          \"input3\": \"\"\n        }\n      }\n    </script></div></div><script type=\"module\" src=\"/gen/js/main.js\"></script>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"w-full h-full bg-base-100\"><img class=\"w-32\" src=\"/static/assets/img/goo.png\" alt=\"A melting vue.js logo\"><div id=\"home\"><script type=\"application/json\" id=\"home-initial-data\">\n      {\n        \"inputs\": {\n          \"input1\": \"Server\",\n          \"input2\": \"\",\n          \"input3\": \"\"\n        }\n      }\n    </script></div></div><script type=\"module\" src=\"/gen/js/main.js\"></script>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 			return nil
 		})
-		templ_7745c5c3_Err = serverLayout.Base("Timothy M | Home").Render(templ.WithChildren(ctx, templ_7745c5c3_Var2), templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = serverLayout.Base("Gooo").Render(templ.WithChildren(ctx, templ_7745c5c3_Var2), templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

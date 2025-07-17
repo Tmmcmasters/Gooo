@@ -20,7 +20,7 @@ const inputs = ref<Inputs>({
 const stop = watch(
   inputs,
   () => {
-    const initialData = document.getElementById('initial-data')
+    const initialData = document.getElementById('home-initial-data')
     if (initialData) {
       console.log(`Setting the initial data`)
       console.log(initialData)
@@ -54,24 +54,6 @@ const { increment } = useCounterStore()
     <Switch v-model:model-value="isDark" />
     <p class="text-5xl">{{ count }}</p>
     <Button @click="increment">Increment</Button>
-    <p>Is dark: {{ isDark }}</p>
-    <form>
-      <label for="input1">Input 1:</label>
-      <input v-model="inputs.input1" id="input1" type="text" />
-      <br />
-      <label for="input2">Input 2:</label>
-      <input v-model="inputs.input2" id="input2" type="text" />
-      <br />
-      <label for="input3" class="text-5xl">Input 3:</label>
-      <input v-model="inputs.input3" id="input3" type="text" />
-    </form>
-    <p>Input 1: {{ inputs.input1 }} {{ inputs.input3 }} {{ inputs.input2 }}</p>
-    <p>Input 2: {{ inputs.input2 }}</p>
-    <p>Input 3: {{ inputs.input3 }}</p>
-
-    <Button variant="outline" @click="console.log('Here is a click')"
-      ><span class="loading loading-dots loading-sm"></span>Shadcn Button</Button
-    >
   </div>
 </template>
 

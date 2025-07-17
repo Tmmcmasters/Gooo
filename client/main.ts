@@ -6,4 +6,4 @@ const app = createApp(Home)
 
 app.use(createPinia())
 
-app.mount('#app')
+app.mount('#home')
