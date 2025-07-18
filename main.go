@@ -77,6 +77,8 @@ func main() {
 	e.Static("/static", "static")
 	e.Static("/gen", "gen")
 
+	e.File("/favicon.ico", "static/favicon.ico")
+
 	if isLocal {
 		e.GET("/ws/reload", reloadWebSocket)
 		go func() {
