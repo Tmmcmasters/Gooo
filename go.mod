@@ -1,4 +1,4 @@
-module PersonalPortfolio
+module Gooo
 
 go 1.24.3
 

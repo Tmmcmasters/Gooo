@@ -1,7 +1,7 @@
 package helpers
 
 import (
-	"PersonalPortfolio/constants"
+	"Gooo/constants"
 	"context"
 	"strings"
 )

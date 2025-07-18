@@ -1,8 +1,8 @@
 package main
 
 import (
-	"PersonalPortfolio/constants"
-	"PersonalPortfolio/handlers"
+	"Gooo/constants"
+	"Gooo/handlers"
 	"context"
 	"log"
 	"net/http"

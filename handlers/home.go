@@ -1,8 +1,8 @@
 package handlers
 
 import (
-	"PersonalPortfolio/helpers"
-	serverPages "PersonalPortfolio/server/pages"
+	"Gooo/helpers"
+	serverPages "Gooo/server/pages"
 
 	"github.com/labstack/echo/v4"
 )

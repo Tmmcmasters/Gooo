@@ -8,7 +8,7 @@ package serverUtility
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
-import "PersonalPortfolio/helpers"
+import "Gooo/helpers"
 
 func SocketScript() templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {

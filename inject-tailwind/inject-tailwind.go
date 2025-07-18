@@ -1,7 +1,7 @@
 package main
 
 import (
-	"PersonalPortfolio/constants"
+	"Gooo/constants"
 	"log"
 	"os"
 	"regexp"

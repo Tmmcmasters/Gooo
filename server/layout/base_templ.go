@@ -8,9 +8,9 @@ package serverLayout
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
-import "PersonalPortfolio/helpers"
-import "PersonalPortfolio/server/generated"
-import "PersonalPortfolio/server/utility"
+import "Gooo/helpers"
+import "Gooo/server/generated"
+import "Gooo/server/utility"
 
 func Base(title string) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
