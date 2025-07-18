@@ -33,13 +33,13 @@ notify-templ-proxy:
 	@templ generate --notify-proxy --proxyport=$(TEMPL_PROXY_PORT)
 
 # watch-tailwind:
-# 	@npx @tailwindcss/cli -i ./main-tw.css -o ./static/assets/css/output-tw.css --watch[=always]
+# 	@npx @tailwindcss/cli -i ./tailwind.css -o ./static/assets/css/output-tw.css --watch[=always]
 
 tailwind: 
-	@npx @tailwindcss/cli -i ./main-tw.css -o ./static/assets/css/output-tw.css
+	@npx @tailwindcss/cli -i ./tailwind.css -o ./static/assets/css/output-tw.css
 
 minify-tailwind: 
-	@npx @tailwindcss/cli -i ./main-tw.css -o ./static/assets/css/output-tw.css --minify
+	@npx @tailwindcss/cli -i ./tailwind.css -o ./static/assets/css/output-tw.css --minify
 
 run-vite: 
 	@npm run dev
