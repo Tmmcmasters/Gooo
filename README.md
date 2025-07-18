@@ -3,7 +3,7 @@
 \*TITLE OF ONE ARTICLE
 An Exercise in why Javascript Frameworks are Horrible for Those Learning how to Code.
 
-\*This is called Gooo^"goo"^
+\*This is called _Gooo_<sup>("goo")</sup>
 
 \*The Framework will be called Groov
 
