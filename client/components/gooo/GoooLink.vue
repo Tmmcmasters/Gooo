@@ -8,9 +8,10 @@ defineOptions({
 
 const props = withDefaults(defineProps<GoooLinkProps>(), {
   href: '#',
+  prefetch: true,
+  noPrefetch: false,
+  prefetchOn: 'interaction',
 })
-
-// const props = defineProps<GoooLinkProps>();
 
 const getDocument = () =>
   $fetch<Document>(props.href, {
@@ -18,10 +19,16 @@ const getDocument = () =>
     headers: {
       Accept: 'text/html',
     },
+    onResponse: ({}) => {},
   })
-
 const fetch = async () => {
   const response = await getDocument()
+  const responseLayout = response.querySelector('goo-layout')
+  if (!responseLayout) {
+    console.error('No gooo-layout attribute found in response')
+    return
+  }
+  document.querySelector('goo-layout')?.replaceWith(responseLayout)
   console.log('Here is the response from the page')
   console.log(response)
 }
