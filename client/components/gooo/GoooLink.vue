@@ -23,7 +23,7 @@ const props = withDefaults(defineProps<GoooLinkProps>(), {
 
 const getDocument = () =>
   $fetch<Document>(props.href, {
-    method: 'get',
+    method: 'GET',
     headers: {
       Accept: 'text/html',
     },
@@ -37,7 +37,7 @@ const fetch = async () => {
 </script>
 
 <template>
-  <a v-bind="props" @click.prevent.stop="fetch" />
+  <a v-bind="props" @click.prevent.stop="fetch" :target="props.target as string" />
 </template>
 
 <style scoped></style>
