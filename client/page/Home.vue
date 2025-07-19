@@ -5,6 +5,7 @@ import Button from '@/components/ui/button/Button.vue'
 import useThemeCookie from '@/composables/useThemeCookie'
 import { useCounterStore } from '@/stores/counter'
 import { storeToRefs } from 'pinia'
+import GoooLink from '@/components/gooo/GoooLink.vue'
 
 type Inputs = {
   input1: string
@@ -54,6 +55,7 @@ const { increment } = useCounterStore()
     <Switch v-model:model-value="isDark" />
     <p class="text-5xl">{{ count }}</p>
     <Button @click="increment">Increment</Button>
+    <Button as-child variant="link"><GoooLink href="/todo" target="">To Do</GoooLink></Button>
   </div>
 </template>
 
