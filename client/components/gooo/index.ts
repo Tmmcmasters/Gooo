@@ -1,6 +1,6 @@
 import type { AnchorHTMLAttributes } from "vue"
 
-export interface GoooLinkProps extends Omit<AnchorHTMLAttributes, "href" | "target"> {
+export interface GoooLinkProps extends /* @vue-ignore */ Omit<AnchorHTMLAttributes, "href" | "target"> {
   href: string
   /**
    * Forces the link to be considered as external (true) or internal (false). This is helpful to handle edge-cases
