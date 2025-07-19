@@ -7,6 +7,8 @@ An Exercise in why Javascript Frameworks are Horrible for Those Learning how to 
 
 \*The Framework will be called Groov
 
+\*Another name for the framework could be Glue
+
 # client
 
 This template should help get you started developing with Vue 3 in Vite.
