@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { $fetch } from 'ofetch'
-import type { GoooLinkProps } from '.'
+import type { GoooLinkProps } from '@/components/gooo/index'
 
 defineOptions({
   inheritAttrs: true,
