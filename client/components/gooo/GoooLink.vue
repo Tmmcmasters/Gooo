@@ -1,25 +1,16 @@
-<script lang="ts">
-import type { AnchorHTMLAttributes } from 'vue'
-import { $fetch } from 'ofetch'
-
-export interface GoooLinkProps extends Omit<AnchorHTMLAttributes, 'href' | 'target'> {
-  href: string
-  /**
-   * Forces the link to be considered as external (true) or internal (false). This is helpful to handle edge-cases
-   */
-  external?: boolean
-
-  /**
-   * Where to display the linked URL, as the name for a browsing context.
-   */
-  target?: '_blank' | '_parent' | '_self' | '_top' | (string & {}) | null
-}
-</script>
-
 <script setup lang="ts">
-const props = withDefaults(defineProps<GoooLinkProps>(), {
-  href: '',
+import { $fetch } from 'ofetch'
+import type { GoooLinkProps } from '.'
+
+defineOptions({
+  inheritAttrs: true,
 })
+
+const props = withDefaults(defineProps<GoooLinkProps>(), {
+  href: '#',
+})
+
+// const props = defineProps<GoooLinkProps>();
 
 const getDocument = () =>
   $fetch<Document>(props.href, {
