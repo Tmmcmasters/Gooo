@@ -59,6 +59,7 @@ func main() {
 	}))
 
 	e.GET("/", handlers.HomeHandler)
+	e.GET("/todo", handlers.TodoHandler)
 
 	e.Use(func(next echo.HandlerFunc) echo.HandlerFunc {
 		return envMiddleware(next, os.Getenv("ENV"))

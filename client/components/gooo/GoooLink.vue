@@ -42,11 +42,13 @@ const getDocument = () => {
 const fetch = async () => {
   const response = await getDocument()
   const responseLayout = response.querySelector('goo-layout')
+  console.log('Here is the response Layout')
+  console.log(responseLayout)
   if (!responseLayout) {
     console.error('No gooo-layout attribute found in response')
     return
   }
-  document.querySelector('goo-layout')?.replaceWith(responseLayout)
+  // document.querySelector('goo-layout')?.replaceWith(responseLayout);
   console.log('Here is the response from the page')
   console.log(response)
 }
