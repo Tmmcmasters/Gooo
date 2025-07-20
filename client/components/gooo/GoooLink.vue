@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { $fetch } from 'ofetch'
 import type { GoooLinkProps } from '@/components/gooo/index'
+import { $fetch } from 'ofetch'
+import { shallowRef } from 'vue'
 
 defineOptions({
   inheritAttrs: true,
@@ -13,14 +14,31 @@ const props = withDefaults(defineProps<GoooLinkProps>(), {
   prefetchOn: 'interaction',
 })
 
-const getDocument = () =>
-  $fetch<Document>(props.href, {
+const fetchStatus = shallowRef<'pending' | 'success' | 'error' | 'idle'>('idle')
+
+const getDocument = () => {
+  return $fetch<Document>(props.href, {
     method: 'GET',
     headers: {
       Accept: 'text/html',
     },
-    onResponse: ({}) => {},
+
+    onRequest: ({}) => {
+      fetchStatus.value = 'pending'
+    },
+    onResponse: ({ response }) => {
+      if (response.ok) {
+        fetchStatus.value = 'success'
+      } else {
+        fetchStatus.value = 'error'
+      }
+    },
+    onResponseError: () => {
+      fetchStatus.value = 'error'
+    },
   })
+}
+
 const fetch = async () => {
   const response = await getDocument()
   const responseLayout = response.querySelector('goo-layout')
