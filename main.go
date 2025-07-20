@@ -46,16 +46,6 @@ func main() {
 
 	e.Use(middleware.GzipWithConfig(middleware.GzipConfig{
 		Level: 5,
-		// Skipper: func(c echo.Context) bool {
-		// 	path := c.Request().URL.Path
-
-		// 	// Skip gzip if path is not a js statically generated vue file
-		// 	if strings.HasPrefix(path, "/gen/js") && strings.HasSuffix(path, ".js") {
-		// 		return false
-		// 	}
-
-		// 	return true
-		// },
 	}))
 
 	e.GET("/", handlers.HomeHandler)
