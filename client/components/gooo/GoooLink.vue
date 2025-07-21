@@ -55,7 +55,7 @@ const fetch = async () => {
 </script>
 
 <template>
-  <a v-bind="props" @click.prevent.stop="fetch" :target="props.target as string">
+  <a v-bind="props" @click.prevent.stop="fetch" :target="target?.toString()">
     <slot />
   </a>
 </template>
