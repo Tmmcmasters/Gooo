@@ -56,7 +56,13 @@ const fetch = async () => {
     console.error(`No gooo-layout attribute found in response, aborting route.  Document: ${doc}`)
     return
   }
-  document.querySelector('[gooo-layout]')?.replaceWith(responseLayout)
+  const existingPage = document.querySelector('[gooo-layout]')
+
+  if (existingPage) {
+    existingPage.replaceWith(responseLayout!)
+  }
+
+  window.history.pushState({}, doc.title, props.href)
   console.log('Here is the response from the page')
   console.log(response)
 }
