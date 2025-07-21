@@ -17,7 +17,7 @@ const props = withDefaults(defineProps<GoooLinkProps>(), {
 const fetchStatus = shallowRef<'pending' | 'success' | 'error' | 'idle'>('idle')
 
 const getDocument = () => {
-  return $fetch<Document>(props.href, {
+  return $fetch<string>(props.href, {
     method: 'GET',
     headers: {
       Accept: 'text/html',
@@ -41,11 +41,19 @@ const getDocument = () => {
 
 const fetch = async () => {
   const response = await getDocument()
-  const responseLayout = response.querySelector('gooo-layout')
+  // Parse the HTML string into a Document object
+  const parser = new DOMParser()
+
+  const doc = parser.parseFromString(response, 'text/html')
+
+  console.log('Here is the doc')
+  console.log(doc)
+
+  const responseLayout = doc.querySelector('[gooo-layout]')
   console.log('Here is the response Layout')
   console.log(responseLayout)
   if (!responseLayout) {
-    console.error('No gooo-layout attribute found in response')
+    console.error(`No gooo-layout attribute found in response, aborting route.  Document: ${doc}`)
     return
   }
   // document.querySelector('goo-layout')?.replaceWith(responseLayout);
