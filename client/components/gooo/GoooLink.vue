@@ -41,7 +41,7 @@ const getDocument = () => {
 
 const fetch = async () => {
   const response = await getDocument()
-  const responseLayout = response.querySelector('goo-layout')
+  const responseLayout = response.querySelector('gooo-layout')
   console.log('Here is the response Layout')
   console.log(responseLayout)
   if (!responseLayout) {
