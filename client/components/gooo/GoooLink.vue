@@ -22,16 +22,9 @@ const reloadScripts = (doc: Document) => {
   // Remove existing page-specific scripts
   document.querySelectorAll('script[data-page-script]').forEach((script) => {
     script.remove()
-    console.log('Removed existing page-specific script')
-    console.log(script)
   })
 
-  console.log('Here is the document')
-  console.log(doc)
-
   const scripts = doc.querySelectorAll('script')
-  console.log('Here are all of the scripts')
-  console.log(scripts)
   scripts.forEach((oldScript) => {
     const newScript = document.createElement('script')
     newScript.setAttribute('data-page-script', 'true') // Mark as page-specific
