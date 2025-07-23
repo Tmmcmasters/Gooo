@@ -51,6 +51,8 @@ const { increment } = useCounterStore()
 
 <template>
   <div class="flex flex-col gap-5 h-full w-full">
+    <p>Server data</p>
+    <p v-for="(input, index) in inputs" :key="index">{{ input }}</p>
     <Button @click="changeColor" variant="ghost" size="icon" class="absolute top-5 right-5"
       ><svg
         v-if="isDark"
