@@ -15,9 +15,37 @@ const props = withDefaults(defineProps<GoooLinkProps>(), {
 })
 
 const fetchStatus = shallowRef<'pending' | 'success' | 'error' | 'idle'>('idle')
-
-// Store the current URL to track navigation
 const currentUrl = shallowRef(window.location.pathname)
+
+// Function to reload scripts dynamically
+const reloadScripts = (doc: Document) => {
+  // Remove existing page-specific scripts
+  document.querySelectorAll('script[data-page-script]').forEach((script) => {
+    script.remove()
+    console.log('Removed existing page-specific script')
+    console.log(script)
+  })
+
+  console.log('Here is the document')
+  console.log(doc)
+
+  const scripts = doc.querySelectorAll('script')
+  console.log('Here are all of the scripts')
+  console.log(scripts)
+  scripts.forEach((oldScript) => {
+    const newScript = document.createElement('script')
+    newScript.setAttribute('data-page-script', 'true') // Mark as page-specific
+    if (oldScript.src) {
+      newScript.type = oldScript.type || 'text/javascript'
+      newScript.src = oldScript.src
+      newScript.async = false
+    } else {
+      newScript.type = oldScript.type || 'text/javascript'
+      newScript.textContent = oldScript.textContent
+    }
+    document.body.appendChild(newScript)
+  })
+}
 
 const getDocument = (url: string) => {
   return $fetch<string>(url, {
@@ -25,15 +53,11 @@ const getDocument = (url: string) => {
     headers: {
       Accept: 'text/html',
     },
-    onRequest: ({}) => {
+    onRequest: () => {
       fetchStatus.value = 'pending'
     },
     onResponse: ({ response }) => {
-      if (response.ok) {
-        fetchStatus.value = 'success'
-      } else {
-        fetchStatus.value = 'error'
-      }
+      fetchStatus.value = response.ok ? 'success' : 'error'
     },
     onResponseError: () => {
       fetchStatus.value = 'error'
@@ -46,12 +70,8 @@ const fetch = async () => {
     const htmlResponse = await getDocument(props.href)
     const parser = new DOMParser()
     const doc = parser.parseFromString(htmlResponse, 'text/html')
-    console.log('Here is the doc')
-    console.log(doc)
 
     const responseLayout = doc.querySelector('[gooo-layout]')
-    console.log('Here is the response Layout')
-    console.log(responseLayout)
     if (!responseLayout) {
       console.error(`No gooo-layout attribute found in response, aborting route. Document: ${doc}`)
       fetchStatus.value = 'error'
@@ -60,32 +80,45 @@ const fetch = async () => {
 
     const existingPage = document.querySelector('[gooo-layout]')
     if (existingPage) {
-      existingPage.replaceWith(responseLayout!)
+      existingPage.replaceWith(responseLayout)
     }
+
+    // Reload scripts after replacing content
+    reloadScripts(doc)
 
     // Update the URL and history with the new title
     const newTitle = doc.querySelector('title')?.textContent || document.title
     window.history.pushState({ url: props.href }, newTitle, props.href)
     currentUrl.value = props.href
-    console.log('Here is the response from the page')
-    console.log(htmlResponse)
   } catch (error) {
     console.error('Fetch or parsing error:', error)
     fetchStatus.value = 'error'
   }
 }
 
-// Handle back/forward navigation
 const handlePopState = async () => {
+  console.log('---Calling the HandlePopState function----')
   const newUrl = window.location.pathname
-  console.log('Popstate event triggered, new URL:', newUrl)
   if (newUrl !== currentUrl.value) {
     fetchStatus.value = 'pending'
     try {
+      // console.log('Here is the new URL when popping: ', newUrl)
       const htmlResponse = await getDocument(newUrl)
+      // console.log('Here is the string response from the fetch: ')
+      // console.log(htmlResponse)
+
       const parser = new DOMParser()
       const doc = parser.parseFromString(htmlResponse, 'text/html')
+      // console.log('Parsed document HTML: ')
+      // console.log(doc.documentElement.outerHTML)
+
       const responseLayout = doc.querySelector('[gooo-layout]')
+      // console.log('Here is the response layout: ')
+      // console.log(responseLayout)
+
+      // console.log('Here is the doc from the response and parsed: ')
+      // console.log(doc)
+
       if (!responseLayout) {
         console.error(`No gooo-layout attribute found for ${newUrl}`)
         fetchStatus.value = 'error'
@@ -95,6 +128,10 @@ const handlePopState = async () => {
       if (existingPage) {
         existingPage.replaceWith(responseLayout)
       }
+
+      // Reload scripts after replacing content
+      reloadScripts(doc)
+
       const newTitle = doc.querySelector('title')?.textContent || document.title
       window.history.replaceState({ url: newUrl }, newTitle, newUrl)
       currentUrl.value = newUrl
