@@ -96,6 +96,28 @@ const fetch = async () => {
   }
 }
 
+function executeScripts(container: Element) {
+  const scripts = container.querySelectorAll('script[data-page-script]')
+  console.log('Scripts to execute:', scripts)
+  scripts.forEach((currentScript) => {
+    const oldScript = currentScript as HTMLScriptElement
+    const newScript = document.createElement('script')
+    newScript.setAttribute('data-page-script', 'true')
+    if (oldScript.src) {
+      newScript.type = oldScript.type || 'text/javascript'
+      newScript.src = `${oldScript.src}?v=${Date.now()}`
+      newScript.async = false
+      console.log(`Executing script with src: ${newScript.src}`)
+    } else {
+      newScript.type = oldScript.type || 'text/javascript'
+      newScript.textContent = oldScript.textContent
+      console.log('Executing inline script:', newScript.textContent)
+    }
+    // Replace the old script with the new one to trigger execution
+    oldScript.parentNode?.replaceChild(newScript, oldScript)
+  })
+}
+
 const handlePopState = async () => {
   console.log('---Calling the HandlePopState function----')
   const newUrl = window.location.pathname
@@ -113,8 +135,8 @@ const handlePopState = async () => {
       // console.log(doc.documentElement.outerHTML)
 
       const responseLayout = doc.querySelector('[gooo-layout]')
-      // console.log('Here is the response layout: ')
-      // console.log(responseLayout)
+      console.log('Here is the response layout: ')
+      console.log(responseLayout)
 
       // console.log('Here is the doc from the response and parsed: ')
       // console.log(doc)
@@ -127,10 +149,17 @@ const handlePopState = async () => {
       const existingPage = document.querySelector('[gooo-layout]')
       if (existingPage) {
         existingPage.replaceWith(responseLayout)
+
+        responseLayout.querySelectorAll('script[data-page-script]').forEach((script) => {
+          console.log('Here is every script')
+          console.log(script)
+        })
+        // Execute scripts
+        executeScripts(responseLayout)
       }
 
       // Reload scripts after replacing content
-      reloadScripts(doc)
+      // reloadScripts(doc)
 
       const newTitle = doc.querySelector('title')?.textContent || document.title
       window.history.replaceState({ url: newUrl }, newTitle, newUrl)
