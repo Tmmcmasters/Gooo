@@ -7,5 +7,5 @@ package serverUtility
 // Example:
 //   @serverUtility.ConnectFrontend("/gen/js/home.js")
 templ ConnectFrontend(src string) {
-	<script type="module" src={ src }></script>
+	<script type="module" data-page-script src={ src }></script>
 }
