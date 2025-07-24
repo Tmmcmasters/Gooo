@@ -9,6 +9,7 @@ import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
 import "Gooo/server/layout"
+import "Gooo/server/utility"
 
 func Home() templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
@@ -43,7 +44,15 @@ func Home() templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<main class=\"w-full h-full bg-base-100 flex items-start justify-center px-4 py-2\"><div class=\"flex flex-col items-center justify-center max-w-4xl w-full py-5\"><img class=\"w-32 mb-2 drop-shadow-2xl drop-shadow-green-300/40 \" src=\"/static/assets/img/goo_resized.png\" alt=\"A melting vue.js logo\"><p class=\"text-5xl font-bold\">Welcome to <span class=\"italic text-go drop-shadow-2xl drop-shadow-go/50\">Gooo</span><span class=\"align-super text-sm\">(\"goo\")</span></p><p class=\"text-lg\">A Breath of Fresh Air That Gives You More Control</p><div class=\"w-full flex flex-col items-center justify-center my-10\" id=\"home\"></div></div><script type=\"application/json\" id=\"home-initial-data\">\n      {\n        \"inputs\": {\n          \"input1\": \"Server\",\n          \"input2\": \"\",\n          \"input3\": \"\"\n        }\n      }\n    </script><script type=\"module\" data-page-script src=\"/gen/js/home.js\"></script></main>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<main class=\"w-full h-full bg-base-100 flex items-start justify-center px-4 py-2\"><div class=\"flex flex-col items-center justify-center max-w-4xl w-full py-5\"><img class=\"w-32 mb-2 drop-shadow-2xl drop-shadow-green-300/40 \" src=\"/static/assets/img/goo_resized.png\" alt=\"A melting vue.js logo\"><p class=\"text-5xl font-bold\">Welcome to <span class=\"italic text-go drop-shadow-2xl drop-shadow-go/50\">Gooo</span><span class=\"align-super text-sm\">(\"goo\")</span></p><p class=\"text-lg\">A Breath of Fresh Air That Gives You More Control</p><div class=\"w-full flex flex-col items-center justify-center my-10\" id=\"home\"></div></div><script type=\"application/json\" id=\"home-initial-data\">\n      {\n        \"inputs\": {\n          \"input1\": \"Server\",\n          \"input2\": \"\",\n          \"input3\": \"\"\n        }\n      }\n    </script>")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			templ_7745c5c3_Err = serverUtility.ConnectFrontend("/gen/js/home.js").Render(ctx, templ_7745c5c3_Buffer)
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "</main>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

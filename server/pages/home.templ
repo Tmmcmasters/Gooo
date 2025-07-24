@@ -1,6 +1,7 @@
 package serverPages
 
 import "Gooo/server/layout"
+import "Gooo/server/utility"
 
 templ Home() {
 	@serverLayout.Base("Gooo") {
@@ -20,7 +21,7 @@ templ Home() {
         }
       }
     </script>
-			<script type="module" data-page-script src="/gen/js/home.js"></script>
+			@serverUtility.ConnectFrontend("/gen/js/home.js")
 		</main>
 	}
 }

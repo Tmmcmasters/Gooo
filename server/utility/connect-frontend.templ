@@ -1,0 +1,11 @@
+package serverUtility
+
+// ConnectFrontend inserts a script tag for connecting the frontend.
+// Parameters:
+//   - src: The source URL of the script. Must point to the generated JavaScript file.
+//
+// Example:
+//   @serverUtility.ConnectFrontend("/gen/js/home.js")
+templ ConnectFrontend(src string) {
+	<script type="module" src={ src }></script>
+}
