@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { GoooLinkProps } from '@/components/gooo/index'
-import { navigate } from '@/utils/goooHydrate'
+import { navigate } from '@/utils/goooNavigation'
 
 defineOptions({
   inheritAttrs: true,
