@@ -25,7 +25,6 @@ window.pageRegistry = window.pageRegistry || new Map()
  */
 export default (genFilePath: string, mountPoint: string, hydrate: () => void) => {
     function innerHydrate() {
-        console.log('Hydrating', genFilePath, 'for path:', window.location.pathname);
 
         hydrate()
     }
