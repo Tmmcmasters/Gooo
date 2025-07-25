@@ -195,8 +195,6 @@ func handleViteDevServer(e *echo.Echo, isLocal bool) {
 	e.Any("/gen/js/*", func(c echo.Context) error {
 		path := c.Request().URL.Path
 
-		log.Println("Here is the path", path)
-
 		if strings.HasSuffix(path, ".js") && !strings.Contains(path, "goooNavigation") {
 			filename := strings.TrimPrefix(path, "/gen/js/")
 			filename = strings.TrimSuffix(filename, ".js")
