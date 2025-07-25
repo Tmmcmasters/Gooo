@@ -17,26 +17,90 @@ const props = withDefaults(defineProps<GoooLinkProps>(), {
 const fetchStatus = shallowRef<'pending' | 'success' | 'error' | 'idle'>('idle')
 const currentUrl = shallowRef(window.location.pathname)
 
-// Function to reload scripts dynamically
+// Track loaded scripts. A set of paths
+const loadedScripts = new Set<string>()
+
+// Function to reload scripts dynamically (for initial load)
 const reloadScripts = (doc: Document) => {
-  // Remove existing page-specific scripts
   document.querySelectorAll('script[data-page-script]').forEach((script) => {
     script.remove()
+    console.log('Removed existing page-specific script:', script.outerHTML)
   })
 
-  const scripts = doc.querySelectorAll('script')
+  const scripts = doc.querySelectorAll('script[data-page-script]')
   scripts.forEach((oldScript) => {
-    const newScript = document.createElement('script')
-    newScript.setAttribute('data-page-script', 'true') // Mark as page-specific
-    if (oldScript.src) {
-      newScript.type = oldScript.type || 'text/javascript'
-      newScript.src = oldScript.src
-      newScript.async = false
+    const scriptElement = oldScript as HTMLScriptElement
+    if (scriptElement.src) {
+      if (!loadedScripts.has(scriptElement.src)) {
+        const newScript = document.createElement('script')
+        newScript.setAttribute('data-page-script', 'true')
+        newScript.type = scriptElement.type || 'text/javascript'
+        newScript.src = scriptElement.src
+        newScript.async = false
+        const newURL = new URL(scriptElement.src)
+        console.log(`Here is the new URL: ${newURL}`)
+        loadedScripts.add(scriptElement.src)
+        console.log(`Loading script: ${scriptElement.src}`)
+        document.body.appendChild(newScript)
+      }
     } else {
+      const newScript = document.createElement('script')
+      newScript.setAttribute('data-page-script', 'true')
+      newScript.type = scriptElement.type || 'text/javascript'
+      newScript.textContent = oldScript.textContent
+      console.log('Executing inline script:', newScript.textContent)
+      document.body.appendChild(newScript)
+    }
+  })
+}
+
+// Function to execute scripts without refetching
+function executeScripts(container: Element) {
+  const scripts = container.querySelectorAll('script[data-page-script]')
+  scripts.forEach((currentScript) => {
+    const oldScript = currentScript as HTMLScriptElement
+    console.log('Processing script:', oldScript.outerHTML)
+
+    const oldScriptSrc = new URL(oldScript.src).pathname
+    if (oldScriptSrc) {
+      console.log(`Here is the oldScriptSrc`)
+      console.log(oldScriptSrc)
+      console.log('Here is the loadScripts set')
+      console.log(loadedScripts)
+      console.log('Here is the window.pageRegistry')
+      console.log(window.pageRegistry)
+
+      console.log(
+        `If Statement resolution: ${loadedScripts.has(oldScriptSrc)} && ${window.pageRegistry?.has(oldScriptSrc)}`,
+      )
+
+      if (loadedScripts.has(oldScriptSrc) && window.pageRegistry?.has(oldScriptSrc)) {
+        console.log(`Script ${oldScriptSrc} already loaded, re-executing hydration`)
+        const pageConfig = window.pageRegistry.get(oldScriptSrc)
+        if (pageConfig?.hydrate) {
+          pageConfig.hydrate()
+        }
+        oldScript.remove()
+      } else if (!loadedScripts.has(oldScriptSrc)) {
+        console.log('-Manually loading new script-')
+        const newScript = document.createElement('script')
+        newScript.setAttribute('data-page-script', 'true')
+        newScript.type = oldScript.type || 'text/javascript'
+        newScript.src = `${oldScriptSrc}?t=${Date.now()}`
+        newScript.async = false
+
+        loadedScripts.add(oldScriptSrc)
+        console.log(`Loading script: ${oldScriptSrc}`)
+        oldScript.parentNode?.replaceChild(newScript, oldScript)
+      }
+    } else {
+      const newScript = document.createElement('script')
+      newScript.setAttribute('data-page-script', 'true')
       newScript.type = oldScript.type || 'text/javascript'
       newScript.textContent = oldScript.textContent
+      console.log('Executing inline script:', newScript.textContent)
+      oldScript.parentNode?.replaceChild(newScript, oldScript)
     }
-    document.body.appendChild(newScript)
   })
 }
 
@@ -66,7 +130,9 @@ const fetch = async () => {
 
     const responseLayout = doc.querySelector('[gooo-layout]')
     if (!responseLayout) {
-      console.error(`No gooo-layout attribute found in response, aborting route. Document: ${doc}`)
+      console.error(
+        `No gooo-layout attribute found in response. Document: ${doc.documentElement.outerHTML}`,
+      )
       fetchStatus.value = 'error'
       return
     }
@@ -76,10 +142,8 @@ const fetch = async () => {
       existingPage.replaceWith(responseLayout)
     }
 
-    // Reload scripts after replacing content
     reloadScripts(doc)
 
-    // Update the URL and history with the new title
     const newTitle = doc.querySelector('title')?.textContent || document.title
     window.history.pushState({ url: props.href }, newTitle, props.href)
     currentUrl.value = props.href
@@ -89,48 +153,46 @@ const fetch = async () => {
   }
 }
 
-function executeScripts(container: Element) {
-  const scripts = container.querySelectorAll('script[data-page-script]')
-  scripts.forEach((currentScript) => {
-    const oldScript = currentScript as HTMLScriptElement
-    const newScript = document.createElement('script')
-    newScript.setAttribute('data-page-script', 'true')
-    if (oldScript.src) {
-      newScript.type = oldScript.type || 'text/javascript'
-      newScript.src = `${oldScript.src}?v=${Date.now()}`
-      newScript.async = false
-    } else {
-      newScript.type = oldScript.type || 'text/javascript'
-      newScript.textContent = oldScript.textContent
-    }
-    // Replace the old script with the new one to trigger execution
-    oldScript.parentNode?.replaceChild(newScript, oldScript)
-  })
-}
-
 const handlePopState = async () => {
+  console.log('---Calling the HandlePopState function----')
   const newUrl = window.location.pathname
   if (newUrl !== currentUrl.value) {
     fetchStatus.value = 'pending'
     try {
+      console.log('Here is the new URL when popping: ', newUrl)
       const htmlResponse = await getDocument(newUrl)
+      console.log('Here is the string response from the fetch: ', htmlResponse)
 
       const parser = new DOMParser()
       const doc = parser.parseFromString(htmlResponse, 'text/html')
+      console.log('Parsed document HTML: ', doc.documentElement.outerHTML)
 
       const responseLayout = doc.querySelector('[gooo-layout]')
+      console.log(
+        'Here is the response layout: ',
+        responseLayout?.outerHTML || 'No response layout',
+      )
 
       if (!responseLayout) {
-        console.error(`No gooo-layout attribute found for ${newUrl}`)
+        console.error(
+          `No gooo-layout attribute found for ${newUrl}. Document HTML:`,
+          doc.documentElement.outerHTML,
+        )
         fetchStatus.value = 'error'
         return
       }
+
       const existingPage = document.querySelector('[gooo-layout]')
       if (existingPage) {
         existingPage.replaceWith(responseLayout)
-
-        // Execute scripts
+        responseLayout.querySelectorAll('script[data-page-script]').forEach((script) => {
+          console.log('Script in DOM after replace:', script.outerHTML)
+        })
         executeScripts(responseLayout)
+      } else {
+        console.error('No existing [gooo-layout] found in current document')
+        fetchStatus.value = 'error'
+        return
       }
 
       const newTitle = doc.querySelector('title')?.textContent || document.title
@@ -145,7 +207,16 @@ const handlePopState = async () => {
 }
 
 onMounted(() => {
-  window.addEventListener('popstate', handlePopState)
+  window.addEventListener('popstate', (event) => {
+    console.log('Popstate event:', event)
+
+    // if (event.state?.url) {
+    handlePopState()
+    // } else {
+    //   console.log('Ignoring initial popstate event')
+    // }
+  })
+  console.log('Initial scripts on mount:', document.querySelectorAll('script[data-page-script]'))
 })
 
 onUnmounted(() => {
