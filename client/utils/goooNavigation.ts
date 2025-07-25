@@ -1,4 +1,3 @@
-// src/utils/navigation.ts
 import { $fetch } from 'ofetch'
 import { shallowRef } from 'vue'
 
