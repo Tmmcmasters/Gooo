@@ -134,6 +134,8 @@ const getDocument = (url: string) => {
 }
 
 const fetch = async () => {
+  console.log(`Fetching ${props.href}`)
+
   try {
     const htmlResponse = await getDocument(props.href)
     const parser = new DOMParser()
@@ -218,14 +220,19 @@ const handlePopState = async () => {
 }
 
 onMounted(() => {
+  document.querySelectorAll('script[data-page-script]').forEach((script) => {
+    const scriptElement = script as HTMLScriptElement
+    if (scriptElement.src) {
+      const scriptPath = new URL(scriptElement.src).pathname
+      loadedScripts.add(scriptPath)
+      console.log(`Added initial script to loadedScripts: ${scriptPath}`)
+    }
+  })
+
   window.addEventListener('popstate', (event) => {
     console.log('Popstate event:', event)
 
-    // if (event.state?.url) {
     handlePopState()
-    // } else {
-    //   console.log('Ignoring initial popstate event')
-    // }
   })
   console.log('Initial scripts on mount:', document.querySelectorAll('script[data-page-script]'))
 })
@@ -236,7 +243,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <a v-bind="props" @click.prevent.stop="fetch" :target="target?.toString()">
+  <a v-bind="props" @click.prevent.stop="fetch()" :target="target?.toString()">
     <slot />
   </a>
 </template>
