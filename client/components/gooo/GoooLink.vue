@@ -30,17 +30,16 @@ const reloadScripts = (doc: Document) => {
   const scripts = doc.querySelectorAll('script[data-page-script]')
   scripts.forEach((oldScript) => {
     const scriptElement = oldScript as HTMLScriptElement
-    if (scriptElement.src) {
-      if (!loadedScripts.has(scriptElement.src)) {
+    console.log('Processing ScriptElement: ', scriptElement.src)
+    const scriptElSrc = new URL(scriptElement.src).pathname
+    if (scriptElSrc) {
+      if (!loadedScripts.has(scriptElSrc)) {
         const newScript = document.createElement('script')
         newScript.setAttribute('data-page-script', 'true')
         newScript.type = scriptElement.type || 'text/javascript'
-        newScript.src = scriptElement.src
+        newScript.src = scriptElSrc
         newScript.async = false
-        const newURL = new URL(scriptElement.src)
-        console.log(`Here is the new URL: ${newURL}`)
-        loadedScripts.add(scriptElement.src)
-        console.log(`Loading script: ${scriptElement.src}`)
+        loadedScripts.add(scriptElSrc)
         document.body.appendChild(newScript)
       }
     } else {
