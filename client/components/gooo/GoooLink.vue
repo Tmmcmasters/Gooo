@@ -39,7 +39,12 @@ const reloadScripts = (doc: Document) => {
         newScript.type = scriptElement.type || 'text/javascript'
         newScript.src = scriptElSrc
         newScript.async = false
+
+        console.log(`Adding scriptElSrc ${scriptElSrc} to loadedScripts`)
         loadedScripts.add(scriptElSrc)
+        console.log('Here is the loadScripts set')
+        console.log(loadedScripts)
+
         document.body.appendChild(newScript)
       }
     } else {
@@ -64,6 +69,10 @@ function executeScripts(container: Element) {
     if (oldScriptSrc) {
       console.log(`Here is the oldScriptSrc`)
       console.log(oldScriptSrc)
+
+      // console.log('Adding for testing')
+
+      // loadedScripts.add(oldScriptSrc)
       console.log('Here is the loadScripts set')
       console.log(loadedScripts)
       console.log('Here is the window.pageRegistry')
@@ -88,7 +97,10 @@ function executeScripts(container: Element) {
         newScript.src = `${oldScriptSrc}?t=${Date.now()}`
         newScript.async = false
 
+        console.log(`Adding ${oldScriptSrc} to loadedScripts`)
         loadedScripts.add(oldScriptSrc)
+        console.log(loadedScripts)
+
         console.log(`Loading script: ${oldScriptSrc}`)
         oldScript.parentNode?.replaceChild(newScript, oldScript)
       }
