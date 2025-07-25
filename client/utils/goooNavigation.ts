@@ -2,17 +2,6 @@
 import { $fetch } from 'ofetch'
 import { shallowRef } from 'vue'
 
-export type PageHydrationConfig = {
-    mountPoint: string
-    hydrate: () => void
-}
-
-declare global {
-    interface Window {
-        pageRegistry: Map<string, PageHydrationConfig>
-    }
-}
-
 // Global state
 window.pageRegistry = window.pageRegistry || new Map()
 const loadedScripts = new Set<string>()
