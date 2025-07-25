@@ -10,11 +10,12 @@ templ Base(title string) {
 		<head>
 			<meta charset="UTF-8"/>
 			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-			@serverGenerated.Tailwind()
 			@Head(title)
+			//Provides the server live reload socket connection during local development
 			@serverUtility.SocketScript()
 			//Provides good navigation between server pages and client GoooLink
 			@serverUtility.ConnectFrontend("/gen/js/goooNavigation.js")
+			@serverGenerated.Tailwind()
 		</head>
 		<body gooo-layout class="w-dvw h-dvh bg-radial from-background via-background to-foreground/30 dark:bg-radial dark:from-go/20 dark:via-90% dark:via-background dark:to-background">
 			{ children... }
