@@ -127,7 +127,11 @@ const swapLayout = (doc: Document, push = true, href = '') => {
     currentUrl.value = href
     return newLayout
 }
-
+/**
+ * A map of URLs to their corresponding prefetched HTML content.
+ * @type {Map<string, string>}
+ * @private
+ */
 const prefetched = new Map<string, string>();
 
 export const prefetch = async (href: string) => {
@@ -141,7 +145,7 @@ export const prefetch = async (href: string) => {
 }
 
 /**
- * Navigate to a new page.
+ * Navigate to a new page using the provided URL either from the server or in the prefetched map.
  *
  * @param {string} href - The URL of the new page.
  *
