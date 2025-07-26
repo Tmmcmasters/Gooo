@@ -136,14 +136,13 @@ const swapLayout = (doc: Document, push = true, href = '') => {
     return newLayout
 }
 
-const prefetched = new Map<string, Document>();
+const prefetched = new Map<string, string>();
 
 export const prefetch = async (href: string) => {
     if (prefetched.has(href)) return
     try {
         const html = await getDocument(href)
-        const doc = parseHtml(html)
-        prefetched.set(href, doc)
+        prefetched.set(href, html)
     } catch (err) {
         console.warn(`Prefetch failed for ${href}`, err);
     }
@@ -163,14 +162,8 @@ export const navigate = async (href: string) => {
         const prefetchedDoc = prefetched.get(href)
         const isPrefetched = prefetchedDoc !== undefined;
 
-        console.log(`Navigating to ${href} (prefetched: ${isPrefetched})`);
-        console.log(prefetched);
-        console.log(prefetchedDoc);
-
-
-
-        const html = isPrefetched ? '' : await getDocument(href)
-        const doc = isPrefetched ? prefetchedDoc : parseHtml(html)
+        const htmlString = isPrefetched ? prefetchedDoc : await getDocument(href)
+        const doc = parseHtml(htmlString)
 
         console.log(`Calling swap layout in navigate for ${href}`);
         if (!swapLayout(doc, true, href)) return
