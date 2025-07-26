@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onBeforeMount, onMounted, ref, watch } from 'vue'
+import { ref } from 'vue'
 import Button from '@/components/ui/button/Button.vue'
 import useThemeCookie from '@/composables/useThemeCookie'
 import { useCounterStore } from '@/stores/counter'
