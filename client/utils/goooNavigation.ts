@@ -78,7 +78,13 @@ const reloadScripts = (doc: Document) => {
  * @param {Element} container - The container to execute the scripts in.
  */
 const executeScripts = (container: Element) => {
+    console.log(`Here is the container`);
+    console.log(container);
+
+
     container.querySelectorAll('script[data-page-script]').forEach((el) => {
+        console.log('Executing script', el);
+
         const script = el as HTMLScriptElement
         const path = script.src && new URL(script.src, location.origin).pathname
         const registered = window.pageRegistry?.get(path)
@@ -155,7 +161,11 @@ export const navigate = async (href: string) => {
         const html = isPrefetched ? '' : await getDocument(href)
         const doc = isPrefetched ? prefetchedDoc : parseHtml(html)
         if (!swapLayout(doc, true, href)) return
-        reloadScripts(doc)
+        console.log('Navigating to', href);
+        // reloadScripts(doc)
+        console.log(`Calling execute scripts for ${href}`);
+
+        executeScripts(document.documentElement)
         fetchStatus.value = 'success'
     } catch (err) {
         console.error('Navigation error:', err)
