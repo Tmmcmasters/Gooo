@@ -1,9 +1,13 @@
 package serverPages
 
 import "Gooo/server/layout"
+import "Gooo/server/utility"
 
 templ Todo() {
 	@serverLayout.Base("Gooo | Todo") {
 		<p>Here is the to-do page</p>
+		<div id="todo">
+			@serverUtility.ConnectFrontend("/gen/js/todo.js")
+		</div>
 	}
 }
