@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import type { GoooLinkProps } from '@/components/gooo/index'
-import { navigate } from '@/utils/goooNavigation'
+import { navigate, prefetch as prefetchGooo } from '@/utils/goooNavigation'
+import { useElementVisibility } from '@vueuse/core'
+import { computed, toRefs, useTemplateRef, watch } from 'vue'
 
 defineOptions({
   inheritAttrs: true,
@@ -12,10 +14,55 @@ const props = withDefaults(defineProps<GoooLinkProps>(), {
   noPrefetch: false,
   prefetchOn: 'interaction',
 })
+
+const { href, target, prefetch, prefetchOn, noPrefetch } = toRefs({
+  href: props.href,
+  target: props.target,
+  prefetch: props.prefetch,
+  prefetchOn: props.prefetchOn,
+  noPrefetch: props.noPrefetch,
+})
+
+const prefetchEnabled = computed(() => {
+  return prefetch.value && !noPrefetch.value
+})
+
+const link = useTemplateRef<HTMLAnchorElement>('link')
+const isVisible = useElementVisibility(link)
+
+function handlePrefetchInteraction() {
+  if (!prefetchEnabled.value || prefetchOn.value !== 'interaction') return
+
+  prefetchGooo(href.value)
+}
+
+function handlePrefetchVisibility() {
+  if (!prefetchEnabled.value || prefetchOn.value !== 'visibility') return
+
+  prefetchGooo(href.value)
+}
+
+watch(
+  isVisible,
+  (newValue) => {
+    if (newValue === true) handlePrefetchVisibility()
+  },
+  {
+    immediate: true,
+  },
+)
 </script>
 
 <template>
-  <a v-bind="props" @click.prevent.stop="navigate(props.href)" :target="target?.toString()">
+  <a
+    ref="link"
+    v-bind="props"
+    @mouseover="handlePrefetchInteraction"
+    @touchstart="handlePrefetchInteraction"
+    @focusin="handlePrefetchInteraction"
+    @click.prevent.stop="navigate(href)"
+    :target="target?.toString()"
+  >
     <slot />
   </a>
 </template>

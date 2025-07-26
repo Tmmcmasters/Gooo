@@ -126,6 +126,19 @@ const swapLayout = (doc: Document, push = true, href = '') => {
     return newLayout
 }
 
+const prefetched = new Map<string, Document>();
+
+export const prefetch = async (href: string) => {
+    if (prefetched.has(href)) return
+    try {
+        const html = await getDocument(href)
+        const doc = parseHtml(html)
+        prefetched.set(href, doc)
+    } catch (err) {
+        console.warn(`Prefetch failed for ${href}`, err);
+    }
+}
+
 /**
  * Navigate to a new page.
  *
@@ -137,8 +150,10 @@ const swapLayout = (doc: Document, push = true, href = '') => {
  */
 export const navigate = async (href: string) => {
     try {
-        const html = await getDocument(href)
-        const doc = parseHtml(html)
+        const prefetchedDoc = prefetched.get(href)
+        const isPrefetched = prefetchedDoc !== undefined;
+        const html = isPrefetched ? '' : await getDocument(href)
+        const doc = isPrefetched ? prefetchedDoc : parseHtml(html)
         if (!swapLayout(doc, true, href)) return
         reloadScripts(doc)
         fetchStatus.value = 'success'
@@ -148,6 +163,8 @@ export const navigate = async (href: string) => {
         location.href = href
     }
 }
+
+
 
 /**
  * Handles a popstate event.
