@@ -2,197 +2,207 @@ import { $fetch } from 'ofetch'
 import { shallowRef } from 'vue'
 
 // Global state
-window.pageRegistry = window.pageRegistry || new Map()
+window.pageRegistry ??= new Map()
 const loadedScripts = new Set<string>()
 const fetchStatus = shallowRef<'pending' | 'success' | 'error' | 'idle'>('idle')
 const currentUrl = shallowRef(window.location.pathname)
 let isInitialized = false
 
-// Fetch document from server
-const getDocument = (url: string) => {
-    return $fetch<string>(url, {
+/**
+ * Fetches a document from the given URL and updates the fetchStatus.
+ * Used to load new pages.
+ *
+ * @param {string} url - The URL to fetch the document from.
+ * @returns {Promise<string>} - The fetched document body.
+ */
+const getDocument = (url: string) =>
+    $fetch<string>(url, {
         method: 'GET',
-        headers: {
-            Accept: 'text/html',
-        },
-        onRequest: () => {
-            fetchStatus.value = 'pending'
-        },
-        onResponse: ({ response }) => {
-            fetchStatus.value = response.ok ? 'success' : 'error'
-        },
-        onResponseError: () => {
-            fetchStatus.value = 'error'
-        },
+        headers: { Accept: 'text/html' },
+        onRequest: () => { fetchStatus.value = 'pending'; },
+        onResponse: ({ response }) => { fetchStatus.value = response.ok ? 'success' : 'error' },
+        onResponseError: () => { fetchStatus.value = 'error' },
     })
+
+/**
+ * Creates a new script element based on the provided HTMLScriptElement.
+ * The new script is marked with a 'data-page-script' attribute for identification
+ * and is set to be synchronous. If the original element has a source, the new
+ * script will use it; otherwise, it will copy the text content.
+ *
+ * @param {HTMLScriptElement} el - The script element to clone and modify.
+ * @returns {HTMLScriptElement} - The newly created script element.
+ */
+
+const createScript = (el: HTMLScriptElement): HTMLScriptElement => {
+    const scriptElement = document.createElement('script')
+    scriptElement.setAttribute('data-page-script', 'true')
+    scriptElement.type = el.type || 'text/javascript'
+    scriptElement.async = false
+    if (el.src) {
+        scriptElement.src = el.src
+    } else {
+        scriptElement.textContent = el.textContent
+    }
+    return scriptElement
 }
 
-// Reload scripts dynamically
+/**
+ * Removes all current scripts in the document with the attribute
+ * 'data-page-script' and then re-adds the scripts from the given
+ * document, adding them to the set of loaded scripts if they were not
+ * already loaded. This is used to update the scripts when a new page
+ * is fetched.
+ *
+ * @param {Document} doc - The document to load the scripts from.
+ */
 const reloadScripts = (doc: Document) => {
-    document.querySelectorAll('script[data-page-script]').forEach((script) => {
-        script.remove()
-    })
-
-    const scripts = doc.querySelectorAll('script[data-page-script]')
-    scripts.forEach((oldScript) => {
-        const scriptElement = oldScript as HTMLScriptElement
-        if (scriptElement.src) {
-            const scriptPath = new URL(scriptElement.src, window.location.origin).pathname
-            if (!loadedScripts.has(scriptPath)) {
-                const newScript = document.createElement('script')
-                newScript.setAttribute('data-page-script', 'true')
-                newScript.type = scriptElement.type || 'text/javascript'
-                newScript.src = scriptElement.src
-                newScript.async = false
-                loadedScripts.add(scriptPath)
-                document.body.appendChild(newScript)
-            }
-        } else {
-            const newScript = document.createElement('script')
-            newScript.setAttribute('data-page-script', 'true')
-            newScript.type = scriptElement.type || 'text/javascript'
-            newScript.textContent = scriptElement.textContent
-            document.body.appendChild(newScript)
+    document.querySelectorAll('script[data-page-script]').forEach((s) => s.remove())
+    doc.querySelectorAll('script[data-page-script]').forEach((el) => {
+        const script = el as HTMLScriptElement
+        const path = script.src && new URL(script.src, location.origin).pathname
+        if (!script.src || !loadedScripts.has(path)) {
+            if (path) loadedScripts.add(path)
+            document.body.appendChild(createScript(script))
         }
     })
 }
 
-// Execute scripts without refetching
+/**
+ * Iterates over all scripts in the given container that have a 'data-page-script'
+ * attribute and checks if they have been loaded before. If they have, and are
+ * registered with a hydrate function, the hydrate function is executed and the
+ * script is removed. If not, or if the script is not registered, the script is
+ * re-added to the container.
+ *
+ * @param {Element} container - The container to execute the scripts in.
+ */
 const executeScripts = (container: Element) => {
-    const scripts = container.querySelectorAll('script[data-page-script]')
-    scripts.forEach((currentScript) => {
-        const oldScript = currentScript as HTMLScriptElement
-        if (oldScript.src) {
-            const oldScriptSrc = new URL(oldScript.src, window.location.origin).pathname
+    container.querySelectorAll('script[data-page-script]').forEach((el) => {
+        const script = el as HTMLScriptElement
+        const path = script.src && new URL(script.src, location.origin).pathname
+        const registered = window.pageRegistry?.get(path)
 
-            if (loadedScripts.has(oldScriptSrc) && window.pageRegistry?.has(oldScriptSrc)) {
-                const pageConfig = window.pageRegistry.get(oldScriptSrc)
-                if (pageConfig?.hydrate) {
-                    pageConfig.hydrate()
-                }
-                oldScript.remove()
-            } else {
-                const newScript = document.createElement('script')
-                newScript.setAttribute('data-page-script', 'true')
-                newScript.type = oldScript.type || 'text/javascript'
-                newScript.src = oldScript.src // Reuse cached script
-                newScript.async = false
-                loadedScripts.add(oldScriptSrc)
-                oldScript.parentNode?.replaceChild(newScript, oldScript)
-            }
+        if (script.src && loadedScripts.has(path) && registered?.hydrate) {
+            registered.hydrate()
+            script.remove()
         } else {
-            const newScript = document.createElement('script')
-            newScript.setAttribute('data-page-script', 'true')
-            newScript.type = oldScript.type || 'text/javascript'
-            newScript.textContent = oldScript.textContent
-            oldScript.parentNode?.replaceChild(newScript, oldScript)
+            if (path) loadedScripts.add(path)
+            script.parentNode?.replaceChild(createScript(script), script)
         }
     })
 }
+/**
+ * Parses the given HTML string into a Document.
+ *
+ * @param {string} html - The HTML string to parse.
+ * @returns {Document} - The parsed Document.
+ */
+const parseHtml = (html: string) => new DOMParser().parseFromString(html, 'text/html')
 
-// Navigate to a new URL
+/**
+ * Replaces the current gooo layout with a new one from the given document.
+ * If the new document does not contain a [gooo-layout] element, the navigation
+ * is cancelled and the fetchStatus is set to 'error'. If push is true, the new
+ * page is pushed to the browser's history stack.
+ * @param {Document} doc - The document containing the new layout.
+ * @param {boolean} push - Whether to push the new page to the browser's history stack.
+ * @param {string} href - The URL associated with the new page.
+ * @returns {Element | false} The new layout element, or false if no layout was found.
+ */
+const swapLayout = (doc: Document, push = true, href = '') => {
+    const newLayout = doc.querySelector('[gooo-layout]')
+    if (!newLayout) {
+        console.error('Missing [gooo-layout]', doc.documentElement.outerHTML)
+        fetchStatus.value = 'error'
+        location.href = href
+        return false
+    }
+
+    const current = document.querySelector('[gooo-layout]')
+    current?.replaceWith(newLayout)
+    if (push) history.pushState({ url: href }, doc.title ?? document.title, href)
+    currentUrl.value = href
+    return newLayout
+}
+
+/**
+ * Navigate to a new page.
+ *
+ * @param {string} href - The URL of the new page.
+ *
+ * @returns {Promise<void>} - Resolves when the page has been swapped.
+ *
+ * @throws {Error} - If there is a problem with the navigation.
+ */
 export const navigate = async (href: string) => {
     try {
-        const htmlResponse = await getDocument(href)
-        const parser = new DOMParser()
-        const doc = parser.parseFromString(htmlResponse, 'text/html')
-
-        const responseLayout = doc.querySelector('[gooo-layout]')
-        if (!responseLayout) {
-            console.error(
-                `No gooo-layout attribute found in response. Document: ${doc.documentElement.outerHTML}`
-            )
-            fetchStatus.value = 'error'
-            window.location.href = href
-            return
-        }
-
-        const existingPage = document.querySelector('[gooo-layout]')
-        if (existingPage) {
-            existingPage.replaceWith(responseLayout)
-        }
-
+        const html = await getDocument(href)
+        const doc = parseHtml(html)
+        if (!swapLayout(doc, true, href)) return
         reloadScripts(doc)
-
-        const newTitle = doc.querySelector('title')?.textContent || document.title
-        window.history.pushState({ url: href }, newTitle, href)
-        currentUrl.value = href
         fetchStatus.value = 'success'
-    } catch (error) {
-        console.error('Navigation error:', error)
+    } catch (err) {
+        console.error('Navigation error:', err)
         fetchStatus.value = 'error'
-        window.location.href = href
+        location.href = href
     }
 }
 
-// Handle popstate events
+/**
+ * Handles a popstate event.
+ *
+ * When the user navigates back or forth using the browser's back and forward buttons,
+ * this function is called to handle the popstate event. It will fetch the document
+ * for the new URL and swap it with the current document.
+ *
+ * @returns {Promise<void>} - Resolves when the page has been swapped.
+ *
+ * @throws {Error} - If there is a problem with the navigation.
+ */
 const handlePopState = async () => {
-    const newUrl = window.location.pathname
-    if (newUrl !== currentUrl.value) {
-        fetchStatus.value = 'pending'
-        try {
-            const htmlResponse = await getDocument(newUrl)
+    const url = location.pathname
+    if (url === currentUrl.value) return
 
-            const parser = new DOMParser()
-            const doc = parser.parseFromString(htmlResponse, 'text/html')
-
-            const responseLayout = doc.querySelector('[gooo-layout]')
-
-            if (!responseLayout) {
-                console.error(
-                    `No gooo-layout attribute found for ${newUrl}. Document HTML:`,
-                    doc.documentElement.outerHTML
-                )
-                fetchStatus.value = 'error'
-                window.location.href = newUrl
-                return
-            }
-
-            const existingPage = document.querySelector('[gooo-layout]')
-            if (existingPage) {
-                existingPage.replaceWith(responseLayout)
-                executeScripts(responseLayout)
-            } else {
-                console.error('No existing [gooo-layout] found in current document')
-                fetchStatus.value = 'error'
-                window.location.href = newUrl
-                return
-            }
-
-            const newTitle = doc.querySelector('title')?.textContent || document.title
-            window.history.replaceState({ url: newUrl }, newTitle, newUrl)
-            currentUrl.value = newUrl
-            fetchStatus.value = 'success'
-        } catch (error) {
-            console.error('Error handling popstate:', error)
-            fetchStatus.value = 'error'
-            window.location.href = newUrl
-        }
+    fetchStatus.value = 'pending'
+    try {
+        const html = await getDocument(url)
+        const doc = parseHtml(html)
+        const layout = swapLayout(doc, false, url)
+        if (!layout) return
+        executeScripts(layout)
+        history.replaceState({ url }, doc.title ?? document.title, url)
+        fetchStatus.value = 'success'
+    } catch (err) {
+        console.error('Popstate error:', err)
+        fetchStatus.value = 'error'
+        location.href = url
     }
 }
 
-// Initialize navigation logic
+/**
+ * Initializes the page navigation system.
+ *
+ * This function sets up event listeners for popstate and unload events to handle
+ * browser navigation and cleans up appropriately. It also registers all existing
+ * scripts with a 'data-page-script' attribute in the loaded scripts set to ensure
+ * they are not reloaded unnecessarily.
+ * 
+ * Ensures initialization is performed only once.
+ */
+
 const initialize = () => {
     if (isInitialized) return
     isInitialized = true
 
-    document.querySelectorAll('script[data-page-script]').forEach((script) => {
-        const scriptElement = script as HTMLScriptElement
-        if (scriptElement.src) {
-            const scriptPath = new URL(scriptElement.src, window.location.origin).pathname
-            loadedScripts.add(scriptPath)
-        }
+    document.querySelectorAll('script[data-page-script]').forEach((s) => {
+        const path = new URL((s as HTMLScriptElement).src, location.origin).pathname
+        loadedScripts.add(path)
     })
 
-    window.addEventListener('popstate', handlePopState)
-
-    window.addEventListener('unload', () => {
-        window.removeEventListener('popstate', handlePopState)
-    })
+    addEventListener('popstate', handlePopState)
+    addEventListener('unload', () => removeEventListener('popstate', handlePopState))
 }
 
-// Run initialization
 initialize()
-
-// Export for GoooLink
 export { fetchStatus }
