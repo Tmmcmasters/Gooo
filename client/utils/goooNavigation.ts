@@ -117,9 +117,13 @@ const parseHtml = (html: string) => new DOMParser().parseFromString(html, 'text/
  * @returns {Element | false} The new layout element, or false if no layout was found.
  */
 const swapLayout = (doc: Document, push = true, href = '') => {
+    console.log(`Calling Swap Layout for ${href}`);
+
     const newLayout = doc.querySelector('[gooo-layout]')
     if (!newLayout) {
-        console.error('Missing [gooo-layout]', doc.documentElement.outerHTML)
+        console.error('Missing [gooo-layout]');
+        console.error(doc.documentElement.outerHTML);
+
         fetchStatus.value = 'error'
         location.href = href
         return false
@@ -158,14 +162,22 @@ export const navigate = async (href: string) => {
     try {
         const prefetchedDoc = prefetched.get(href)
         const isPrefetched = prefetchedDoc !== undefined;
+
+        console.log(`Navigating to ${href} (prefetched: ${isPrefetched})`);
+        console.log(prefetched);
+        console.log(prefetchedDoc);
+
+
+
         const html = isPrefetched ? '' : await getDocument(href)
         const doc = isPrefetched ? prefetchedDoc : parseHtml(html)
+
+        console.log(`Calling swap layout in navigate for ${href}`);
         if (!swapLayout(doc, true, href)) return
         console.log('Navigating to', href);
-        // reloadScripts(doc)
         console.log(`Calling execute scripts for ${href}`);
-
         executeScripts(document.documentElement)
+        // reloadScripts(doc)
         fetchStatus.value = 'success'
     } catch (err) {
         console.error('Navigation error:', err)
@@ -195,6 +207,8 @@ const handlePopState = async () => {
     try {
         const html = await getDocument(url)
         const doc = parseHtml(html)
+
+        console.log(`Calling swapLayout from handlePopState for ${url}`);
         const layout = swapLayout(doc, false, url)
         if (!layout) return
         executeScripts(layout)
