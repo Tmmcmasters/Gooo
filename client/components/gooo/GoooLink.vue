@@ -60,7 +60,7 @@ watch(
     ref="link"
     v-bind="props"
     @mouseover="handlePrefetchInteraction"
-    @touchstart="handlePrefetchInteraction"
+    @touchstart.passive="handlePrefetchInteraction"
     @focusin="handlePrefetchInteraction"
     @click.prevent.stop="navigate(href)"
     :target="target?.toString()"

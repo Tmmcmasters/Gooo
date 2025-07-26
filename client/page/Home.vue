@@ -22,8 +22,6 @@ const stop = watch(
   () => {
     const initialData = document.getElementById('home-initial-data')
     if (initialData) {
-      console.log(`Setting the initial data`)
-      console.log(initialData)
       const data = JSON.parse(initialData.textContent || '{}')
       inputs.value = data.inputs || inputs.value // Update ref with server data
       initialData.remove()
