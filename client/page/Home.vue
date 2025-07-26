@@ -6,39 +6,25 @@ import { useCounterStore } from '@/stores/counter'
 import { storeToRefs } from 'pinia'
 import GoooLink from '@/components/gooo/GoooLink.vue'
 
+interface InitialData {
+  inputs?: {
+    input1: string
+    input2: string
+    input3: string
+  }
+}
+
+const props = defineProps<{ initialData: InitialData }>()
+
 type Inputs = {
   input1: string
   input2: string
   input3: string
 }
 const inputs = ref<Inputs>({
-  input1: '',
-  input2: '',
-  input3: '',
-})
-
-const stop = watch(
-  inputs,
-  () => {
-    const initialData = document.getElementById('home-initial-data')
-    if (initialData) {
-      const data = JSON.parse(initialData.textContent || '{}')
-      inputs.value = data.inputs || inputs.value // Update ref with server data
-      initialData.remove()
-    }
-  },
-  {
-    immediate: true,
-    once: true,
-  },
-)
-
-onBeforeMount(() => {
-  console.log('On before mount')
-})
-onMounted(() => {
-  console.log('On mounted')
-  stop()
+  input1: props.initialData.inputs?.input1 ?? '',
+  input2: props.initialData.inputs?.input2 ?? '',
+  input3: props.initialData.inputs?.input3 ?? '',
 })
 
 const { isDark, changeColor } = useThemeCookie()
