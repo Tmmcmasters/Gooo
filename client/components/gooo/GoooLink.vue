@@ -2,7 +2,7 @@
 import type { GoooLinkProps } from '@/components/gooo/index'
 import { navigate, prefetch as prefetchGooo } from '@/utils/goooNavigation'
 import { useElementVisibility } from '@vueuse/core'
-import { computed, toRefs, useTemplateRef, watch } from 'vue'
+import { computed, reactive, toRefs, useTemplateRef, watch } from 'vue'
 
 defineOptions({
   inheritAttrs: true,
@@ -15,13 +15,15 @@ const props = withDefaults(defineProps<GoooLinkProps>(), {
   prefetchOn: 'interaction',
 })
 
-const { href, target, prefetch, prefetchOn, noPrefetch } = toRefs({
+const reactiveProps = reactive({
   href: props.href,
   target: props.target,
   prefetch: props.prefetch,
   prefetchOn: props.prefetchOn,
   noPrefetch: props.noPrefetch,
 })
+
+const { href, target, prefetch, prefetchOn, noPrefetch } = toRefs(reactiveProps)
 
 const prefetchEnabled = computed(() => {
   return prefetch.value && !noPrefetch.value
