@@ -21,7 +21,9 @@ export default () => {
     })
 
     watchImmediate(isDark, (newValue, oldValue) => {
-        cookies.set('color-scheme', newValue ? 'dark' : 'light')
+        cookies.set('color-scheme', newValue ? 'dark' : 'light', {
+            maxAge: 60 * 60 * 24 * 365
+        })
         color.value = newValue ? 'dark' : 'light'
     })
 
