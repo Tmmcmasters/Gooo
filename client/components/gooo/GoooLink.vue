@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { GoooLinkProps } from '@/components/gooo/index'
 import { navigate, prefetch as prefetchGooo } from '@/utils/goooNavigation'
-import { useElementVisibility } from '@vueuse/core'
+import { useElementVisibility, watchImmediate } from '@vueuse/core'
 import { computed, reactive, toRefs, useTemplateRef, watch } from 'vue'
 
 defineOptions({
@@ -44,15 +44,9 @@ function handlePrefetchVisibility() {
   prefetchGooo(href.value)
 }
 
-watch(
-  isVisible,
-  (newValue) => {
-    if (newValue === true) handlePrefetchVisibility()
-  },
-  {
-    immediate: true,
-  },
-)
+watchImmediate(isVisible, () => {
+  if (isVisible.value === true) handlePrefetchVisibility()
+})
 </script>
 
 <template>
