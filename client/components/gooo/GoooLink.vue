@@ -2,7 +2,7 @@
 import type { GoooLinkProps } from '@/components/gooo/index'
 import { navigate, prefetch as prefetchGooo } from '@/utils/goooNavigation'
 import { useElementVisibility, watchImmediate } from '@vueuse/core'
-import { computed, reactive, toRefs, useTemplateRef, watch } from 'vue'
+import { computed, reactive, toRefs, useTemplateRef } from 'vue'
 
 defineOptions({
   inheritAttrs: true,
