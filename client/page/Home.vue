@@ -41,8 +41,6 @@ const { increment } = useCounterStore()
 
 <template>
   <div class="flex flex-col gap-5 h-full w-full">
-    <p>Server data</p>
-    <p v-for="(input, index) in inputs" :key="index">{{ input }}</p>
     <!-- Theme Change Button -->
     <Button @click="changeColor" variant="ghost" size="icon" class="absolute top-5 right-5">
       <SunIcon v-if="isDark" class="size-5 text-foreground" />
