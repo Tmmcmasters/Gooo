@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { ref } from 'vue'
 import Button from '@/components/ui/button/Button.vue'
 import useThemeCookie from '@/composables/useThemeCookie'
 import { useCounterStore } from '@/stores/counter'
@@ -11,27 +10,21 @@ import ArrowTRIcon from '@/components/icons/ArrowTRIcon.vue'
 import DocIcon from '@/components/icons/DocIcon.vue'
 import ArrowRIcon from '@/components/icons/ArrowRIcon.vue'
 import TodoIcon from '@/components/icons/TodoIcon.vue'
+import { toRefs } from 'vue'
+
+type Card = {
+  title: string
+  description: string
+  link?: string
+}
 
 interface InitialData {
-  inputs?: {
-    input1: string
-    input2: string
-    input3: string
-  }
+  cards: Card[]
 }
 
-const props = defineProps<{ initialData: InitialData }>()
+const props = defineProps<InitialData>()
 
-type Inputs = {
-  input1: string
-  input2: string
-  input3: string
-}
-const inputs = ref<Inputs>({
-  input1: props.initialData.inputs?.input1 ?? '',
-  input2: props.initialData.inputs?.input2 ?? '',
-  input3: props.initialData.inputs?.input3 ?? '',
-})
+const { cards } = toRefs(props)
 
 const { isDark, changeColor } = useThemeCookie()
 
