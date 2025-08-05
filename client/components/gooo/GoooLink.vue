@@ -13,6 +13,7 @@ const props = withDefaults(defineProps<GoooLinkProps>(), {
   prefetch: true,
   noPrefetch: false,
   prefetchOn: 'interaction',
+  external: false,
 })
 
 const reactiveProps = reactive({
@@ -26,7 +27,7 @@ const reactiveProps = reactive({
 const { href, target, prefetch, prefetchOn, noPrefetch } = toRefs(reactiveProps)
 
 const prefetchEnabled = computed(() => {
-  return prefetch.value && !noPrefetch.value
+  return prefetch.value && !noPrefetch.value && !props.external
 })
 
 const link = useTemplateRef<HTMLAnchorElement>('link')
