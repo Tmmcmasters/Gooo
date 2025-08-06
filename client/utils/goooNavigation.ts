@@ -2,7 +2,7 @@ import { $fetch } from 'ofetch'
 import { shallowRef } from 'vue'
 
 // Global state
-window.pageRegistry ??= new Map()
+window.fileRegistry ??= new Map()
 const loadedScripts = new Set<string>()
 const fetchStatus = shallowRef<'pending' | 'success' | 'error' | 'idle'>('idle')
 const currentUrl = shallowRef(window.location.pathname)
@@ -81,7 +81,7 @@ const executeScripts = (container: Element) => {
     container.querySelectorAll('script[data-page-script]').forEach((el) => {
         const script = el as HTMLScriptElement
         const path = script.src && new URL(script.src, location.origin).pathname
-        const registered = window.pageRegistry?.get(path)
+        const registered = window.fileRegistry?.get(path)
 
         if (script.src && loadedScripts.has(path) && registered?.hydrate) {
             registered.hydrate()

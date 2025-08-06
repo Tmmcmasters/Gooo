@@ -11,14 +11,14 @@ declare global {
          * @type {Map<string, PageHydrationConfig>}
          * @memberof Window
          */
-        pageRegistry: Map<string, PageHydrationConfig>
+        fileRegistry: Map<string, PageHydrationConfig>
     }
 }
 
-window.pageRegistry = window.pageRegistry || new Map()
+window.fileRegistry = window.fileRegistry || new Map()
 
 /**
- * Necessary to hydrate the component and set page registration. This provides a way to dynamically load the component whenever navigating between routes and be able to prefetch when wanted.
+ * Necessary to hydrate the component and set js file registration. This provides a way to dynamically load the component whenever navigating between routes and be able to prefetch when wanted.
  * @param {string} genFilePath - The path of the generated file that will be used for hydration.
  * @param {string} mountPoint - The selector for the element which the vue app will be mounted to.
  * @param {function} hydrate - The function that will be called to hydrate the component.
@@ -30,7 +30,7 @@ export default (genFilePath: string, mountPoint: string, hydrate: () => void) =>
     }
 
     // Register in global registry
-    window.pageRegistry.set(genFilePath, {
+    window.fileRegistry.set(genFilePath, {
         mountPoint,
         hydrate: innerHydrate
     });
