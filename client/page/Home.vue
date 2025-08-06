@@ -20,10 +20,11 @@ const { increment } = useCounterStore()
 <template>
   <div class="flex flex-col gap-5 h-full w-full">
     <!-- Theme Change Button -->
-    <Button @click="changeColor" variant="ghost" size="icon" class="absolute top-5 right-5">
+    <!-- <Button @click="changeColor" variant="ghost" size="icon" class="absolute top-5 right-5">
       <SunIcon v-if="isDark" class="size-5 text-foreground" />
       <MoonIcon v-else class="size-5 text-foreground" />
-    </Button>
+    </Button> -->
+
     <div class="flex items-center justify-between h-full gap-5 w-full flex-wrap">
       <!-- Documentation Button Card -->
       <Button

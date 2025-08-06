@@ -1,8 +1,11 @@
 package serverLayout
 
+import "Gooo/server/components"
+
 templ Main(title string) {
 	@Base(title) {
 		<main class="w-full h-full bg-base-100 flex items-start justify-center px-4 py-2">
+			@serverComponents.ThemeSwitcher()
 			<div class="flex flex-col items-center justify-center max-w-4xl w-full py-5">
 				<img class="w-32 mb-2 drop-shadow-2xl drop-shadow-green-300/40 " src="/static/assets/img/goo_resized.png" alt="A melting vue.js logo"/>
 				<p class="text-5xl font-bold">Welcome to <span class="italic text-go drop-shadow-2xl drop-shadow-go/50">Gooo</span><span class="align-super text-sm">("goo")</span></p>
