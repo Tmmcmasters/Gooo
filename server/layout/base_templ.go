@@ -75,7 +75,7 @@ func Base(title string) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "</head><body gooo-layout class=\"w-dvw h-dvh bg-radial from-background via-background to-foreground/30 dark:bg-radial dark:from-go/20 dark:via-90% dark:via-background dark:to-background\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "</head><body class=\"w-dvw h-dvh bg-radial from-background via-background to-foreground/30 dark:bg-radial dark:from-go/20 dark:via-90% dark:via-background dark:to-background\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

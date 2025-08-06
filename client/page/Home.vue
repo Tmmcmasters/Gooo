@@ -10,21 +10,6 @@ import ArrowTRIcon from '@/components/icons/ArrowTRIcon.vue'
 import DocIcon from '@/components/icons/DocIcon.vue'
 import ArrowRIcon from '@/components/icons/ArrowRIcon.vue'
 import TodoIcon from '@/components/icons/TodoIcon.vue'
-import { toRefs } from 'vue'
-
-type Card = {
-  title: string
-  description: string
-  link?: string
-}
-
-interface InitialData {
-  cards: Card[]
-}
-
-const props = defineProps<InitialData>()
-
-const { cards } = toRefs(props)
 
 const { isDark, changeColor } = useThemeCookie()
 

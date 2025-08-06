@@ -4,7 +4,7 @@ import "Gooo/server/layout"
 import "Gooo/server/utility"
 
 templ Todo() {
-	@serverLayout.Base("Gooo | Todo") {
+	@serverLayout.Main("Gooo | Todo") {
 		<p>Here is the to-do page</p>
 		<div id="todo"></div>
 		@serverUtility.ConnectFrontend("/gen/js/todo.js")
