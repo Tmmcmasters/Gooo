@@ -2,10 +2,16 @@ package serverPages
 
 import "Gooo/server/layout"
 import "Gooo/server/utility"
+import "Gooo/server/icons"
 
 templ Home() {
 	@serverLayout.Main("Gooo") {
-		<div class="w-full flex flex-col items-center justify-center my-10" id="home"></div>
+		<div class="w-full flex flex-col items-center justify-center my-10" id="home">
+			// Mounted Zone
+			<button>
+				@serverIcons.ArrowTR()
+			</button>
+		</div>
 		<script type="application/json" id="home-initial-data">
       {
         "inputs": {

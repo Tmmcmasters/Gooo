@@ -20,7 +20,7 @@ const { increment } = useCounterStore()
         variant="outline"
         class="max-w-80 w-full h-32 text-2xl flex relative flex-col justify-start items-start gap-y-1.5"
       >
-        <ArrowTRIcon class="size-5 absolute top-3 right-3 top-right-arrow" />
+        <ArrowTRIcon class="size-5 absolute top-3 right-3" />
         <DocIcon class="size-8 p-0.5 text-foreground border border-border rounded-md" />
         <span class="font-semibold text-lg leading-none">Documentation</span>
         <span class="text-sm text-muted-foreground text-pretty text-left w-full"
