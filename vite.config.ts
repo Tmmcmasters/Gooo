@@ -18,6 +18,7 @@ export default defineConfig({
       input: {
         home: fileURLToPath(new URL('./client/home.ts', import.meta.url)),
         goooNavigation: fileURLToPath(new URL('./client/utils/goooNavigation.ts', import.meta.url)),
+        themeSwitcher: fileURLToPath(new URL('./client/themeSwitcher.ts', import.meta.url)),
         todo: fileURLToPath(new URL('./client/todo.ts', import.meta.url)),
       },
       output: {

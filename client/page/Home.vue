@@ -1,17 +1,12 @@
 <script setup lang="ts">
 import Button from '@/components/ui/button/Button.vue'
-import useThemeCookie from '@/composables/useThemeCookie'
 import { useCounterStore } from '@/stores/counter'
 import { storeToRefs } from 'pinia'
 import GoooLink from '@/components/gooo/GoooLink.vue'
-import SunIcon from '@/components/icons/SunIcon.vue'
-import MoonIcon from '@/components/icons/MoonIcon.vue'
 import ArrowTRIcon from '@/components/icons/ArrowTRIcon.vue'
 import DocIcon from '@/components/icons/DocIcon.vue'
 import ArrowRIcon from '@/components/icons/ArrowRIcon.vue'
 import TodoIcon from '@/components/icons/TodoIcon.vue'
-
-const { isDark, changeColor } = useThemeCookie()
 
 const { count } = storeToRefs(useCounterStore())
 const { increment } = useCounterStore()
@@ -19,12 +14,6 @@ const { increment } = useCounterStore()
 
 <template>
   <div class="flex flex-col gap-5 h-full w-full">
-    <!-- Theme Change Button -->
-    <!-- <Button @click="changeColor" variant="ghost" size="icon" class="absolute top-5 right-5">
-      <SunIcon v-if="isDark" class="size-5 text-foreground" />
-      <MoonIcon v-else class="size-5 text-foreground" />
-    </Button> -->
-
     <div class="flex items-center justify-between h-full gap-5 w-full flex-wrap">
       <!-- Documentation Button Card -->
       <Button
