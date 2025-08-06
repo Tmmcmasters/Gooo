@@ -25,6 +25,9 @@ export default defineConfig({
         entryFileNames: 'js/[name].js',
         chunkFileNames: 'js/[name].js',
         assetFileNames: 'css/[name].[ext]',
+        manualChunks: {
+          'gooo-hydrate': ['@/utils/goooHydrate.ts'],
+        }
       },
     }
   },

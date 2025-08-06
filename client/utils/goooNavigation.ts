@@ -8,6 +8,7 @@ const fetchStatus = shallowRef<'pending' | 'success' | 'error' | 'idle'>('idle')
 const currentUrl = shallowRef(window.location.pathname)
 let isInitialized = false
 
+
 /**
  * Fetches a document from the given URL and updates the fetchStatus.
  * Used to load new pages.
@@ -77,7 +78,7 @@ const reloadScripts = (doc: Document) => {
  *
  * @param {Element} container - The container to execute the scripts in.
  */
-const executeScripts = (container: Element) => {
+const executeScripts = async (container: Element) => {
     container.querySelectorAll('script[data-page-script]').forEach((el) => {
         const script = el as HTMLScriptElement
         const path = script.src && new URL(script.src, location.origin).pathname
