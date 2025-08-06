@@ -9,8 +9,8 @@ import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
 import "Gooo/server/layout"
-import "Gooo/server/utility"
 import "Gooo/server/icons"
+import "Gooo/server/utility"
 
 func Home() templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
@@ -45,7 +45,7 @@ func Home() templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"w-full flex flex-col items-center justify-center my-10\" id=\"home\"><button>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"w-full flex flex-col items-center justify-center my-10\" id=\"home\"><div class=\"flex flex-col gap-5 h-full w-full\"><div class=\"flex items-center justify-between h-full gap-5 w-full flex-wrap\"><button class=\"border rounded-md bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50 px-4 py-2 has-[>svg]:px-3 max-w-80 w-full h-32 text-2xl flex relative flex-col justify-start items-start gap-y-1.5\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -53,7 +53,23 @@ func Home() templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "</button></div><script type=\"application/json\" id=\"home-initial-data\">\n      {\n        \"inputs\": {\n          \"input1\": \"Server\",\n          \"input2\": \"\",\n          \"input3\": \"\"\n        }\n      }\n    </script> ")
+			templ_7745c5c3_Err = serverIcons.Doc().Render(ctx, templ_7745c5c3_Buffer)
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "<span class=\"font-semibold text-lg leading-none\">Documentation</span> <span class=\"text-sm text-muted-foreground text-pretty text-left w-full\">It is recommended to read the documentation to get started.</span></button> <button class=\"border rounded-md bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50 px-4 py-2 has-[>svg]:px-3 max-w-80 w-full h-32 text-2xl  \">Counter: 0</button> <button class=\"border rounded-md bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50 px-4 py-2 has-[>svg]:px-3 max-w-80 w-full h-32 text-2xl flex relative flex-col justify-start items-start gap-y-1.5\">")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			templ_7745c5c3_Err = serverIcons.ArrowR().Render(ctx, templ_7745c5c3_Buffer)
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			templ_7745c5c3_Err = serverIcons.Todo().Render(ctx, templ_7745c5c3_Buffer)
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "<span class=\"font-semibold text-lg leading-none\">To Do - <i>Example</i></span> <span class=\"text-sm text-muted-foreground text-pretty text-left w-full\">This is an example of a link to another page and to-do list.</span></button></div></div></div><script type=\"application/json\" id=\"home-initial-data\">\n      {\n        \"inputs\": {\n          \"input1\": \"Server\",\n          \"input2\": \"\",\n          \"input3\": \"\"\n        }\n      }\n    </script> ")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
