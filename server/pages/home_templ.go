@@ -69,7 +69,19 @@ func Home() templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "<span class=\"font-semibold text-lg leading-none\">To Do - <i>Example</i></span> <span class=\"text-sm text-muted-foreground text-pretty text-left w-full\">This is an example of a link to another page and to-do list.</span></button></div></div></div><script type=\"application/json\" id=\"home-initial-data\">\n      {\n        \"inputs\": {\n          \"input1\": \"Server\",\n          \"input2\": \"\",\n          \"input3\": \"\"\n        }\n      }\n    </script> ")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "<span class=\"font-semibold text-lg leading-none\">To Do - <i>Example</i></span> <span class=\"text-sm text-muted-foreground text-pretty text-left w-full\">This is an example of a link to another page and to-do list.</span></button> <button class=\"border rounded-md bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50 px-4 py-2 has-[>svg]:px-3 max-w-80 w-full h-32 text-2xl flex relative flex-col justify-start items-start gap-y-1.5\">")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			templ_7745c5c3_Err = serverIcons.ArrowR().Render(ctx, templ_7745c5c3_Buffer)
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			templ_7745c5c3_Err = serverIcons.Todo().Render(ctx, templ_7745c5c3_Buffer)
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "<span class=\"font-semibold text-lg leading-none\">Server Props</span> <span class=\"text-sm text-muted-foreground text-pretty text-left w-full\">The data for this card has been provided by the server and passed down as props to this component. <i>*This also links to /todo and doesn't prefetch twice.</i></span><script type=\"application/json\" id=\"serverProps\">\n\t\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\t\"Title\": \"Server Props\",\n\t\t\t\t\t\t\t\t\"Description\": \"The data for this card has been provided by the server and passed down as props to this component.\",\n\t\t\t\t\t\t\t\t\"Italic\": \"*This also links to /todo and doesn't prefetch twice.\"\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t</script></button></div></div></div>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

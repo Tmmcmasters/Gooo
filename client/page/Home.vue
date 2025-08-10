@@ -8,6 +8,14 @@ import DocIcon from '@/components/icons/DocIcon.vue'
 import ArrowRIcon from '@/components/icons/ArrowRIcon.vue'
 import TodoIcon from '@/components/icons/TodoIcon.vue'
 
+export type ServerCardProps = {
+  Title: string
+  Description: string
+  Italic: string
+}
+
+defineProps<ServerCardProps>()
+
 const { count } = storeToRefs(useCounterStore())
 const { increment } = useCounterStore()
 </script>
@@ -47,6 +55,21 @@ const { increment } = useCounterStore()
           </span>
         </GoooLink></Button
       >
+
+      <Button
+        as-child
+        variant="outline"
+        class="max-w-80 w-full text-2xl flex relative flex-col justify-start items-start gap-y-1.5 h-fit"
+      >
+        <GoooLink href="/todo" target="">
+          <ArrowRIcon class="size-5 absolute top-3 right-3 top-right-arrow" />
+          <TodoIcon class="size-8 p-0.5 text-foreground border border-border rounded-md" />
+          <span class="font-semibold text-lg leading-none">{{ Title }}</span>
+          <span class="text-sm text-muted-foreground text-pretty text-left w-full">
+            {{ Description }}<i>{{ Italic }}</i>
+          </span>
+        </GoooLink>
+      </Button>
     </div>
   </div>
 </template>
