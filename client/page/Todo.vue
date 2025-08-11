@@ -44,7 +44,7 @@ function removeTodo(index: number) {
         class="flex items-center justify-between w-full max-w-md gap-x-3"
       >
         <p
-          class="py-2 px-2 rounded-lg text-sm font-medium border border-solid border-border flex-grow text-pretty bg-secondary"
+          class="py-2 px-2 rounded-lg text-sm font-medium border border-solid border-border flex-grow break-all text-pretty bg-secondary"
         >
           {{ todo }}
         </p>
