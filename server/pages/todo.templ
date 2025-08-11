@@ -5,8 +5,10 @@ import "Gooo/server/utility"
 
 templ Todo() {
 	@serverLayout.Main("Gooo | Todo") {
-		<p>Here is the to-do page</p>
-		<div id="todo"></div>
-		@serverUtility.ConnectFrontend("/gen/js/todo.js")
+		<div class="flex flex-col max-w-lg w-full my-5">
+			<p class="text-foreground text-2xl text-center font-bold">Here is the Todo page</p>
+			<div id="todo"></div>
+			@serverUtility.ConnectFrontend("/gen/js/todo.js")
+		</div>
 	}
 }
