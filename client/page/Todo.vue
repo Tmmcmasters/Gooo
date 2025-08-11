@@ -27,7 +27,7 @@ function removeTodo(index: number) {
       <GoooLink href="/"><-- Go Home</GoooLink>
     </Button>
     <div class="flex items-center justify-center gap-x-2 max-w-md w-full">
-      <div class="relative w-full items-center">
+      <div class="relative w-full flex items-center">
         <Input v-model="inputModel" placeholder="Enter your task" class="pl-9" />
         <!-- Here is the icon -->
         <span class="absolute start-0 inset-y-0 flex items-center justify-center px-2">
@@ -41,7 +41,7 @@ function removeTodo(index: number) {
       <div
         v-for="(todo, index) in todos"
         :key="index"
-        class="flex items-center justify-between w-full max-w-md gap-x-2"
+        class="flex items-center justify-between w-full max-w-md gap-x-3"
       >
         <p
           class="py-2 px-2 rounded-lg text-sm font-medium border border-solid border-border flex-grow bg-secondary"
