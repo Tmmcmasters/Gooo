@@ -5,8 +5,18 @@ import "Gooo/server/utility"
 
 templ Todo() {
 	@serverLayout.Main("Gooo | Todo") {
-		<div class="flex flex-col max-w-lg w-full my-5">
+		<div class="flex flex-col max-w-xl w-full my-5">
 			<p class="text-foreground text-2xl text-center font-bold">Here is the Todo page</p>
+			<p class="text-sm text-muted-foreground font-medium text-center">*Notice how the count in the top right maintains the state across pages with GoooLink</p>
+			<div class="flex items-center justify-around gap-x-2">
+				<div class="relative w-full max-w-sm items-center">
+					<input type="text" name="todo" id="todoInput" class="file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input flex h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm pl-9" placeholder="Enter your task"/>
+					<span class="absolute start-0 inset-y-0 flex items-center justify-center px-2">
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-5"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M7 3m0 2.667a2.667 2.667 0 0 1 2.667 -2.667h8.666a2.667 2.667 0 0 1 2.667 2.667v8.666a2.667 2.667 0 0 1 -2.667 2.667h-8.666a2.667 2.667 0 0 1 -2.667 -2.667z"></path><path d="M4.012 7.26a2.005 2.005 0 0 0 -1.012 1.737v10c0 1.1 .9 2 2 2h10c.75 0 1.158 -.385 1.5 -1"></path><path d="M11 10h6"></path><path d="M14 7v6"></path></svg>
+					</span>
+				</div>
+				<button id="addTodo" class="inline-flex items-center cursor-pointer justify-center active:scale-[99%] gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*=\'size-\'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive bg-primary text-primary-foreground shadow-xs hover:bg-primary/90 h-9 px-4 py-2 has-[>svg]:px-3">Add Task</button>
+			</div>
 			<div id="todo"></div>
 			@serverUtility.ConnectFrontend("/gen/js/todo.js")
 		</div>
