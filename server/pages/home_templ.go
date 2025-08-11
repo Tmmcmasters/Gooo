@@ -45,7 +45,7 @@ func Home() templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"w-full flex flex-col items-center justify-center my-10\" id=\"home\"><div class=\"flex flex-col gap-5 h-full w-full\"><div class=\"flex items-center justify-between h-full gap-5 w-full flex-wrap\"><button class=\"border rounded-md bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50 px-4 py-2 has-[>svg]:px-3 max-w-80 w-full h-32 text-2xl flex relative flex-col justify-start items-start gap-y-1.5\">")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"w-full flex flex-col items-center justify-center my-10\" id=\"home\"><div class=\"flex flex-col gap-5 h-full w-full\"><div class=\"flex items-center justify-between h-full gap-5 w-full flex-wrap\"><button class=\"border rounded-md bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50 px-4 py-2 has-[>svg]:px-3 max-w-80 w-full h-32 text-2xl flex relative flex-col justify-start items-start gap-y-1.5\" type=\"button\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -57,7 +57,7 @@ func Home() templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "<span class=\"font-semibold text-lg leading-none\">Documentation</span> <span class=\"text-sm text-muted-foreground text-pretty text-left w-full\">It is recommended to read the documentation to get started.</span></button> <button class=\"border rounded-md bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50 px-4 py-2 has-[>svg]:px-3 max-w-80 w-full h-32 text-2xl  \">Counter: 0</button> <button class=\"border rounded-md bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50 px-4 py-2 has-[>svg]:px-3 max-w-80 w-full h-32 text-2xl flex relative flex-col justify-start items-start gap-y-1.5\">")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "<span class=\"font-semibold text-lg leading-none\">Documentation</span> <span class=\"text-sm text-muted-foreground text-pretty text-left w-full\">It is recommended to read the documentation to get started.</span></button> <button class=\"border rounded-md bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50 px-4 py-2 has-[>svg]:px-3 max-w-80 w-full h-32 text-2xl  \" type=\"button\">Counter: 0</button> <button class=\"border rounded-md bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50 px-4 py-2 has-[>svg]:px-3 max-w-80 w-full h-32 text-2xl flex relative flex-col justify-start items-start gap-y-1.5\" type=\"button\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -69,7 +69,7 @@ func Home() templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "<span class=\"font-semibold text-lg leading-none\">To Do - <i>Example</i></span> <span class=\"text-sm text-muted-foreground text-pretty text-left w-full\">This is an example of a link to another page and to-do list.</span></button> <button class=\"border rounded-md bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50 px-4 py-2 has-[>svg]:px-3 max-w-80 w-full h-32 text-2xl flex relative flex-col justify-start items-start gap-y-1.5\">")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "<span class=\"font-semibold text-lg leading-none\">To Do - <i>Example</i></span> <span class=\"text-sm text-muted-foreground text-pretty text-left w-full\">This is an example of a link to another page and to-do list.</span></button> <button class=\"border rounded-md bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50 px-4 py-2 has-[>svg]:px-3 max-w-80 w-full h-32 text-2xl flex relative flex-col justify-start items-start gap-y-1.5\" type=\"button\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
