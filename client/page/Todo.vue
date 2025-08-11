@@ -26,7 +26,7 @@ function removeTodo(index: number) {
       <!-- eslint-disable-next-line vue/no-parsing-error -->
       <GoooLink href="/"><-- Go Home</GoooLink>
     </Button>
-    <div class="flex items-center justify-center gap-x-2 max-w-md flex-grow">
+    <div class="flex items-center justify-center gap-x-2 max-w-md w-full">
       <div class="relative w-full items-center">
         <Input v-model="inputModel" placeholder="Enter your task" class="pl-9" />
         <!-- Here is the icon -->
@@ -37,11 +37,11 @@ function removeTodo(index: number) {
       <Button @click="addTodo(inputModel)"> Add Task </Button>
     </div>
 
-    <div class="flex flex-col justify-start items-center gap-y-2 my-2">
+    <div class="flex flex-col justify-start items-center gap-y-2 my-2 w-full">
       <div
         v-for="(todo, index) in todos"
         :key="index"
-        class="flex items-stretch justify-between w-full max-w-md gap-x-2"
+        class="flex items-center justify-between w-full max-w-md gap-x-2"
       >
         <p
           class="py-2 px-2 rounded-lg text-sm font-medium border border-solid border-border flex-grow bg-secondary"
