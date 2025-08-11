@@ -1,0 +1,1 @@
+import{l as r,m as n}from"./pinia.js";import{r as u}from"./reactivity.esm-bundler.js";const m=r("counter",()=>{const o=u(0),e=n(()=>o.value*2);function t(){o.value++}return{count:o,doubleCount:e,increment:t}});export{m as u};
