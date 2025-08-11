@@ -4,10 +4,11 @@ import Button from '../ui/button/Button.vue'
 import SunIcon from '../icons/SunIcon.vue'
 import MoonIcon from '../icons/MoonIcon.vue'
 import { useCounterStore } from '@/stores/counter'
+import { storeToRefs } from 'pinia'
 
 const { isDark, changeColor } = useThemeCookie()
 
-const { count } = useCounterStore()
+const { count } = storeToRefs(useCounterStore())
 </script>
 
 <template>
