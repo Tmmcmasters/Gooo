@@ -1,9 +1,9 @@
 package serverUtility
 
-import "Gooo/helpers"
+import "Gooo/helpers/gooo"
 
 templ SocketScript() {
-	if helpers.IsLocal(ctx) {
+	if gooo.IsLocal(ctx) {
 		<script>
 
 				function setupReloadSocket() {
