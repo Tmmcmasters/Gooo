@@ -1,12 +1,12 @@
 package serverLayout
 
-import "Gooo/helpers"
 import "Gooo/server/generated"
 import "Gooo/server/utility"
+import "Gooo/helpers/gooo"
 
 templ Base(title string) {
 	<!DOCTYPE html>
-	<html lang="en" class={ helpers.GetTheme(ctx) }>
+	<html lang="en" class={ gooo.GetTheme(ctx) }>
 		<head>
 			<meta charset="UTF-8"/>
 			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>

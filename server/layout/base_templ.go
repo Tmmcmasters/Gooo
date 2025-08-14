@@ -8,9 +8,9 @@ package serverLayout
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
-import "Gooo/helpers"
 import "Gooo/server/generated"
 import "Gooo/server/utility"
+import "Gooo/helpers/gooo"
 
 func Base(title string) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
@@ -37,7 +37,7 @@ func Base(title string) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		var templ_7745c5c3_Var2 = []any{helpers.GetTheme(ctx)}
+		var templ_7745c5c3_Var2 = []any{gooo.GetTheme(ctx)}
 		templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var2...)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
