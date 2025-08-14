@@ -49,7 +49,7 @@ func main() {
 	})
 
 	// Serve Static Assets for Production
-	isLocal := os.Getenv("ENV") == "LOCAL"
+	isLocal := os.Getenv("ENV") == "DEV"
 
 	if !isLocal {
 		e.Static("/static", "static")

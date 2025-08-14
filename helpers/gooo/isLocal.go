@@ -9,7 +9,7 @@ import (
 func IsLocal(ctx context.Context) bool {
 	// Get the theme from the context
 	if env, ok := ctx.Value(constants.EnvKey).(string); ok {
-		return strings.ToLower(env) == "local"
+		return strings.ToLower(env) == "dev"
 	}
 
 	// Default theme
