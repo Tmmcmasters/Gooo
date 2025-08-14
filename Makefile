@@ -1,4 +1,4 @@
-.PHONY: build run templ notify-templ-proxy tailwind minify-tailwind build-inject-tw build-echo run-build run-vite gen-envs build-gen-envs
+.PHONY: build run templ notify-templ-proxy tailwind minify-tailwind build-inject-tw build-echo run-build run-vite gen-envs build-gen-envs build-gen-manifest gen-manifest
 
 #To be used for development only and with the templ proxy
 -include .env.dev
@@ -15,11 +15,19 @@ build-gen-envs:
 gen-envs:
 	@generate-envs/generate-envs
 
+build-gen-manifest:
+	@go build -o generate-manifest/generate-manifest generate-manifest/generate-manifest.go
+
+gen-manifest:
+	@generate-manifest/generate-manifest
+
 build:
 	@make build-inject-tw
+	@make build-gen-manifest
 	@make minify-tailwind
 	@make inject-tw
 	@npm run build
+	@make gen-manifest
 	@templ generate
 	@make build-echo
 
@@ -54,5 +62,7 @@ run-vite:
 run:
 	@make templ & sleep 1
 	@$(MAKE) build-inject-tw
+	@$(MAKE) build-gen-manifest
+	@$(MAKE) gen-manifest
 	@$(MAKE) run-vite & sleep 1
 	@ENV_FILE=.env.dev air
