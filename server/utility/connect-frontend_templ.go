@@ -8,6 +8,12 @@ package serverUtility
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
+import (
+	"encoding/json"
+	"log"
+	"os"
+)
+
 // ConnectFrontend inserts a script tag for connecting the frontend.
 // Parameters:
 //   - src: The source URL of the script. Must point to the generated JavaScript file.
@@ -41,9 +47,9 @@ func ConnectFrontend(src string) templ.Component {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var2 string
-		templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.JoinStringErrs(src)
+		templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.JoinStringErrs(getHashedAssetPath(src))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/utility/connect-frontend.templ`, Line: 10, Col: 49}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/utility/connect-frontend.templ`, Line: 16, Col: 69}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var2))
 		if templ_7745c5c3_Err != nil {
@@ -55,6 +61,42 @@ func ConnectFrontend(src string) templ.Component {
 		}
 		return nil
 	})
+}
+
+// manifestCache caches the parsed manifest to avoid repeated file reads
+var manifestCache map[string]string
+
+// getHashedAssetPath reads the manifest to return the hashed filename
+func getHashedAssetPath(originalPath string) string {
+	log.Printf("Manifest cache: %v", manifestCache)
+	if manifestCache == nil {
+		manifestCache = loadManifest()
+	}
+	if hashedPath, ok := manifestCache[originalPath]; ok {
+		return hashedPath
+	}
+	log.Printf("Warning: No hashed path found for %s, using original", originalPath)
+	return originalPath // Fallback if not found
+}
+
+// loadManifest reads and parses the Vite manifest.json
+func loadManifest() map[string]string {
+	file, err := os.ReadFile("gen/.vite/manifest.json")
+	if err != nil {
+		log.Printf("Warning: Could not load manifest: %v", err)
+		return make(map[string]string)
+	}
+	var manifest map[string]map[string]string
+	if err := json.Unmarshal(file, &manifest); err != nil {
+		log.Printf("Warning: Could not parse manifest: %v", err)
+		return make(map[string]string)
+	}
+	result := make(map[string]string)
+	for orig, data := range manifest {
+		// Vite manifest stores the file path under the "file" key
+		result["/gen/"+orig] = "/gen/" + data["file"] // Adjust path to match serving
+	}
+	return result
 }
 
 var _ = templruntime.GeneratedTemplate

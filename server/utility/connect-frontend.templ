@@ -1,5 +1,11 @@
 package serverUtility
 
+import (
+	"encoding/json"
+	"log"
+	"os"
+)
+
 // ConnectFrontend inserts a script tag for connecting the frontend.
 // Parameters:
 //   - src: The source URL of the script. Must point to the generated JavaScript file.
@@ -7,5 +13,41 @@ package serverUtility
 // Example:
 //   @serverUtility.ConnectFrontend("/gen/js/home.js")
 templ ConnectFrontend(src string) {
-	<script type="module" data-page-script src={ src }></script>
+	<script type="module" data-page-script src={ getHashedAssetPath(src) }></script>
+}
+
+// manifestCache caches the parsed manifest to avoid repeated file reads
+var manifestCache map[string]string
+
+// getHashedAssetPath reads the manifest to return the hashed filename
+func getHashedAssetPath(originalPath string) string {
+	log.Printf("Manifest cache: %v", manifestCache)
+	if manifestCache == nil {
+		manifestCache = loadManifest()
+	}
+	if hashedPath, ok := manifestCache[originalPath]; ok {
+		return hashedPath
+	}
+	log.Printf("Warning: No hashed path found for %s, using original", originalPath)
+	return originalPath // Fallback if not found
+}
+
+// loadManifest reads and parses the Vite manifest.json
+func loadManifest() map[string]string {
+	file, err := os.ReadFile("gen/.vite/manifest.json")
+	if err != nil {
+		log.Printf("Warning: Could not load manifest: %v", err)
+		return make(map[string]string)
+	}
+	var manifest map[string]map[string]string
+	if err := json.Unmarshal(file, &manifest); err != nil {
+		log.Printf("Warning: Could not parse manifest: %v", err)
+		return make(map[string]string)
+	}
+	result := make(map[string]string)
+	for orig, data := range manifest {
+		// Vite manifest stores the file path under the "file" key
+		result["/gen/"+orig] = "/gen/" + data["file"] // Adjust path to match serving
+	}
+	return result
 }

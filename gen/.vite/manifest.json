@@ -1,0 +1,82 @@
+{
+  "_GoooLink.vue_vue_type_script_setup_true_lang.js": {
+    "file": "js/GoooLink.vue_vue_type_script_setup_true_lang.js",
+    "name": "GoooLink.vue_vue_type_script_setup_true_lang",
+    "imports": [
+      "_pinia.js",
+      "client/utils/goooNavigation.ts",
+      "_reactivity.esm-bundler.js"
+    ]
+  },
+  "_counter.js": {
+    "file": "js/counter.js",
+    "name": "counter",
+    "imports": [
+      "_pinia.js",
+      "_reactivity.esm-bundler.js"
+    ]
+  },
+  "_gooo-hydrate.js": {
+    "file": "js/gooo-hydrate.js",
+    "name": "gooo-hydrate"
+  },
+  "_pinia.js": {
+    "file": "js/pinia.js",
+    "name": "pinia",
+    "imports": [
+      "_reactivity.esm-bundler.js"
+    ]
+  },
+  "_reactivity.esm-bundler.js": {
+    "file": "js/reactivity.esm-bundler.js",
+    "name": "reactivity.esm-bundler"
+  },
+  "client/home.ts": {
+    "file": "js/home.js",
+    "name": "home",
+    "src": "client/home.ts",
+    "isEntry": true,
+    "imports": [
+      "_pinia.js",
+      "_counter.js",
+      "_GoooLink.vue_vue_type_script_setup_true_lang.js",
+      "_reactivity.esm-bundler.js",
+      "_gooo-hydrate.js",
+      "client/utils/goooNavigation.ts"
+    ]
+  },
+  "client/themeSwitcher.ts": {
+    "file": "js/themeSwitcher.js",
+    "name": "themeSwitcher",
+    "src": "client/themeSwitcher.ts",
+    "isEntry": true,
+    "imports": [
+      "_pinia.js",
+      "_gooo-hydrate.js",
+      "_reactivity.esm-bundler.js",
+      "_counter.js"
+    ]
+  },
+  "client/todo.ts": {
+    "file": "js/todo.js",
+    "name": "todo",
+    "src": "client/todo.ts",
+    "isEntry": true,
+    "imports": [
+      "_pinia.js",
+      "_gooo-hydrate.js",
+      "_GoooLink.vue_vue_type_script_setup_true_lang.js",
+      "_reactivity.esm-bundler.js",
+      "client/utils/goooNavigation.ts"
+    ]
+  },
+  "client/utils/goooNavigation.ts": {
+    "file": "js/goooNavigation.js",
+    "name": "goooNavigation",
+    "src": "client/utils/goooNavigation.ts",
+    "isEntry": true,
+    "imports": [
+      "_reactivity.esm-bundler.js"
+    ]
+  }
+}

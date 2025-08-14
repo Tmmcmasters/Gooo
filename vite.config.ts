@@ -13,6 +13,7 @@ export default defineConfig({
   build: {
     outDir: './gen',
     emptyOutDir: true,
+    manifest: true,
     assetsDir: 'js',
     rollupOptions: {
       input: {
