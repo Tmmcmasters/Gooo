@@ -23,9 +23,9 @@ export default defineConfig({
         todo: fileURLToPath(new URL('./client/todo.ts', import.meta.url)),
       },
       output: {
-        entryFileNames: 'js/[name].js',
-        chunkFileNames: 'js/[name].js',
-        assetFileNames: 'css/[name].[ext]',
+        entryFileNames: 'js/[name].[hash].js',
+        chunkFileNames: 'js/[name].[hash].js',
+        assetFileNames: 'css/[name].[hash].[ext]',
         manualChunks: {
           'gooo-hydrate': ['@/utils/goooHydrate.ts'],
         }
