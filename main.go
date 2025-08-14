@@ -3,7 +3,7 @@ package main
 import (
 	"Gooo/constants"
 	"Gooo/handlers"
-	"context"
+	customMiddleware "Gooo/helpers/middleware"
 	"log"
 	"net/http"
 	"net/http/httptest"
@@ -42,7 +42,7 @@ func main() {
 		log.Fatal("APP_PORT env variable not set correctly")
 	}
 
-	e.Use(themeMiddleware)
+	e.Use(customMiddleware.ThemeMiddleware)
 
 	e.Use(middleware.GzipWithConfig(middleware.GzipConfig{
 		Level: 5,
@@ -52,7 +52,7 @@ func main() {
 	e.GET("/todo", handlers.TodoHandler)
 
 	e.Use(func(next echo.HandlerFunc) echo.HandlerFunc {
-		return envMiddleware(next, os.Getenv("ENV"))
+		return customMiddleware.EnvMiddleware(next, os.Getenv("ENV"))
 	})
 
 	// Serve Static Assets for Production
@@ -149,37 +149,6 @@ func broadcastReload() {
 	}
 }
 
-// themeMiddleware sets the theme for the request based on the cookie value.
-// The theme is sanitized to be either "light" or "dark". The theme is stored
-// in the echo.Context and the request.Context for use by the application.
-func themeMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
-	return func(c echo.Context) error {
-		theme := "light"
-		cookie, err := c.Cookie("color-scheme")
-		if err == nil && cookie != nil {
-			theme = cookie.Value
-		}
-
-		// Sanitize/validate theme
-		switch theme {
-		case "dark":
-			// leave as-is
-		default:
-			theme = "light"
-		}
-
-		// Store in echo.Context (for direct access)
-		c.Set(string(constants.ThemeKey), theme)
-
-		// Also inject into request.Context for templ
-		req := c.Request()
-		ctxWithTheme := context.WithValue(req.Context(), constants.ThemeKey, theme)
-		c.SetRequest(req.WithContext(ctxWithTheme))
-
-		return next(c)
-	}
-}
-
 // handleViteDevServer sets up the reverse proxy to Vite for development. It
 // forwards requests from /gen/js/* to /client/*.ts to allow Vite to handle
 // the typescript files. It also forwards requests for Vite's HMR client and
@@ -263,23 +232,5 @@ func handleViteDevServer(e *echo.Echo, isLocal bool) {
 		} else {
 			c.String(http.StatusInternalServerError, "Internal Server Error")
 		}
-	}
-}
-
-// envMiddleware injects the environment variable into the echo.Context and
-// the request.Context for use by the application. It sets the environment
-// in the context using a predefined key and ensures the value is accessible
-// throughout the request lifecycle. This middleware is useful for passing
-// environment-specific configuration to handlers and other middleware functions.
-func envMiddleware(next echo.HandlerFunc, env string) echo.HandlerFunc {
-	return func(c echo.Context) error {
-		c.Set(string(constants.EnvKey), env)
-
-		req := c.Request()
-		ctxWithEnv := context.WithValue(req.Context(), constants.EnvKey, env)
-		c.SetRequest(req.WithContext(ctxWithEnv))
-
-		return next(c)
-
 	}
 }
