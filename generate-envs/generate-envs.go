@@ -44,7 +44,27 @@ func generateEnvFile(templateContent []byte, filePath string) error {
 }
 
 func renderTemplate(templateContent []byte) ([]byte, error) {
-	// You could go get the data from a secure source and populate the template here.
+	// Define replacement values (could be from env vars, a vault, or config)
+	values := map[string]string{
+		"example_api_url": getEnvOrDefault("EXAMPLE_API_URL", "http://localhost:8080/api"),
+	}
 
-	return nil, nil
+	// Convert template content to string
+	content := string(templateContent)
+
+	// Replace placeholders with values
+	for key, value := range values {
+		placeholder := "{{" + key + "}}"
+		content = strings.ReplaceAll(content, placeholder, value)
+	}
+
+	return []byte(content), nil
+}
+
+// getEnvOrDefault retrieves an environment variable or returns a default value
+func getEnvOrDefault(key, defaultValue string) string {
+	if value, exists := os.LookupEnv(key); exists {
+		return value
+	}
+	return defaultValue
 }
