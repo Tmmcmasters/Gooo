@@ -8,10 +8,6 @@
 @source "./**/*.vue";
 @source "./**/*.ts";
 
-@plugin "daisyui" {
-  themes: false;
-}
-
 :root {
   --background: oklch(0.9885 0.0057 84.5659);
   --foreground: oklch(0.366 0.0251 49.6085);
