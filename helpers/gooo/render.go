@@ -1,4 +1,4 @@
-package helpers
+package gooo
 
 import (
 	"github.com/a-h/templ"
@@ -16,7 +16,7 @@ import (
 // Any error returned by the component during rendering is returned as-is.
 //
 // The status code is used when writing the response.
-func Render(ctx echo.Context, statusCode int, component templ.Component) error  {
+func Render(ctx echo.Context, statusCode int, component templ.Component) error {
 	buf := templ.GetBuffer()
 
 	defer templ.ReleaseBuffer(buf)
