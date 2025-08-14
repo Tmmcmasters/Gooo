@@ -4,6 +4,7 @@ import (
 	"Gooo/constants"
 	"log"
 	"os"
+	"regexp"
 	"strings"
 )
 
@@ -44,27 +45,33 @@ func generateEnvFile(templateContent []byte, filePath string) error {
 }
 
 func renderTemplate(templateContent []byte) ([]byte, error) {
-	// Define replacement values (could be from env vars, a vault, or config)
-	values := map[string]string{
-		"example_api_url": getEnvOrDefault("EXAMPLE_API_URL", "http://localhost:8080/api"),
-	}
-
 	// Convert template content to string
 	content := string(templateContent)
 
-	// Replace placeholders with values
-	for key, value := range values {
-		placeholder := "{{" + key + "}}"
+	// Find all placeholders in the template (e.g., {{ example_api_url }})
+	re := regexp.MustCompile(`\{\{\s*([a-zA-Z0-9_]+)\s*\}\}`)
+	matches := re.FindAllStringSubmatch(content, -1)
+
+	// Replace each placeholder with its value
+	for _, match := range matches {
+		if len(match) < 2 {
+			continue
+		}
+		placeholder := match[0] // e.g., {{ example_api_url }}
+		key := match[1]         // e.g., example_api_url
+		value := getValueForKey(key)
 		content = strings.ReplaceAll(content, placeholder, value)
 	}
 
 	return []byte(content), nil
 }
 
-// getEnvOrDefault retrieves an environment variable or returns a default value
-func getEnvOrDefault(key, defaultValue string) string {
-	if value, exists := os.LookupEnv(key); exists {
-		return value
+func getValueForKey(key string) string {
+	// Manually assign value for example_api_url
+	// In the future, this could fetch from a secure source.
+	if key == "example_api_url" {
+		return "http://localhost:8080/api"
 	}
-	return defaultValue
+	// Return empty string for unknown keys (or could error out)
+	return ""
 }
