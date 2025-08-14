@@ -68,7 +68,7 @@ func renderTemplate(templateContent []byte) ([]byte, error) {
 
 func getValueForKey(key string) string {
 	// Manually assign value for example_api_url
-	// In the future, this could fetch from a secure source.
+	// In the future, this could fetch from a secure source(vault or other).
 	if key == "example_api_url" {
 		return "http://localhost:8080/api"
 	}
