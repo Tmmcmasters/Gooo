@@ -48,4 +48,4 @@ run:
 	@make templ & sleep 1
 	@$(MAKE) build-inject-tw
 	@$(MAKE) run-vite & sleep 1
-	@ENV_FILE=.env air
+	@ENV_FILE=.env.dev air
