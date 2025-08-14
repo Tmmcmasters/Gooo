@@ -26,11 +26,15 @@ func HandleViteDevServer(e *echo.Echo, isLocal bool) {
 	e.Any("/gen/js/*", func(c echo.Context) error {
 		path := c.Request().URL.Path
 
+		// If the path is a JS file and not a goooNavigation file, convert
+		// it to a TS file path.
 		if strings.HasSuffix(path, ".js") && !strings.Contains(path, "goooNavigation") {
 			filename := strings.TrimPrefix(path, "/gen/js/")
 			filename = strings.TrimSuffix(filename, ".js")
 			c.Request().URL.Path = "/client/" + filename + ".ts"
 		} else {
+			// Otherwise, assume it's a utils file and convert it to a TS
+			// file path.
 			filename := strings.TrimPrefix(path, "/gen/js/")
 			filename = strings.TrimSuffix(filename, ".js")
 			c.Request().URL.Path = "/client/utils/" + filename + ".ts"

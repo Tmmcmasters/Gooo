@@ -41,7 +41,11 @@ func main() {
 	for srcPath, entry := range manifest {
 		if entry.IsEntry {
 			// Derive the served path from the source path (e.g., "client/home.ts" -> "/gen/js/home.js")
+
 			servedPath := "/gen/js/" + strings.TrimPrefix(strings.TrimSuffix(srcPath, ".ts"), "client/") + ".js"
+			if strings.Contains(srcPath, "goooNavigation") {
+				servedPath = "/gen/js/goooNavigation.js"
+			}
 			hashedPath := "/gen/" + entry.File // e.g., "/gen/js/home.-48JG4rj.js"
 			cache[servedPath] = hashedPath
 		}
