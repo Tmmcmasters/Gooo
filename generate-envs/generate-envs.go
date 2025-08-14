@@ -12,27 +12,34 @@ func main() {
 	log.SetFlags(0)
 	log.Println("")
 	log.Println("\u2022" + constants.Blue + constants.Bold + " Build: " + constants.Reset + "Generating .env files")
+	log.Println("")
 
 	var envFilePaths = []string{
 		"./.env.prod.j2",
 		"./.env.dev.j2",
 	}
 
-	for _, filePath := range envFilePaths {
+	for _, oldFilePath := range envFilePaths {
 		// Read the template file
-		templateContent, err := os.ReadFile(filePath)
+		templateContent, err := os.ReadFile(oldFilePath)
 		if err != nil {
-			log.Fatalf("Error reading template file at path: %s, error: %v", filePath, err)
+			log.Fatalf("Error reading template file at path: %s, error: %v", oldFilePath, err)
 		}
 
 		// Generate the .env file
-		err = generateEnvFile(templateContent, filePath)
+		err = generateEnvFile(templateContent, oldFilePath)
 		if err != nil {
-			log.Fatalf("Error generating .env file at path: %s, error: %v", filePath, err)
+			log.Fatalf("Error generating .env file at path: %s, error: %v", oldFilePath, err)
 		}
 
-		log.Printf("\u2022 Generated .env file at path: %s", filePath)
+		generatedEnvFilePath := strings.TrimSuffix(oldFilePath, ".j2")
+		generatedEnvFilePath = strings.TrimPrefix(generatedEnvFilePath, "./")
+
+		log.Printf("\u2022 Generated %s file from template: %s", generatedEnvFilePath, oldFilePath)
 	}
+
+	log.Println("")
+	log.Println("\u2022" + constants.Green + constants.Bold + " Build: " + constants.Reset + "Finished generating .env files")
 }
 
 func generateEnvFile(templateContent []byte, filePath string) error {
