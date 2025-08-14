@@ -1,4 +1,4 @@
-.PHONY: build run templ notify-templ-proxy tailwind minify-tailwind build-inject-tw build-echo run-build run-vite
+.PHONY: build run templ notify-templ-proxy tailwind minify-tailwind build-inject-tw build-echo run-build run-vite gen-envs build-gen-envs
 
 -include .env
 
@@ -7,6 +7,12 @@ MAKEFLAGS += --no-print-directory
 
 build-echo: 
 	@go build -o ./tmp/main .
+
+build-gen-envs:
+	@go build -o generate-envs/generate-envs generate-envs/generate-envs.go
+
+gen-envs:
+	@generate-envs/generate-envs
 
 build:
 	@make build-inject-tw

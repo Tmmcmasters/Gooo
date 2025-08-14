@@ -14,8 +14,8 @@ func main() {
 	log.Println("\u2022" + constants.Blue + constants.Bold + " Build: " + constants.Reset + "Generating .env files")
 
 	var envFilePaths = []string{
-		"../.env.prod.j2",
-		"../.env.dev.j2",
+		"./.env.prod.j2",
+		"./.env.dev.j2",
 	}
 
 	for _, filePath := range envFilePaths {
@@ -30,6 +30,8 @@ func main() {
 		if err != nil {
 			log.Fatalf("Error generating .env file at path: %s, error: %v", filePath, err)
 		}
+
+		log.Printf("\u2022 Generated .env file at path: %s", filePath)
 	}
 }
 
