@@ -1,6 +1,7 @@
 .PHONY: build run templ notify-templ-proxy tailwind minify-tailwind build-inject-tw build-echo run-build run-vite gen-envs build-gen-envs
 
--include .env
+#To be used for development only and with the templ proxy
+-include .env.dev
 
 # Suppress the "Entering/Leaving directory" messages
 MAKEFLAGS += --no-print-directory	
