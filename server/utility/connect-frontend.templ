@@ -14,7 +14,7 @@ import (
 // Example:
 //   @serverUtility.ConnectFrontend("/gen/js/home.js")
 templ ConnectFrontend(viteInputName string) {
-	<script type="module" data-page-script src={ getHashedAssetPath(viteInputName, ctx) }></script>
+	<script type="module" data-page-script data-vite-input={ viteInputName } src={ getHashedAssetPath(viteInputName, ctx) }></script>
 }
 
 // getHashedAssetPath reads the manifest to return the hashed filename
