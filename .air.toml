@@ -4,10 +4,10 @@ tmp_dir = "tmp"
 [build]
   args_bin = []
   bin = "./tmp/main"
-  cmd = "make minify-tailwind && make inject-tw && make notify-templ-proxy && go build -o ./tmp/main ."
+  cmd = "make minify-tailwind && make inject-tw && make gen-manifest && make notify-templ-proxy && go build -o ./tmp/main ."
   delay = 0
   exclude_dir = ["assets", "tmp", "gen", "static", "node_modules"]
-  exclude_file = ["server/generated/tailwind.templ", "server/generated/tailwind_templ.go"]
+  exclude_file = ["server/generated/tailwind.templ", "server/generated/tailwind_templ.go", "server/generated/generated-manifest.go"]
   exclude_regex = [".*\\.txt$"]
   exclude_unchanged = false
   follow_symlink = false

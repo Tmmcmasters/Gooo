@@ -63,6 +63,5 @@ run:
 	@make templ & sleep 1
 	@$(MAKE) build-inject-tw
 	@$(MAKE) build-gen-manifest
-	@$(MAKE) gen-manifest
 	@$(MAKE) run-vite & sleep 1
 	@ENV_FILE=.env.dev air
