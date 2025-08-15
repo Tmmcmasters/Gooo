@@ -65,12 +65,9 @@ func main() {
 			log.Fatalf("Failed to parse prod manifest: %v", err)
 		}
 		cache = make(map[string]string)
-		for srcPath, entry := range prodManifest {
+		for _, entry := range prodManifest {
 			if entry.IsEntry {
-				servedPath := "/gen/js/" + strings.TrimPrefix(strings.TrimSuffix(srcPath, ".ts"), "client/") + ".js"
-				if strings.Contains(srcPath, "goooNavigation") {
-					servedPath = "/gen/js/goooNavigation.js" // Special case for goooNavigation
-				}
+				servedPath := entry.Name
 				hashedPath := "/gen/" + entry.File
 				cache[servedPath] = hashedPath
 			}

@@ -4,12 +4,12 @@ package serverGenerated
 // ManifestCache is the pre-generated manifest cache
 var ManifestCache = map[string]string{
 
-	"/gen/js/goooNavigation.js": "/gen/js/goooNavigation.Bt03DvT9.js",
+	"goooNavigation": "http://localhost:5173/utils/goooNavigation.ts",
 
-	"/gen/js/home.js": "/gen/js/home.-48JG4rj.js",
+	"home": "http://localhost:5173/home.ts",
 
-	"/gen/js/themeSwitcher.js": "/gen/js/themeSwitcher.DqzOn6NG.js",
+	"themeSwitcher": "http://localhost:5173/themeSwitcher.ts",
 
-	"/gen/js/todo.js": "/gen/js/todo.yJKhFdr6.js",
+	"todo": "http://localhost:5173/todo.ts",
 
 }
