@@ -6,7 +6,6 @@ import (
 	"net/http/httptest"
 	"net/http/httputil"
 	"net/url"
-	"strings"
 
 	"github.com/labstack/echo/v4"
 )
@@ -22,27 +21,6 @@ func HandleViteDevServer(e *echo.Echo, isLocal bool) {
 	// Establish the Reverse Proxy to Vite
 	viteUrl, _ := url.Parse("http://localhost:5173")
 	proxy := httputil.NewSingleHostReverseProxy(viteUrl)
-
-	e.Any("/gen/js/*", func(c echo.Context) error {
-		path := c.Request().URL.Path
-
-		// If the path is a JS file and not a goooNavigation file, convert
-		// it to a TS file path.
-		if strings.HasSuffix(path, ".js") && !strings.Contains(path, "goooNavigation") {
-			filename := strings.TrimPrefix(path, "/gen/js/")
-			filename = strings.TrimSuffix(filename, ".js")
-			c.Request().URL.Path = "/client/" + filename + ".ts"
-		} else {
-			// Otherwise, assume it's a utils file and convert it to a TS
-			// file path.
-			filename := strings.TrimPrefix(path, "/gen/js/")
-			filename = strings.TrimSuffix(filename, ".js")
-			c.Request().URL.Path = "/client/utils/" + filename + ".ts"
-		}
-
-		proxy.ServeHTTP(c.Response().Writer, c.Request())
-		return nil
-	})
 
 	// Proxy Vite's HMR client
 	e.Any("/@vite/*", func(c echo.Context) error {

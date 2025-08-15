@@ -22,7 +22,7 @@ import (
 // Example:
 //
 //	@serverUtility.ConnectFrontend("/gen/js/home.js")
-func ConnectFrontend(src string) templ.Component {
+func ConnectFrontend(viteInputName string) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -48,9 +48,9 @@ func ConnectFrontend(src string) templ.Component {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var2 string
-		templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.JoinStringErrs(getHashedAssetPath(src, ctx))
+		templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.JoinStringErrs(getHashedAssetPath(viteInputName, ctx))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/utility/connect-frontend.templ`, Line: 17, Col: 74}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `server/utility/connect-frontend.templ`, Line: 17, Col: 84}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var2))
 		if templ_7745c5c3_Err != nil {
@@ -65,17 +65,23 @@ func ConnectFrontend(src string) templ.Component {
 }
 
 // getHashedAssetPath reads the manifest to return the hashed filename
-func getHashedAssetPath(originalPath string, ctx context.Context) string {
+func getHashedAssetPath(viteInputName string, ctx context.Context) string {
 	if gooo.IsLocal(ctx) {
-		return originalPath
+		hashedPath, ok := serverGenerated.ManifestCache[viteInputName]
+		if !ok {
+			log.Printf("Warning: No hashed path found for %s, using original", viteInputName)
+			return ""
+		}
+		log.Printf("Hashed Path for %s: %s", viteInputName, hashedPath)
+		return hashedPath
 	}
 	log.Printf("Manifest cache: %v", serverGenerated.ManifestCache)
 
-	if hashedPath, ok := serverGenerated.ManifestCache[originalPath]; ok {
+	if hashedPath, ok := serverGenerated.ManifestCache[viteInputName]; ok {
 		return hashedPath
 	}
-	log.Printf("Warning: No hashed path found for %s, using original", originalPath)
-	return originalPath // Fallback if not found
+	log.Printf("Warning: No hashed path found for %s, using original", viteInputName)
+	return viteInputName // Fallback if not found
 }
 
 var _ = templruntime.GeneratedTemplate
