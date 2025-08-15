@@ -5,7 +5,6 @@ import (
 	"log"
 	"os"
 	"path/filepath"
-	"strings"
 	"text/template"
 
 	"github.com/joho/godotenv"
@@ -55,8 +54,8 @@ func main() {
 		cache = make(map[string]string)
 		for inputName, srcPath := range devManifest.Inputs {
 			// Map input name (e.g., "goooNavigation") to served URL
-			servedPath := inputName                                                // Use the input name directly
-			hashedPath := devManifest.URL + strings.TrimPrefix(srcPath, "client/") // e.g., "http://localhost:5173/utils/goooNavigation.ts"
+			servedPath := inputName // Use the input name directly
+			hashedPath := srcPath   // e.g., "http://localhost:5173/utils/goooNavigation.ts"
 			cache[servedPath] = hashedPath
 		}
 	} else {
