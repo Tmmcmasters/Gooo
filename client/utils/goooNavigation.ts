@@ -86,6 +86,7 @@ const executeScripts = async (container: Element) => {
         const registered = window.fileRegistry?.get(viteInputName)
 
         if (script.src && loadedScripts.has(viteInputName) && registered?.hydrate) {
+            if (registered.unMount) registered.unMount();
             registered.hydrate()
             script.remove()
         } else {

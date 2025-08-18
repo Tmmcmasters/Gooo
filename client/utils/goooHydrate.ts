@@ -1,6 +1,9 @@
+import type { App } from "vue"
+
 export type PageHydrationConfig = {
     mountPoint: string
     hydrate: () => void
+    unMount: App<Element>['unmount']
 }
 
 declare global {
@@ -23,18 +26,20 @@ window.fileRegistry = window.fileRegistry || new Map()
  * @param {string} mountPoint - The selector for the element which the vue app will be mounted to.
  * @param {function} hydrate - The function that will be called to hydrate the component.
  */
-export default (viteInputName: string, mountPoint: string, hydrate: () => void) => {
+export default (viteInputName: string, mountPoint: string, hydrate: () => App<Element>) => {
     function innerHydrate() {
 
-        hydrate()
+        return hydrate()
     }
+
+    const app = innerHydrate()
 
     //Register in global registry
     window.fileRegistry.set(viteInputName, {
         mountPoint,
-        hydrate: innerHydrate
+        hydrate: innerHydrate,
+        unMount: app.unmount
     });
 
     // Execute initial hydration
-    innerHydrate()
 }

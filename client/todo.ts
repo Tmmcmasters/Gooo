@@ -9,4 +9,5 @@ goooHydrate('todo', '#todo', () => {
     app.use(sharedPinia);
     app.mount('#todo')
 
+    return app;
 })

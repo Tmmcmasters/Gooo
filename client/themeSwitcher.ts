@@ -8,4 +8,6 @@ goooHydrate('themeSwitcher', '#theme-switcher', () => {
     const app = createApp(ThemeSwitcher)
     app.use(sharedPinia)
     app.mount('#theme-switcher')
+
+    return app;
 })

@@ -9,4 +9,5 @@ goooHydrate('home', '#home', () => {
     const app = createApp(Home, serverProps)
     app.use(sharedPinia)
     app.mount('#home')
+    return app;
 })
