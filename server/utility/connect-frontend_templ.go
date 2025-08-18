@@ -85,10 +85,8 @@ func getHashedAssetPath(viteInputName string, ctx context.Context) string {
 			log.Printf("Warning: No hashed path found for %s, using original", viteInputName)
 			return ""
 		}
-		log.Printf("Hashed Path for %s: %s", viteInputName, hashedPath)
 		return hashedPath
 	}
-	log.Printf("Manifest cache: %v", serverGenerated.ManifestCache)
 
 	if hashedPath, ok := serverGenerated.ManifestCache[viteInputName]; ok {
 		return hashedPath
