@@ -29,18 +29,6 @@ export default (viteInputName: string, mountPoint: string, hydrate: () => void) 
         hydrate()
     }
 
-    console.log("GOOO HYDRATE WITH INPUT NAME", viteInputName)
-
-    const element = document.querySelector(`[data-page-script='true'][data-vite-input="${viteInputName}"]`)
-    console.log(element);
-
-    console.log(`Here is the window.fileRegistry in the hydrate function: `);
-    console.log(window.fileRegistry);
-
-
-
-
-
     //Register in global registry
     window.fileRegistry.set(viteInputName, {
         mountPoint,

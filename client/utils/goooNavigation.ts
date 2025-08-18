@@ -80,8 +80,6 @@ const reloadScripts = (doc: Document) => {
  */
 const executeScripts = async (container: Element) => {
     container.querySelectorAll('script[data-page-script]').forEach((el) => {
-        console.log(`Looping through all scripts in the container`);
-        console.log(el);
 
         const script = el as HTMLScriptElement
         const viteInputName = script.getAttribute('data-vite-input') as string
@@ -229,12 +227,6 @@ const initialize = () => {
         const viteInputName = s.getAttribute('data-vite-input') as string
         loadedScripts.add(viteInputName)
     })
-
-
-    console.log(`Loaded Scripts in goooNavigation initialize:`);
-    console.log(loadedScripts);
-
-
 
     addEventListener('popstate', handlePopState)
     addEventListener('unload', () => removeEventListener('popstate', handlePopState))
