@@ -36,6 +36,8 @@ WORKDIR /app
 COPY --from=builder /app/tmp/main /app/main
 COPY --from=builder /app/static /app/static
 COPY --from=builder /app/gen /app/gen
+# Add .env.prod to runtime stage
+COPY --from=builder /app/.env.prod /app/.env.prod
 
 RUN chmod +x /app/main
 
