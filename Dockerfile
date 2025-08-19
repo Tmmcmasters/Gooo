@@ -25,9 +25,7 @@ COPY . .
 ENV ENV_FILE=/app/.env.prod
 
 # Build artifacts + env files
-RUN make docker-build \
- && echo "✅ Generated env files:" \
- && ls -l /app/.env*
+RUN make docker-build
 
 # --------------------------
 # Stage 2: Runtime
