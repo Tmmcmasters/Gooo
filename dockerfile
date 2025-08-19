@@ -45,5 +45,4 @@ ENV ENV_FILE=/app/.env.prod
 
 EXPOSE 8080
 
-CMD ["/app/main \
-    --env-file .env.prod"]
+CMD ["/app/main"]
