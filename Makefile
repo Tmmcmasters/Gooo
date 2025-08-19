@@ -39,7 +39,6 @@ docker-build:
 docker-run:
 	@docker build -t myapp .
 	@docker run --rm -it -p 8080:8080 \
-  --env-file .env.prod \
   myapp
 
 

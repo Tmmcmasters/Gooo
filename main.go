@@ -31,6 +31,12 @@ func main() {
 	e := echo.New()
 
 	appPort := os.Getenv("APP_PORT")
+
+	if appPort == "" {
+		// Fallback for some deployment services create their own ports
+		appPort = os.Getenv("PORT")
+	}
+
 	if appPort == "" {
 		log.Fatal("APP_PORT env variable not set correctly")
 	}
