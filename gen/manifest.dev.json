@@ -1,9 +1,0 @@
-{
-	"url": "http://localhost:5173/",
-	"inputs": {
-		"home": "client/home.ts",
-		"goooNavigation": "client/utils/goooNavigation.ts",
-		"themeSwitcher": "client/themeSwitcher.ts",
-		"todo": "client/todo.ts"
-	}
-}

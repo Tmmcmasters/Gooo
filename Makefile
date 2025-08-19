@@ -3,6 +3,9 @@
 #To be used for development only and with the templ proxy
 -include .env.dev
 
+# Fail immediately on any command error
+SHELL := /bin/sh -e
+
 # Suppress the "Entering/Leaving directory" messages
 MAKEFLAGS += --no-print-directory	
 
@@ -13,7 +16,7 @@ build-gen-envs:
 	@go build -o generate-envs/generate-envs generate-envs/generate-envs.go
 
 gen-envs:
-	@generate-envs/generate-envs
+	@./generate-envs/generate-envs
 
 build-gen-manifest:
 	@go build -o generate-manifest/generate-manifest generate-manifest/generate-manifest.go
@@ -22,19 +25,19 @@ gen-manifest:
 	@generate-manifest/generate-manifest
 
 build:
-	@make build-inject-tw
-	@make build-gen-manifest
-	@make build-gen-envs
-	@make gen-envs
-	@make minify-tailwind
-	@make inject-tw
+	$(MAKE) build-inject-tw
+	$(MAKE) build-gen-manifest
+	$(MAKE) build-gen-envs
+	$(MAKE) gen-envs
+	$(MAKE) minify-tailwind
+	$(MAKE) inject-tw
 	@npm run build
-	@make gen-manifest
+	$(MAKE) gen-manifest
 	@templ generate
-	@make build-echo
+	$(MAKE) build-echo
 
 docker-build:
-	@make build
+	$(MAKE) build
 
 docker-run:
 	@docker build -t myapp .
