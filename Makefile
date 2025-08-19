@@ -24,6 +24,8 @@ gen-manifest:
 build:
 	@make build-inject-tw
 	@make build-gen-manifest
+	@make build-gen-envs
+	@make gen-envs
 	@make minify-tailwind
 	@make inject-tw
 	@npm run build
