@@ -20,7 +20,7 @@ RUN npm install
 COPY . .
 
 # Always use production env
-ENV ENV_FILE=.env.prod
+ENV ENV_FILE=/app/.env.prod
 
 # Build artifacts (but don't run them!)
 RUN make docker-build
@@ -41,7 +41,8 @@ COPY --from=builder /app/.env.prod /app/.env.prod
 
 RUN chmod +x /app/main
 
-ENV ENV_FILE=.env.prod
+ENV ENV_FILE=/app/.env.prod
+
 EXPOSE 8080
 
 CMD ["/app/main"]
