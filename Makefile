@@ -1,4 +1,4 @@
-.PHONY: build run templ notify-templ-proxy tailwind minify-tailwind build-inject-tw build-echo run-build run-vite gen-envs build-gen-envs build-gen-manifest gen-manifest docker-build
+.PHONY: build run templ notify-templ-proxy tailwind minify-tailwind build-inject-tw build-echo run-build run-vite gen-envs build-gen-envs build-gen-manifest gen-manifest docker-build docker-run
 
 #To be used for development only and with the templ proxy
 -include .env.dev
@@ -33,6 +33,14 @@ build:
 
 docker-build:
 	@make build
+
+docker-run:
+	@docker build -t myapp .
+	@docker run --rm -it -p 8080:8080 \
+  --env-file .env.prod \
+  myapp
+
+
 
 run-build:
 	@make build
