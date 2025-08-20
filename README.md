@@ -82,7 +82,7 @@ Ensure you have the following installed:
    npm install
    ```
 
-4. Go mod tidy for good fortune
+4. Run `go mod tidy` for good fortune
    ```bash
    go mod tidy
    ```
