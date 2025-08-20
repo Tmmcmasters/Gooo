@@ -1,13 +1,11 @@
-# NOTE
+# _Gooo_<sup>("goo")</sup>
 
-\*TITLE OF ONE ARTICLE
-An Exercise in why Javascript Frameworks are Horrible for Those Learning how to Code.
+_Gooo_<sup>("goo")</sup> is a web toolkit designed to build web applications with Go, Templ, Vue, and Echo. 
 
-\*This is called _Gooo_<sup>("goo")</sup>
+It includes things like Router Prefetching, Vue HMR(live reloading), Go Live Reloading, and Tailwindcss live reloading. 
+It is designed to assist in making the developer experience quicker, but completely customizable. 
+The code is delivered as is straight from this repository. (potentially future integration with a cli)
 
-\*The Framework will be called Groov
-
-\*Another name for the framework could be Glue
 
 # client
 
