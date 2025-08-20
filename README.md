@@ -88,14 +88,25 @@ Ensure you have the following installed:
    go mod tidy
    ```
 
-5. Generate environment variables
+5. Ensure that you have Make installed
+
+   ```bash
+   make --version
+   ```
+
+   If you don't have Make installed, you can download it from [https://www.gnu.org/software/make/](https://www.gnu.org/software/make/).
+
+   If you are on a windows terminal, it is advised to setup WSL so that you can use the Makefile. If you do not want to use WSL, you might be able to setup Make with Chocolatey.
+   Check this Article: [Medium Article](https://medium.com/@AliMasaoodi/installing-make-on-windows-10-using-chocolatey-a-step-by-step-guide-5e178c449394)
+
+6. Generate environment variables
 
    ```bash
    make build-gen-envs
    make gen-envs
    ```
 
-6. Run locally
+7. Run locally
 
    ```bash
    make run
@@ -103,31 +114,10 @@ Ensure you have the following installed:
 
 ### Development Workflow
 
-1. **Start the development server**:
-   Run the following command to start the Vite development server with Vue HMR and Tailwind CSS live reloading:
+1. Run the development server:
 
    ```bash
-   npm run dev
-   ```
-
-2. **Run the Go backend**:
-   Start the Go server with live reloading (using a tool like `air` for Go live reloading, if configured):
-
-   ```bash
-   go run main.go
-   ```
-
-3. **Build for production**:
-   Compile and minify the front-end assets for production:
-
-   ```bash
-   npm run build
-   ```
-
-4. **Lint the code**:
-   Check and fix code quality issues with ESLint:
-   ```bash
-   npm run lint
+   make run
    ```
 
 ## Project Structure
