@@ -1,11 +1,10 @@
 # _Gooo_<sup>("goo")</sup>
 
-_Gooo_<sup>("goo")</sup> is a web toolkit designed to build web applications with Go, Templ, Vue, and Echo. 
+_Gooo_<sup>("goo")</sup> is a web toolkit designed to build web applications with Go, Templ, Vue, and Echo.
 
-It includes things like Router Prefetching, Vue HMR(live reloading), Go Live Reloading, and Tailwindcss live reloading. 
-It is designed to assist in making the developer experience quicker, but completely customizable. 
-The code is delivered as is straight from this repository. (potentially future integration with a cli)
-
+It includes things like Router Prefetching, Vue HMR(live reloading), Go Live Reloading, and Tailwindcss live reloading.
+It is designed to assist in making the developer experience quicker, but completely customizable.
+The code is delivered as is straight from this repository.
 
 # client
 
