@@ -6,6 +6,8 @@ _Gooo_<sup>("goo")</sup> is a powerful and flexible toolkit for developing moder
 
 The code is delivered as-is directly from the [Tmmcmasters/Gooo](https://github.com/Tmmcmasters/Gooo) repository. Execute the `get-gooo` script and follow the instructions for ease of setup and use. The terminal script that is run is get-gooo which is from this repository. See [Get-Gooo](https://github.com/Tmmcmasters/Get-Gooo)
 
+### For more documentation, see [gooo.dev](https://gooo.dev) (NOT FINISHED/PUBLISHED YET)
+
 ## Table of Contents
 
 - [Features](#features)
