@@ -4,14 +4,14 @@
 
 _Gooo_<sup>("goo")</sup> is a powerful and flexible toolkit for developing modern web applications using **Go**, **Templ**, **Vue 3**, and **Echo**. It is designed to enhance the developer experience with features like router prefetching, Vue HMR (Hot Module Replacement), Go live reloading, and Tailwind CSS live reloading. The toolkit is fully customizable, allowing developers to tailor it to their specific needs while maintaining a rapid development workflow. You can change anything
 
-The code is delivered as-is directly from the [Tmmcmasters/Gooo](https://github.com/Tmmcmasters/Gooo) repository. Just execute the terminal script following the instructions. The terminal script that is run is get-gooo which is from this repository. See [Get-Gooo](https://github.com/Tmmcmasters/Get-Gooo)
+The code is delivered as-is directly from the [Tmmcmasters/Gooo](https://github.com/Tmmcmasters/Gooo) repository. Execute the `get-gooo` script and follow the instructions for ease of setup and use. The terminal script that is run is get-gooo which is from this repository. See [Get-Gooo](https://github.com/Tmmcmasters/Get-Gooo)
 
 ## Table of Contents
 
 - [Features](#features)
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
+  - [Installation / Setup](#Installation-Setup)
   - [Development Workflow](#development-workflow)
 - [Project Structure](#project-structure)
 - [Configuration](#configuration)
@@ -51,7 +51,7 @@ Ensure you have the following installed:
 - **Templ** (For the server side templates)
 - **Make** (for development and deployment)
 
-### Installation
+### Installation-Setup
 
 1. **Download and Run the [Get-Gooo](https://github.com/Tmmcmasters/Get-Gooo) script**:
 
@@ -118,6 +118,12 @@ Ensure you have the following installed:
 
    ```bash
    make run
+   ```
+
+2. Run the prod server:
+
+   ```bash
+   make run-build
    ```
 
 ## Project Structure
