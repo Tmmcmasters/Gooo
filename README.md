@@ -205,6 +205,7 @@ Gooo/
 - **components.json**: The components for shadcn-vue.
 - **.j2 env files**: Customize the environment variables and then run the gen-env command in the Makefile.
 - **.prettierrc.json**: Customize the Prettier configuration. Refer to the [Prettier Configuration Reference](https://prettier.io/docs/en/configuration.html) for details.
+- **eslint.config.ts**: Customize the ESLint configuration. Refer to the [ESLint Configuration Reference](https://eslint.org/docs/user-guide/configuring) for details.
 
 ## Contributing
 
