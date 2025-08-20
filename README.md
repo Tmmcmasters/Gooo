@@ -1,8 +1,8 @@
 # _Gooo_<sup>("goo")</sup>
 
-![Gooo Logo](https://raw.githubusercontent.com/Tmmcmasters/Gooo/refs/heads/main/static/assets/img/goo_resized.webp)
+<img src="https://raw.githubusercontent.com/Tmmcmasters/Gooo/refs/heads/main/static/assets/img/goo_resized.webp" alt="Gooo Logo" width="200">
 
-_Gooo_<sup>("goo")</sup> (also known as **Groov** or **Glue**) is a powerful and flexible toolkit for developing modern web applications using **Go**, **Templ**, **Vue 3**, and **Echo**. It is designed to streamline the developer experience with features like router prefetching, Vue HMR (Hot Module Replacement), Go live reloading, and Tailwind CSS live reloading. The toolkit is fully customizable, allowing developers to tailor it to their specific needs while maintaining a rapid development workflow.
+_Gooo_<sup>("goo")</sup> is a powerful and flexible toolkit for developing modern web applications using **Go**, **Templ**, **Vue 3**, and **Echo**. It is designed to enhance the developer experience with features like router prefetching, Vue HMR (Hot Module Replacement), Go live reloading, and Tailwind CSS live reloading. The toolkit is fully customizable, allowing developers to tailor it to their specific needs while maintaining a rapid development workflow. You can change anything
 
 The code is delivered as-is directly from the [Tmmcmasters/Gooo](https://github.com/Tmmcmasters/Gooo) repository.
 
@@ -21,16 +21,23 @@ The code is delivered as-is directly from the [Tmmcmasters/Gooo](https://github.
 
 ## Features
 
-- **Vue 3 Integration**: Leverage the power of Vue 3 with Vite for a fast and modern front-end development experience.
+- **Vue 3 Integration**: Leverage the power of Vue 3 Composition API with Vite for a fast and modern front-end development experience.
 - **Templ for Go**: Use Templ to create type-safe, performant server-side rendered templates in Go.
 - **Echo Framework**: Utilize the lightweight and fast Echo web framework for building robust Go backends.
 - **Hot Reloading**:
   - Vue HMR for instant front-end updates.
-  - Go live reloading for seamless backend development.
+  - Go live reloading for seamless backend.
+  - Templ Proxy Live reloading for server-side templates.
   - Tailwind CSS live reloading for real-time styling updates.
-- **Router Prefetching**: Improve performance with intelligent router prefetching for faster page loads.
+- **Router Prefetching**: Improve performance with intelligent router prefetching for faster page loads with GoooLink.
+- **Tailwind CSS**: Utilize Tailwind CSS for styling and responsive design.
+- **Shadcn-Vue**: Utilize Shadcn-vue(out of the box) for a modern and accessible UI library or whatever you want.
 - **Customizable**: Fully customizable setup to adapt to various project requirements.
-- **TypeScript Support**: Enhanced type safety for Vue components with `vue-tsc` and Volar.
+- **TypeScript Support**: Out of the box with Vite and Vue Single File Components.
+- **Linting and Formatting**: Built-in support for ESLint and Prettier for code quality and formatting.
+- **Included Dockerfile**: A ready-to-run Dockerfile for easy deployment.
+- **Included Makefile**: A ready-to-run Makefile for easy development and deployment.
+- **Included Env Script/Files**: A customizable ready-to-run env script for easy deployment.
 
 ## Getting Started
 
@@ -38,11 +45,11 @@ The code is delivered as-is directly from the [Tmmcmasters/Gooo](https://github.
 
 Ensure you have the following installed:
 
-- **Node.js** (v16 or higher)
-- **npm** (v7 or higher)
-- **Go** (v1.18 or higher)
-- **Vite** (for front-end tooling)
-- **VSCode** with the **Volar** extension (recommended, disable Vetur if installed)
+- **Node.js** (v22+ recommended)
+- **npm**
+- **Go**
+- **Templ** (For the server side templates)
+- **Make** (for development and deployment)
 
 ### Installation
 
@@ -53,14 +60,19 @@ Ensure you have the following installed:
    cd Gooo
    ```
 
-2. Install front-end dependencies:
+2. Install Templ CLI:
+
+   ```bash
+   go install github.com/a-h/templ/cmd/templ@latest
+   ```
+
+3. Install Front-end dependencies:
 
    ```bash
    npm install
    ```
 
-3. Set up the Go backend:
-   Ensure your Go environment is configured, and install any required Go dependencies (e.g., Templ, Echo):
+4. Go mod tidy for good fortune
    ```bash
    go mod tidy
    ```
@@ -133,8 +145,8 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ## Contact
 
-For questions, issues, or suggestions, please open an issue on the [GitHub repository](https://github.com/Tmmcmasters/Gooo) or contact the maintainer at [your-contact-info] (update with your preferred contact method).
+For questions, issues, or suggestions, please open an issue on the [GitHub repository](https://github.com/Tmmcmasters/Gooo).
 
 ---
 
-© 2025 Tmmcmasters. Built with _Gooo_<sup>("goo")</sup>.
+© 2025 Timothy McMasters. Built with _Gooo_<sup>("goo")</sup>.
