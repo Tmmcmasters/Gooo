@@ -134,14 +134,63 @@ Ensure you have the following installed:
 
 ```
 Gooo/
-├── client/                 # Vue 3 front-end code (Vite-based)
-├── static/                 # Static assets (e.g., images)
-│   └── assets/img/goo_resized.webp
-├── main.go                 # Go backend entry point
-├── templates/              # Templ files for server-side rendering
-├── go.mod                  # Go module dependencies
-├── package.json            # Node.js dependencies and scripts
-└── README.md               # This file
+├── .github/
+├── .vscode/
+├── client/
+│   ├── components/         # Vue components
+│   ├── composables/        # Vue composable functions
+│   ├── layout/             # Vue layout templates
+│   ├── lib/                # Vue library functions
+│   ├── page/               # Vue page templates
+│   ├── stores/             # Vue pinia stores
+│   ├── utils/              # Vue utility functions
+│   ├── home.ts             # Vue home page entrypoint
+│   ├── themeSwitcher.ts    # Vue theme switcher entrypoint
+│   └── todos.ts            # Vue todo page entrypoint
+├── constants/
+├── gen/                    # Vite generated files
+│── generate-envs/          # Generates env files go script
+│── generate-manifest/      # Generates manifest files go script
+│── handlers/               # Server-side handlers for API
+│── helpers/                # Helper functions
+│── inject-tailwind/        # Injects Tailwind CSS into template files
+├── node_modules/
+├── server/                 # Backend server-side-templates
+│   ├── components/         # General components
+│   ├── generated/          # Auto-generated templates
+│   ├── icons/              # Icon components
+│   ├── layout/             # Layout templates for server
+│   ├── pages/              # Server-side pages templates
+│   └── utility/            # Utility templates for server
+├── static/                 # Static assets like favicon.ico
+├── tmp/
+│   └── main
+├── .air.toml
+├── .editorconfig
+├── .env.dev                # Actual dev env file that is read
+├── .env.dev2               # Template dev env file
+├── .env.prod
+├── .env.prod2
+├── .gitattributes
+├── .gitignore
+├── Dockerfile
+├── env.d.ts
+├── eslint.config.js
+├── go.mod
+├── go.sum
+├── LICENSE
+├── Makefile
+├── notes.md
+├── package.json
+├── package-lock.json
+├── railway.json
+├── README.md
+├── tailwind.css
+├── tsconfig.json
+├── tsconfig.app.json
+├── tsconfig.node.json
+└── vite.config.ts
+
 ```
 
 ## Configuration
