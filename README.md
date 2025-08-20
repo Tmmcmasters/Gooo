@@ -53,32 +53,36 @@ Ensure you have the following installed:
 
 ### Installation
 
-1. Clone the repository:
+1. **Download and Run the [Get-Gooo](https://github.com/Tmmcmasters/Get-Gooo) script**:
+
+   **For Linux/MacOS**
 
    ```bash
-   git clone https://github.com/Tmmcmasters/Gooo.git {YOUR_DIRECTORY}
-   cd {YOUR_DIRECTORY}
+   curl -L -o get-gooo https://github.com/Tmmcmasters/Get-Gooo/raw/refs/heads/main/get-gooo
+   chmod +x get-gooo
+   ./get-gooo
    ```
 
-2. Remove Origin:
+   **For Windows**
 
-   ```bash
-   git remote remove origin
+   ```powershell
+   Invoke-WebRequest -Uri https://github.com/Tmmcmasters/Get-Gooo/raw/refs/heads/main/get-gooo.exe -OutFile get-gooo.exe
+   .\get-gooo.exe
    ```
 
-3. Install Templ CLI:
+2. Install Templ CLI:
 
    ```bash
    go install github.com/a-h/templ/cmd/templ@latest
    ```
 
-4. Install Front-end dependencies:
+3. Install Front-end dependencies:
 
    ```bash
    npm install
    ```
 
-5. Go mod tidy for good fortune
+4. Go mod tidy for good fortune
    ```bash
    go mod tidy
    ```
