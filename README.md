@@ -88,11 +88,17 @@ Ensure you have the following installed:
    go mod tidy
    ```
 
-5. Generate envs
+5. Generate environment variables
 
    ```bash
    make build-gen-envs
    make gen-envs
+   ```
+
+6. Run locally
+
+   ```bash
+   make run
    ```
 
 ### Development Workflow
@@ -140,10 +146,12 @@ Gooo/
 
 ## Configuration
 
-- **Vite Configuration**: Customize the Vite setup by editing `vite.config.js`. Refer to the [Vite Configuration Reference](https://vitejs.dev/config/) for details.
-- **TypeScript Support**: Use `vue-tsc` for type checking in `.vue` files. Ensure Volar is installed in VSCode for proper TypeScript support.
-- **Tailwind CSS**: Tailwind is pre-configured for live reloading. Modify `tailwind.config.js` to customize styles.
-- **Echo Routes**: Define server routes in the Go backend using the Echo framework.
+- **No Special Configs** for now
+- **Vite Configuration**: Customize the Vite setup by editing `vite.config.ts`. Refer to the [Vite Configuration Reference](https://vitejs.dev/config/) for details.
+- **Tailwind CSS**: Tailwind is pre-configured for live reloading. Modify `tailwind.css` to customize styles.
+- **Echo Routes**: Define server routes in the Go backend using the Echo framework. Check main.go for examples.
+- **Dockerfile**: Use the provided Dockerfile for deployment. Adjust as you see fit.
+- **Makefile**: Use the provided Makefile for development and deployment. Adjust as you see fit.
 
 ## Contributing
 
