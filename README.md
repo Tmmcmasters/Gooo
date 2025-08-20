@@ -4,7 +4,7 @@
 
 _Gooo_<sup>("goo")</sup> is a powerful and flexible toolkit for developing modern web applications using **Go**, **Templ**, **Vue 3**, and **Echo**. It is designed to enhance the developer experience with features like router prefetching, Vue HMR (Hot Module Replacement), Go live reloading, and Tailwind CSS live reloading. The toolkit is fully customizable, allowing developers to tailor it to their specific needs while maintaining a rapid development workflow. You can change anything
 
-The code is delivered as-is directly from the [Tmmcmasters/Gooo](https://github.com/Tmmcmasters/Gooo) repository.
+The code is delivered as-is directly from the [Tmmcmasters/Gooo](https://github.com/Tmmcmasters/Gooo) repository. Just execute the terminal script following the instructions. The terminal script that is run is get-gooo which is from this repository. See [Get-Gooo](https://github.com/Tmmcmasters/Get-Gooo)
 
 ## Table of Contents
 
