@@ -60,19 +60,25 @@ Ensure you have the following installed:
    cd {YOUR_DIRECTORY}
    ```
 
-2. Install Templ CLI:
+2. Remove Origin:
+
+   ```bash
+   git remote remove origin
+   ```
+
+3. Install Templ CLI:
 
    ```bash
    go install github.com/a-h/templ/cmd/templ@latest
    ```
 
-3. Install Front-end dependencies:
+4. Install Front-end dependencies:
 
    ```bash
    npm install
    ```
 
-4. Go mod tidy for good fortune
+5. Go mod tidy for good fortune
    ```bash
    go mod tidy
    ```
