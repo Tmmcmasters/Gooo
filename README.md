@@ -22,6 +22,7 @@ The code is delivered as-is directly from the [Tmmcmasters/Gooo](https://github.
 ## Features
 
 - **Vue 3 Integration**: Leverage the power of Vue 3 Composition API with Vite for a fast and modern front-end development experience.
+- **Vite Integration**: Utilize Vite for a lightning-fast development experience with hot module reloading and automatic bundling.
 - **Templ for Go**: Use Templ to create type-safe, performant server-side rendered templates in Go.
 - **Echo Framework**: Utilize the lightweight and fast Echo web framework for building robust Go backends.
 - **Hot Reloading**:
