@@ -83,8 +83,16 @@ Ensure you have the following installed:
    ```
 
 4. Run `go mod tidy` for good fortune
+
    ```bash
    go mod tidy
+   ```
+
+5. Generate envs
+
+   ```bash
+   make build-gen-envs
+   make gen-envs
    ```
 
 ### Development Workflow
