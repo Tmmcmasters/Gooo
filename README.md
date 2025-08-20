@@ -152,6 +152,10 @@ Gooo/
 - **Echo Routes**: Define server routes in the Go backend using the Echo framework. Check main.go for examples.
 - **Dockerfile**: Use the provided Dockerfile for deployment. Adjust as you see fit.
 - **Makefile**: Use the provided Makefile for development and deployment. Adjust as you see fit.
+- **.air.toml**: Customize the Air configuration for Go live reloading. Refer to the [Air Configuration Reference](https://github.com/air-verse/air) for details.
+- **components.json**: The components for shadcn-vue.
+- **.j2 env files**: Customize the environment variables and then run the gen-env command in the Makefile.
+- **.prettierrc.json**: Customize the Prettier configuration. Refer to the [Prettier Configuration Reference](https://prettier.io/docs/en/configuration.html) for details.
 
 ## Contributing
 
