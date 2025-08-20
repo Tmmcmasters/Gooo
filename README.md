@@ -56,8 +56,8 @@ Ensure you have the following installed:
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/Tmmcmasters/Gooo.git
-   cd Gooo
+   git clone https://github.com/Tmmcmasters/Gooo.git {YOUR_DIRECTORY}
+   cd {YOUR_DIRECTORY}
    ```
 
 2. Install Templ CLI:
