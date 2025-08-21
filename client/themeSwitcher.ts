@@ -4,10 +4,10 @@ import ThemeSwitcher from "./components/buttons/Theme-Switcher.vue";
 import { sharedPinia } from "./utils/pinia";
 
 
-goooHydrate('themeSwitcher', '#theme-switcher', () => {
+goooHydrate('themeSwitcher', '#theme-switcher', (el) => {
     const app = createApp(ThemeSwitcher)
     app.use(sharedPinia)
-    app.mount('#theme-switcher')
+    app.mount(el)
 
     return app;
 })
