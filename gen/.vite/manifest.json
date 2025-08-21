@@ -16,8 +16,8 @@
       "_reactivity.esm-bundler.VNJZQcYl.js"
     ]
   },
-  "_gooo-hydrate.DQSUyeGB.js": {
-    "file": "js/gooo-hydrate.DQSUyeGB.js",
+  "_gooo-hydrate.CV-SjrhH.js": {
+    "file": "js/gooo-hydrate.CV-SjrhH.js",
     "name": "gooo-hydrate"
   },
   "_pinia.Ct1Kb_kd.js": {
@@ -32,7 +32,7 @@
     "name": "reactivity.esm-bundler"
   },
   "client/home.ts": {
-    "file": "js/home.kRV3s9Pi.js",
+    "file": "js/home.BcpxG7m8.js",
     "name": "home",
     "src": "client/home.ts",
     "isEntry": true,
@@ -41,30 +41,30 @@
       "_counter.B3ZrjAct.js",
       "_GoooLink.vue_vue_type_script_setup_true_lang.C0vsCQ6d.js",
       "_reactivity.esm-bundler.VNJZQcYl.js",
-      "_gooo-hydrate.DQSUyeGB.js",
+      "_gooo-hydrate.CV-SjrhH.js",
       "client/utils/goooNavigation.ts"
     ]
   },
   "client/themeSwitcher.ts": {
-    "file": "js/themeSwitcher.DO8d1u4R.js",
+    "file": "js/themeSwitcher.DHbf3JWi.js",
     "name": "themeSwitcher",
     "src": "client/themeSwitcher.ts",
     "isEntry": true,
     "imports": [
       "_pinia.Ct1Kb_kd.js",
-      "_gooo-hydrate.DQSUyeGB.js",
+      "_gooo-hydrate.CV-SjrhH.js",
       "_reactivity.esm-bundler.VNJZQcYl.js",
       "_counter.B3ZrjAct.js"
     ]
   },
   "client/todo.ts": {
-    "file": "js/todo.Ba-OfZ5v.js",
+    "file": "js/todo.G6m-aByI.js",
     "name": "todo",
     "src": "client/todo.ts",
     "isEntry": true,
     "imports": [
       "_pinia.Ct1Kb_kd.js",
-      "_gooo-hydrate.DQSUyeGB.js",
+      "_gooo-hydrate.CV-SjrhH.js",
       "_GoooLink.vue_vue_type_script_setup_true_lang.C0vsCQ6d.js",
       "_reactivity.esm-bundler.VNJZQcYl.js",
       "client/utils/goooNavigation.ts"
