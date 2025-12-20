@@ -2,6 +2,7 @@
 
 <img src="https://raw.githubusercontent.com/Tmmcmasters/Gooo/refs/heads/main/static/assets/img/goo_resized.webp" alt="Gooo Logo" width="200">
 
+!!Gooo has been sidelined by me for the time being.... It was an explortation on how I could build a better developer experience building applications with go, templ, vue, and echo. Please see below for all of the features that were at one point offered :)
 !!This is a work in progress and not meant for production yet!!
 
 _Gooo_<sup>("goo")</sup> is a powerful and flexible toolkit for developing modern web applications using **Go**, **Templ**, **Vue 3**, and **Echo**. It is designed to enhance the developer experience with features like router prefetching, Vue HMR (Hot Module Replacement), Go live reloading, and Tailwind CSS live reloading. The toolkit is fully customizable, allowing developers to tailor it to their specific needs while maintaining a rapid development workflow. You can change anything
